@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">Office Timer</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- messages -->
+    <string name="messages_starting">Good luck!</string>
+    <string name="messages_middle">Half way there!</string>
+    <string name="messages_end">Almost there!</string>
+
+    <!-- movement -->
+    <string name="messages_moving">Hey! are we moving?</string>
+    <string name="messages_sitting">Sitting again!</string>
+
+    <!-- motivation -->
+    <string name="motivation_message_1">Great that you are here!</string>
+    <string name="motivation_message_2">Ready for some sitting?</string>
+    <string name="motivation_message_3">Lot of work, eh?</string>
+
+    <!-- hints -->
+    <string name="messages_hint_1">Hint: A (too) small walk won\'t reset the timer</string>
+    <string name="messages_hint_2">Hint: You can deselect movement sensors in the settings menu</string>
+    <string name="messages_hint_3">Hint: History charts and more for only 0.99</string>
+</resources>
