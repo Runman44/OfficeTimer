@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import java.util.concurrent.TimeUnit;
 
+import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.custom.CircularSeekBar;
 
@@ -20,7 +21,6 @@ import nl.mranderson.sittingapp.custom.CircularSeekBar;
  */
 public class MainFragment extends Fragment implements View.OnClickListener {
 
-    private int time;
     private CircularSeekBar circularSeekbar;
     private TextView timeText;
     private TextView motivationText;
@@ -60,17 +60,26 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         circularSeekbar.setBarWidth(35);
         circularSeekbar.initDrawable(R.drawable.stickman_walk);
 
-        time = 5;
         circularSeekbar.setSeekBarChangeListener(new CircularSeekBar.OnSeekChangeListener() {
 
             @Override
             public void onProgressChange(CircularSeekBar view, int newProgress) {
-                int rounded = round(view.getProgress(), 5);
-                rounded = rounded + 5;
-                time = rounded;
-                timeText.setText(getTimeText(rounded));
-                setRangeColor(rounded);
-                setMotivationText(rounded);
+                int time = round(view.getProgress(), 5) + 5;
+                timeText.setText(getTimeText(time));
+                setRangeColor(time);
+                setMotivationText(time);
+                Constants.TIMER_SELECTED_TIME = time;
+            }
+        });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        circularSeekbar.post(new Runnable() {
+            @Override
+            public void run() {
+                circularSeekbar.invalidate();
             }
         });
     }
@@ -91,16 +100,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        circularSeekbar.post(new Runnable() {
-            @Override
-            public void run() {
-                circularSeekbar.invalidate();
-            }
-        });
-    }
 
     private void setRangeColor(int progress) {
         if (progress > circularSeekbar.getMaxProgress() / 2) {
@@ -122,9 +121,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         Fragment newFragment = new TimerFragment();
-        Bundle args = new Bundle();
-        args.putInt("time", time);
-        newFragment.setArguments(args);
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment, newFragment);
         transaction.commit();

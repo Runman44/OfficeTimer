@@ -43,6 +43,8 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
     private GoogleApiClient mGApiClient;
     private boolean USER_WALKED = false;
     private long millisUntilFinished;
+    private BroadcastReceiver timerCountdownReceiver;
+    private BroadcastReceiver sensorReceiver;
 
 
     public TimerFragment() {
@@ -64,7 +66,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
         stopButton.setOnClickListener(this);
 
         //TODO crash here
-        int time = getArguments().getInt("time");
+        int time = Constants.TIMER_SELECTED_TIME;
         final int millisStarted = (time * 1000) * 60;
 
 
@@ -83,7 +85,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
         if (sensor)
             startSensors();
 
-        BroadcastReceiver timerCountdownReceiver = new BroadcastReceiver() {
+        timerCountdownReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getExtras() != null) {
@@ -162,7 +164,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
             Toast.makeText(getActivity(), "Google Play Service not Available", Toast.LENGTH_LONG).show();
         }
 
-        BroadcastReceiver sensorReceiver = new BroadcastReceiver() {
+        sensorReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getStringExtra("activity").equals("On Foot") || intent.getStringExtra("activity").equals("On Bicycle") && intent.getExtras().getInt("confidence") == 100) {
@@ -215,8 +217,8 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
         super.onDestroy();
 
         //TODO unregister
-//        getActivity().unregisterReceiver();
-//        getActivity().unregisterReceiver();
+        getActivity().unregisterReceiver(timerCountdownReceiver);
+        getActivity().unregisterReceiver(sensorReceiver);
 
         if (mGApiClient != null)
             mGApiClient.disconnect();

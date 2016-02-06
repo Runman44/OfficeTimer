@@ -10,6 +10,7 @@ public class Constants {
     public static final int NOTIFICATION_GET_WALKING = 99;
 
     public static boolean IS_TIMER_SERVICE_RUNNING = false;
+    public static int TIMER_SELECTED_TIME = 5;
 
     public static final String COUNTDOWN_TIME_BROADCAST = "time";
     public static final String COUNTDOWN_RESTART_BROADCAST = "restart";
