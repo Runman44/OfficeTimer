@@ -8,6 +8,7 @@ package nl.mranderson.sittingapp;
 public class Constants {
 
     public static final int NOTIFICATION_GET_WALKING = 99;
+    public static final String SENSOR_BROADCAST = "sensor";
 
     public static boolean IS_TIMER_SERVICE_RUNNING = false;
     public static int TIMER_SELECTED_TIME = 5;

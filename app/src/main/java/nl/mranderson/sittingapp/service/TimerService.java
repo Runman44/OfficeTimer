@@ -82,7 +82,7 @@ public class TimerService extends Service {
     }
 
     private void restartTimerService(int time) {
-        TimerService.this.stopSelf();
+        stopTimerService();
         Intent timerServiceIntent = new Intent(TimerService.this, TimerService.class);
         timerServiceIntent.putExtra("time", time);
         startService(timerServiceIntent);

@@ -180,9 +180,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
             }
         };
 
-        IntentFilter filter = new IntentFilter();
-        filter.addAction("sensorIntent");
-        getActivity().registerReceiver(sensorReceiver, filter);
+        getActivity().registerReceiver(sensorReceiver, new IntentFilter(Constants.SENSOR_BROADCAST));
     }
 
     //Check for Google play services available on device

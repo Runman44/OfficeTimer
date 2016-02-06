@@ -6,6 +6,8 @@ import android.content.Intent;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 
+import nl.mranderson.sittingapp.Constants;
+
 public class ActivityRecognitionIntentService extends IntentService {
 
     public ActivityRecognitionIntentService() {
@@ -21,7 +23,7 @@ public class ActivityRecognitionIntentService extends IntentService {
             int confidence = detectedActivity.getConfidence();
             String mostProbableName = getActivityName(detectedActivity.getType());
 
-            Intent i = new Intent("sensorIntent");
+            final Intent i = new Intent(Constants.SENSOR_BROADCAST);
             i.putExtra("activity", mostProbableName);
             i.putExtra("confidence", confidence);
             this.sendBroadcast(i);
