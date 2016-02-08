@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
 
@@ -51,6 +52,14 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                 FragmentTransaction transaction = getFragmentManager().beginTransaction();
                 transaction.replace(R.id.fragment, newFragment);
                 transaction.commit();
+            }
+        });
+
+        ImageButton bUpgrade = (ImageButton) getActivity().findViewById(R.id.bUpgrade);
+        bUpgrade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Not in here yet!", Toast.LENGTH_SHORT).show();
             }
         });
         timeText = (TextView) getActivity().findViewById(R.id.timeText);
