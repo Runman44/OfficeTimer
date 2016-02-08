@@ -54,11 +54,14 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             }
         });
         timeText = (TextView) getActivity().findViewById(R.id.timeText);
+        timeText.setText(getTimeText(Constants.TIMER_SELECTED_TIME));
+
         circularSeekbar = (CircularSeekBar) getActivity().findViewById(R.id.seekBar);
         circularSeekbar.setMaxProgress(115);
-        circularSeekbar.setProgress(5);
+        circularSeekbar.setProgress(Constants.TIMER_SELECTED_TIME);
         circularSeekbar.setBarWidth(35);
         circularSeekbar.initDrawable(R.drawable.stickman_walk);
+
 
         circularSeekbar.setSeekBarChangeListener(new CircularSeekBar.OnSeekChangeListener() {
 
@@ -71,6 +74,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                 Constants.TIMER_SELECTED_TIME = time;
             }
         });
+
+        setRangeColor(Constants.TIMER_SELECTED_TIME);
+        setMotivationText(Constants.TIMER_SELECTED_TIME);
     }
 
     @Override
