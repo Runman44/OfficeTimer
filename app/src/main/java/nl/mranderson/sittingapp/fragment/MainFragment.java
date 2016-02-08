@@ -103,7 +103,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     private void setRangeColor(int progress) {
         if (progress > circularSeekbar.getMaxProgress() / 2) {
-            circularSeekbar.setProgressColor(getActivity().getResources().getColor(R.color.orange, null));
+            circularSeekbar.setProgressColor(getActivity().getResources().getColor(R.color.red, null));
         } else {
             circularSeekbar.setProgressColor(getActivity().getResources().getColor(R.color.blue, null));
         }

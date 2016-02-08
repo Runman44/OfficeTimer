@@ -168,12 +168,12 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
             @Override
             public void onReceive(Context context, Intent intent) {
                 if (intent.getStringExtra("activity").equals("On Foot") || intent.getStringExtra("activity").equals("On Bicycle") && intent.getExtras().getInt("confidence") == 100) {
-                    messageText.setText(R.string.messages_moving);
+                    //messageText.setText(R.string.messages_moving);
                     USER_WALKED = true;
                 } else if (intent.getStringExtra("activity").equals("Still") && intent.getExtras().getInt("confidence") == 100) {
                     if (USER_WALKED) {
                         USER_WALKED = false;
-                        messageText.setText(R.string.messages_sitting);
+                        //messageText.setText(R.string.messages_sitting);
                         getActivity().sendBroadcast(new Intent(Constants.COUNTDOWN_RESTART_BROADCAST));
                     }
                 }
