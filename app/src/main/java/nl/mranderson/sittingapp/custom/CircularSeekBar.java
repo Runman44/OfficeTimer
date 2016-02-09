@@ -343,7 +343,7 @@ public class CircularSeekBar extends View {
             dx = getXFromAngle();
             dy = getYFromAngle();
             if (SHOW_MARKER) {
-               // drawMarkerAtProgress(canvas);
+                // drawMarkerAtProgress(canvas);
             }
             if (innerRadius > 0 && backgroundImage != null)
                 drawBackgroundImage(canvas);
@@ -625,7 +625,8 @@ public class CircularSeekBar extends View {
                     break;
             }
             return true;
-        } return false;
+        }
+        return false;
     }
 
     /**
