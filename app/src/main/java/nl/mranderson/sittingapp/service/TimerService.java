@@ -67,6 +67,7 @@ public class TimerService extends Service {
         countDownTimer = new CountDownTimer(((time * 1000) * 60), 1000) {
 
             public void onTick(long millisUntilFinished) {
+                Constants.TIMER_SERVICE_MILLI_LEFT = millisUntilFinished;
                 bi.putExtra("countdown", millisUntilFinished);
                 sendBroadcast(bi);
             }
