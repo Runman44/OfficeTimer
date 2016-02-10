@@ -7,6 +7,7 @@ import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 
 import nl.mranderson.sittingapp.Constants;
+import nl.mranderson.sittingapp.R;
 
 public class ActivityRecognitionIntentService extends IntentService {
 
@@ -22,11 +23,20 @@ public class ActivityRecognitionIntentService extends IntentService {
 
             int confidence = detectedActivity.getConfidence();
             String mostProbableName = getActivityName(detectedActivity.getType());
+            if (mostProbableName.equals("On Foot") || mostProbableName.equals("On Bicycle") && confidence > 80) {
+                Constants.USER_WALKED = true;
+                this.sendBroadcast(new Intent(Constants.COUNTDOWN_STOP_TIMER_BROADCAST));
 
-            final Intent i = new Intent(Constants.SENSOR_BROADCAST);
-            i.putExtra("activity", mostProbableName);
-            i.putExtra("confidence", confidence);
-            this.sendBroadcast(i);
+                final Intent i = new Intent(Constants.SENSOR_BROADCAST);
+                i.putExtra("message", getString(R.string.messages_moving));
+                this.sendBroadcast(i);
+            } else if (mostProbableName.equals("Still") && confidence > 80) {
+                if (Constants.USER_WALKED) {
+                    Constants.USER_WALKED = false;
+
+                    this.sendBroadcast(new Intent(Constants.COUNTDOWN_RESTART_BROADCAST));
+                }
+            }
         }
     }
 

@@ -40,7 +40,7 @@ public class TimerService extends Service {
             BroadcastReceiver restartServiceReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
-                    restartTimerService(time);
+                    restartTimerService(Constants.TIMER_SELECTED_TIME);
                 }
             };
             registerReceiver(restartServiceReceiver, new IntentFilter(Constants.COUNTDOWN_RESTART_BROADCAST));

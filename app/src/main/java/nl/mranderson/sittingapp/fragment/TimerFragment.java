@@ -42,7 +42,6 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
     private TextView messageText;
 
     private GoogleApiClient mGApiClient;
-    private boolean USER_WALKED = false;
     private long millisUntilFinished;
     private BroadcastReceiver timerCountdownReceiver;
     private BroadcastReceiver sensorReceiver;
@@ -66,7 +65,6 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
         Button stopButton = (Button) getActivity().findViewById(R.id.bStop);
         stopButton.setOnClickListener(this);
 
-        //TODO crash here
         int time = Constants.TIMER_SELECTED_TIME;
         final int millisStarted = (time * 1000) * 60;
 
@@ -175,20 +173,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
         sensorReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                if (intent.getStringExtra("activity").equals("On Foot") || intent.getStringExtra("activity").equals("On Bicycle") && intent.getExtras().getInt("confidence") == 100) {
-                    messageText.setText(R.string.messages_moving);
-                    USER_WALKED = true;
-
-                    //TODO dont stop the service but only the countdown.
-                    getActivity().sendBroadcast(new Intent(Constants.COUNTDOWN_STOP_TIMER_BROADCAST));
-                } else if (intent.getStringExtra("activity").equals("Still") && intent.getExtras().getInt("confidence") == 100) {
-                    if (USER_WALKED) {
-                        USER_WALKED = false;
-                        //messageText.setText(R.string.messages_sitting);
-                        //TODO dont start the service but do a restart !
-                        getActivity().sendBroadcast(new Intent(Constants.COUNTDOWN_RESTART_BROADCAST));
-                    }
-                }
+                messageText.setText(intent.getStringExtra("message"));
             }
         };
 
@@ -226,8 +211,8 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
     public void onDestroy() {
         super.onDestroy();
 
-        //TODO unregister
         getActivity().unregisterReceiver(timerCountdownReceiver);
+        //TODO does this still matter !?
         getActivity().unregisterReceiver(sensorReceiver);
 
         if (mGApiClient != null)

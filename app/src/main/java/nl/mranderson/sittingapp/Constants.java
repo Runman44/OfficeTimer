@@ -12,6 +12,8 @@ public class Constants {
     public static final String COUNTDOWN_STOP_TIMER_BROADCAST = "countdown_freeze";
     public static long TIMER_SERVICE_MILLI_LEFT = 0;
 
+    public static boolean USER_WALKED = false;
+
     public static boolean IS_TIMER_SERVICE_RUNNING = false;
     public static int TIMER_SELECTED_TIME = 5;
 
