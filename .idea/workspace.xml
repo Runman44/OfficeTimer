@@ -33,11 +33,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="66a2cdfa-a2bb-4ede-851c-7ef8a21db4d7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/stickman_sitting.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/app.iml" afterPath="$PROJECT_DIR$/app/app.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/custom/CircularSeekBar.java" afterPath="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/custom/CircularSeekBar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/Constants.java" afterPath="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/Constants.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/TimerFragment.java" afterPath="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/TimerFragment.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/service/TimerService.java" afterPath="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/service/TimerService.java" />
     </list>
     <ignored path="SittingApp.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -74,22 +72,48 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/service/TimerService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="85" column="16" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
+              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
               <folding>
                 <element signature="e#1256#1458#0" expanded="true" />
                 <element signature="e#1457#1458#0" expanded="true" />
+                <element signature="e#1633#1833#0" expanded="true" />
+                <element signature="e#1832#1833#0" expanded="true" />
+                <element signature="e#4340#4383#0" expanded="true" />
+                <element signature="e#5450#5493#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TimerFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="TimerFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/TimerFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="74" column="61" selection-start-line="74" selection-start-column="61" selection-end-line="74" selection-end-column="61" />
+            <state vertical-scroll-proportion="0.6725146">
+              <caret line="78" column="11" selection-start-line="78" selection-start-column="11" selection-end-line="78" selection-end-column="11" />
               <folding>
-                <element signature="e#6610#6634#0" expanded="true" />
+                <element signature="e#2702#2912#0" expanded="true" />
+                <element signature="e#2911#2912#0" expanded="true" />
+                <element signature="e#3576#4309#0" expanded="true" />
+                <element signature="e#4308#4309#0" expanded="true" />
+                <element signature="e#4630#4656#0" expanded="true" />
+                <element signature="e#4782#4806#0" expanded="true" />
+                <element signature="e#4936#4957#0" expanded="true" />
+                <element signature="e#6614#7725#0" expanded="true" />
+                <element signature="e#6953#6977#0" expanded="true" />
+                <element signature="e#7724#7725#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainFragment.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/MainFragment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="63" column="11" selection-start-line="57" selection-start-column="7" selection-end-line="63" selection-end-column="11" />
+              <folding>
+                <element signature="e#2071#2281#0" expanded="true" />
+                <element signature="e#2280#2281#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -105,10 +129,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="colors.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="colors.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.06147541">
+            <state vertical-scroll-proportion="-1.25">
               <caret line="2" column="38" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="38" />
               <folding />
             </state>
@@ -119,7 +143,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/Constants.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+              <caret line="11" column="82" selection-start-line="11" selection-start-column="82" selection-end-line="11" selection-end-column="82" />
               <folding />
             </state>
           </provider>
@@ -1673,9 +1697,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/service/ActivityRecognitionIntentService.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/MainFragment.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/custom/CircularSeekBar.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/Constants.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/service/TimerService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/custom/CircularSeekBar.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/TimerFragment.java" />
       </list>
     </option>
@@ -1780,6 +1804,60 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SittingApp" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SittingApp" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sittingapp" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SittingApp" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="sittingapp" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fragment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
           <PATH>
@@ -2131,8 +2209,8 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287841" sideWeight="0.4914163" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287841" sideWeight="0.45708156" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3300248" sideWeight="0.41773963" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3287841" sideWeight="0.45708156" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3300248" sideWeight="0.41773963" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3995037" sideWeight="0.48855507" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
@@ -2140,13 +2218,13 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5222222" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.5212569" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287841" sideWeight="0.48569384" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.47777778" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24964234" sideWeight="0.47874308" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3287841" sideWeight="0.42203146" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -2171,12 +2249,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/TimerFragment.java</url>
-          <line>182</line>
-          <properties />
-          <option name="timeStamp" value="60" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/TimerFragment.java</url>
           <line>177</line>
@@ -2518,42 +2590,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/MainFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="16" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="16" />
-          <folding>
-            <element signature="e#1411#1440#0" expanded="false" />
-            <element signature="e#2071#2281#0" expanded="false" />
-            <element signature="e#2280#2281#0" expanded="false" />
-            <element signature="e#2783#3202#0" expanded="false" />
-            <element signature="e#3201#3202#0" expanded="false" />
-            <element signature="e#3820#3849#0" expanded="false" />
-            <element signature="e#3961#3990#0" expanded="false" />
-            <element signature="e#4105#4134#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/service/TimerService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="85" column="16" selection-start-line="85" selection-start-column="16" selection-end-line="85" selection-end-column="16" />
-          <folding>
-            <element signature="e#1256#1458#0" expanded="true" />
-            <element signature="e#1457#1458#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/Constants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/Library/Android/sdk/sources/android-23/android/view/View.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="22.65625">
@@ -2580,16 +2616,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/TimerFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="74" column="61" selection-start-line="74" selection-start-column="61" selection-end-line="74" selection-end-column="61" />
-          <folding>
-            <element signature="e#6610#6634#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/styles.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.4705882">
@@ -2600,9 +2626,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/values/colors.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06147541">
+        <state vertical-scroll-proportion="-1.25">
           <caret line="2" column="38" selection-start-line="2" selection-start-column="32" selection-end-line="2" selection-end-column="38" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/Constants.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="11" column="82" selection-start-line="11" selection-start-column="82" selection-end-line="11" selection-end-column="82" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/service/TimerService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
+          <folding>
+            <element signature="e#1256#1458#0" expanded="true" />
+            <element signature="e#1457#1458#0" expanded="true" />
+            <element signature="e#1633#1833#0" expanded="true" />
+            <element signature="e#1832#1833#0" expanded="true" />
+            <element signature="e#4340#4383#0" expanded="true" />
+            <element signature="e#5450#5493#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/MainFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="11" selection-start-line="57" selection-start-column="7" selection-end-line="63" selection-end-column="11" />
+          <folding>
+            <element signature="e#2071#2281#0" expanded="true" />
+            <element signature="e#2280#2281#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/TimerFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6725146">
+          <caret line="78" column="11" selection-start-line="78" selection-start-column="11" selection-end-line="78" selection-end-column="11" />
+          <folding>
+            <element signature="e#2702#2912#0" expanded="true" />
+            <element signature="e#2911#2912#0" expanded="true" />
+            <element signature="e#3576#4309#0" expanded="true" />
+            <element signature="e#4308#4309#0" expanded="true" />
+            <element signature="e#4630#4656#0" expanded="true" />
+            <element signature="e#4782#4806#0" expanded="true" />
+            <element signature="e#4936#4957#0" expanded="true" />
+            <element signature="e#6614#7725#0" expanded="true" />
+            <element signature="e#6953#6977#0" expanded="true" />
+            <element signature="e#7724#7725#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

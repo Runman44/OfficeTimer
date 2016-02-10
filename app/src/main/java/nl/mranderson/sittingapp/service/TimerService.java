@@ -45,6 +45,15 @@ public class TimerService extends Service {
             };
             registerReceiver(restartServiceReceiver, new IntentFilter(Constants.COUNTDOWN_RESTART_BROADCAST));
 
+
+            BroadcastReceiver restartTimerServiceReceiver = new BroadcastReceiver() {
+                @Override
+                public void onReceive(Context context, Intent intent) {
+                    countDownTimer.cancel();
+                }
+            };
+            registerReceiver(restartTimerServiceReceiver, new IntentFilter(Constants.COUNTDOWN_STOP_TIMER_BROADCAST));
+
             BroadcastReceiver stopServiceReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {

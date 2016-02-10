@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -69,6 +70,13 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
         int time = Constants.TIMER_SELECTED_TIME;
         final int millisStarted = (time * 1000) * 60;
 
+        ImageButton bUpgrade = (ImageButton) getActivity().findViewById(R.id.bUpgrade);
+        bUpgrade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getActivity(), "Not in here yet!", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         CircularSeekBar circularSeekbar = (CircularSeekBar) getActivity().findViewById(R.id.seekBar2);
         circularSeekbar.initDrawable(R.drawable.stickman_walk);
@@ -170,12 +178,15 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
                 if (intent.getStringExtra("activity").equals("On Foot") || intent.getStringExtra("activity").equals("On Bicycle") && intent.getExtras().getInt("confidence") == 100) {
                     messageText.setText(R.string.messages_moving);
                     USER_WALKED = true;
-                    getActivity().sendBroadcast(new Intent(Constants.COUNTDOWN_STOP_BROADCAST));
+
+                    //TODO dont stop the service but only the countdown.
+                    getActivity().sendBroadcast(new Intent(Constants.COUNTDOWN_STOP_TIMER_BROADCAST));
                 } else if (intent.getStringExtra("activity").equals("Still") && intent.getExtras().getInt("confidence") == 100) {
                     if (USER_WALKED) {
                         USER_WALKED = false;
                         //messageText.setText(R.string.messages_sitting);
-                        startTimerService(Constants.TIMER_SELECTED_TIME);
+                        //TODO dont start the service but do a restart !
+                        getActivity().sendBroadcast(new Intent(Constants.COUNTDOWN_RESTART_BROADCAST));
                     }
                 }
             }

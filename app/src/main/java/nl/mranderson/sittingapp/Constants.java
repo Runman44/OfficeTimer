@@ -9,6 +9,7 @@ public class Constants {
 
     public static final int NOTIFICATION_GET_WALKING = 99;
     public static final String SENSOR_BROADCAST = "sensor";
+    public static final String COUNTDOWN_STOP_TIMER_BROADCAST = "countdown_freeze";
     public static long TIMER_SERVICE_MILLI_LEFT = 0;
 
     public static boolean IS_TIMER_SERVICE_RUNNING = false;
