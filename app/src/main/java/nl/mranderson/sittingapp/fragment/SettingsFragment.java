@@ -7,9 +7,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.UserPreference;
@@ -32,7 +32,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        Button bSave = (Button) getActivity().findViewById(R.id.bSave);
+        ImageButton bSave = (ImageButton) getActivity().findViewById(R.id.bSave);
         CheckBox cSensors = (CheckBox) getActivity().findViewById(R.id.sensors);
         CheckBox cVibration = (CheckBox) getActivity().findViewById(R.id.notify_vibration);
         CheckBox cLight = (CheckBox) getActivity().findViewById(R.id.notify_light);
@@ -53,6 +53,17 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
         cSound.setChecked(sound);
         cVibration.setChecked(vibration);
         cSensors.setChecked(sensors);
+
+        ImageButton bBack = (ImageButton) getActivity().findViewById(R.id.bBack);
+        bBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment newFragment = new MainFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment, newFragment);
+                transaction.commit();
+            }
+        });
     }
 
     @Override
@@ -66,7 +77,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        switch(buttonView.getId()){
+        switch (buttonView.getId()) {
             case R.id.notify_light:
                 UserPreference.setLightSettings(getActivity(), isChecked);
                 break;

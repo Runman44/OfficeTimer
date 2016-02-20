@@ -3,6 +3,7 @@ package nl.mranderson.sittingapp.fragment;
 import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,17 @@ public class MainFragment extends Fragment implements View.OnClickListener {
                 Toast.makeText(getActivity(), "Not in here yet!", Toast.LENGTH_SHORT).show();
             }
         });
+
+        ImageButton bInfo = (ImageButton) getActivity().findViewById(R.id.bInfo);
+        bInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment newFragment = new InfoFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment, newFragment);
+                transaction.commit();
+            }
+        });
         timeText = (TextView) getActivity().findViewById(R.id.timeText);
         timeText.setText(getTimeText(Constants.TIMER_SELECTED_TIME));
 
@@ -118,9 +130,9 @@ public class MainFragment extends Fragment implements View.OnClickListener {
 
     private void setRangeColor(int progress) {
         if (progress > circularSeekbar.getMaxProgress() / 2) {
-            circularSeekbar.setProgressColor(getActivity().getResources().getColor(R.color.red, null));
+            circularSeekbar.setProgressColor(ContextCompat.getColor(getActivity(), R.color.red));
         } else {
-            circularSeekbar.setProgressColor(getActivity().getResources().getColor(R.color.blue, null));
+            circularSeekbar.setProgressColor(ContextCompat.getColor(getActivity(), R.color.blue));
         }
     }
 

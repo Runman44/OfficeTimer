@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.os.CountDownTimer;
 import android.os.IBinder;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.NotificationCompat;
 
 import nl.mranderson.sittingapp.Constants;
@@ -20,9 +21,6 @@ import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.UserPreference;
 import nl.mranderson.sittingapp.activity.MainActivity;
 
-/**
- * Created by MrAnderson1 on 02/12/15.
- */
 public class TimerService extends Service {
 
     private CountDownTimer countDownTimer;
@@ -113,8 +111,8 @@ public class TimerService extends Service {
 
         NotificationCompat.Builder mBuilder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.stickman_walk)
-                        .setColor(getResources().getColor(R.color.colorPrimary, null))
+                        .setSmallIcon(R.drawable.ic_directions_walk_white_36dp)
+                        .setColor(ContextCompat.getColor(this, R.color.colorPrimary))
                         .setContentTitle(getResources().getString(R.string.app_name))
                         .setOngoing(true)
                         .setContentText("Timer is running!")
@@ -137,8 +135,8 @@ public class TimerService extends Service {
 
         NotificationCompat.Builder mBuilder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.drawable.stickman_walk)
-                        .setColor(getResources().getColor(R.color.red, null))
+                        .setSmallIcon(R.drawable.ic_directions_walk_white_36dp)
+                        .setColor(ContextCompat.getColor(this, R.color.red))
                         .setContentTitle(getResources().getString(R.string.app_name))
                         .setContentText("Stand Up !")
                         .setContentIntent(pNextIntent);

@@ -68,6 +68,26 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
         int time = Constants.TIMER_SELECTED_TIME;
         final int millisStarted = (time * 1000) * 60;
 
+        ImageButton bBack = (ImageButton) getActivity().findViewById(R.id.bBack);
+        bBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Cancel the current notification.
+                NotificationManager mNotifyMgr =
+                        (NotificationManager) getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
+                mNotifyMgr.cancel(Constants.NOTIFICATION_GET_WALKING);
+
+                // Stop the service
+                stopTimerService();
+
+                // Replace fragment
+                Fragment newFragment = new MainFragment();
+                FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                transaction.replace(R.id.fragment, newFragment);
+                transaction.commit();
+            }
+        });
+
         ImageButton bUpgrade = (ImageButton) getActivity().findViewById(R.id.bUpgrade);
         bUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
