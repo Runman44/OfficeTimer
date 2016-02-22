@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 /**
  * Created by MrAnderson on 23/01/16.
- *
+ * <p/>
  * UserPreferences are stored here.
  */
 public class UserPreference {
@@ -35,6 +35,12 @@ public class UserPreference {
     public static void setSensorSettings(Activity activity, boolean isChecked) {
         editor = activity.getSharedPreferences(MY_PREFS_NAME, activity.MODE_PRIVATE).edit();
         editor.putBoolean("sensor", isChecked);
+        editor.commit();
+    }
+
+    public static void setIntroShown(Activity activity, boolean isChecked) {
+        editor = activity.getSharedPreferences(MY_PREFS_NAME, activity.MODE_PRIVATE).edit();
+        editor.putBoolean("introShown", isChecked);
         editor.commit();
     }
 }

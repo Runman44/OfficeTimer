@@ -9,19 +9,19 @@ import android.view.ViewGroup;
 /**
  * Created by MrAnderson1 on 20/02/16.
  */
-public class InfoPagerAdapter extends PagerAdapter {
+public class TutorialPagerAdapter extends PagerAdapter {
 
     private Context mContext;
 
-    public InfoPagerAdapter(Context context) {
+    public TutorialPagerAdapter(Context context) {
         mContext = context;
     }
 
     @Override
     public Object instantiateItem(ViewGroup collection, int position) {
-        InfoPagerEnum infoPagerEnum = InfoPagerEnum.values()[position];
+        TutorialPagerEnum customPagerEnum = TutorialPagerEnum.values()[position];
         LayoutInflater inflater = LayoutInflater.from(mContext);
-        ViewGroup layout = (ViewGroup) inflater.inflate(infoPagerEnum.getLayoutResId(), collection, false);
+        ViewGroup layout = (ViewGroup) inflater.inflate(customPagerEnum.getLayoutResId(), collection, false);
         collection.addView(layout);
         return layout;
     }
@@ -33,7 +33,7 @@ public class InfoPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return InfoPagerEnum.values().length;
+        return TutorialPagerEnum.values().length;
     }
 
     @Override
@@ -43,8 +43,8 @@ public class InfoPagerAdapter extends PagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        InfoPagerEnum infoPagerEnum = InfoPagerEnum.values()[position];
-        return mContext.getString(infoPagerEnum.getTitleResId());
+        TutorialPagerEnum customPagerEnum = TutorialPagerEnum.values()[position];
+        return mContext.getString(customPagerEnum.getTitleResId());
     }
 
 }

@@ -53,17 +53,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
         cSound.setChecked(sound);
         cVibration.setChecked(vibration);
         cSensors.setChecked(sensors);
-
-        ImageButton bBack = (ImageButton) getActivity().findViewById(R.id.bBack);
-        bBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment newFragment = new MainFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment, newFragment);
-                transaction.commit();
-            }
-        });
     }
 
     @Override
