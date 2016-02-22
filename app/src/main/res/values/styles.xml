@@ -23,6 +23,11 @@
         <item name="android:textSize">30sp</item>
     </style>
 
+    <style name="sub_text_2">
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
     <style name="timer_text">
         <item name="android:textColor">@android:color/white</item>
         <item name="android:textSize">70sp</item>
