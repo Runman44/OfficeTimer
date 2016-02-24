@@ -1,7 +1,6 @@
 package nl.mranderson.sittingapp.fragment;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -54,11 +53,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
 
     @Override
     public void onClick(View v) {
-        // Replace fragment
-        Fragment newFragment = new MainFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment, newFragment);
-        transaction.commit();
+        getActivity().onBackPressed();
     }
 
     @Override

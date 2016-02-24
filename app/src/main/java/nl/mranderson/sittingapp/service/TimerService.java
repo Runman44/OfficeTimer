@@ -24,6 +24,9 @@ import nl.mranderson.sittingapp.activity.MainActivity;
 public class TimerService extends Service {
 
     private CountDownTimer countDownTimer;
+    private BroadcastReceiver restartServiceReceiver;
+    private BroadcastReceiver restartTimerServiceReceiver;
+    private BroadcastReceiver stopServiceReceiver;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -35,7 +38,7 @@ public class TimerService extends Service {
 
             Constants.IS_TIMER_SERVICE_RUNNING = true;
 
-            BroadcastReceiver restartServiceReceiver = new BroadcastReceiver() {
+            restartServiceReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     restartTimerService(Constants.TIMER_SELECTED_TIME);
@@ -44,7 +47,7 @@ public class TimerService extends Service {
             registerReceiver(restartServiceReceiver, new IntentFilter(Constants.COUNTDOWN_RESTART_BROADCAST));
 
 
-            BroadcastReceiver restartTimerServiceReceiver = new BroadcastReceiver() {
+            restartTimerServiceReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     countDownTimer.cancel();
@@ -52,7 +55,7 @@ public class TimerService extends Service {
             };
             registerReceiver(restartTimerServiceReceiver, new IntentFilter(Constants.COUNTDOWN_STOP_TIMER_BROADCAST));
 
-            BroadcastReceiver stopServiceReceiver = new BroadcastReceiver() {
+            stopServiceReceiver = new BroadcastReceiver() {
                 @Override
                 public void onReceive(Context context, Intent intent) {
                     stopTimerService();
@@ -97,6 +100,10 @@ public class TimerService extends Service {
     }
 
     private void stopTimerService() {
+        unregisterReceiver(restartServiceReceiver);
+        unregisterReceiver(restartTimerServiceReceiver);
+        unregisterReceiver(stopServiceReceiver);
+
         Constants.IS_TIMER_SERVICE_RUNNING = false;
         countDownTimer.cancel();
         TimerService.this.stopForeground(true);

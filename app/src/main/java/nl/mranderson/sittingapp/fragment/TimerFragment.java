@@ -1,7 +1,6 @@
 package nl.mranderson.sittingapp.fragment;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -80,11 +79,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
                 // Stop the service
                 stopTimerService();
 
-                // Replace fragment
-                Fragment newFragment = new MainFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment, newFragment);
-                transaction.commit();
+                getActivity().onBackPressed();
             }
         });
 
@@ -169,10 +164,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
         stopTimerService();
 
         // Replace fragment
-        Fragment newFragment = new MainFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment, newFragment);
-        transaction.commit();
+        getActivity().onBackPressed();
     }
 
     private void startSensors() {
@@ -232,7 +224,6 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
         super.onDestroy();
 
         getActivity().unregisterReceiver(timerCountdownReceiver);
-        //TODO does this still matter !?
         getActivity().unregisterReceiver(sensorReceiver);
 
         if (mGApiClient != null)

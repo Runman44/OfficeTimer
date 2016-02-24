@@ -1,7 +1,6 @@
 package nl.mranderson.sittingapp.fragment;
 
 import android.app.Fragment;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -42,10 +41,7 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Fragment newFragment = new MainFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment, newFragment);
-        transaction.commit();
+        getActivity().onBackPressed();
     }
 
 }

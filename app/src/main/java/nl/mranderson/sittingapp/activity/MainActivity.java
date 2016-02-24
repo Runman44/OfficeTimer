@@ -15,11 +15,9 @@ import nl.mranderson.sittingapp.fragment.TimerFragment;
 import nl.mranderson.sittingapp.fragment.TutorialFragment;
 
 public class MainActivity extends AppCompatActivity {
-
-    //TODO add backstack
+    
     //TODO add images
     //TODO add text
-    //TODO Make arrows white
     //TODO version 1.5                                  MARCH?
     //TODO Start making the graph
     //TODO start making the service
@@ -65,5 +63,14 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment, newFragment);
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if(getFragmentManager().getBackStackEntryCount() != 0) {
+            getFragmentManager().popBackStack();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
