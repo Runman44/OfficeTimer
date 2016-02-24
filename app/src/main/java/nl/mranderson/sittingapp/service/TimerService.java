@@ -115,7 +115,7 @@ public class TimerService extends Service {
                         .setColor(ContextCompat.getColor(this, R.color.colorPrimary))
                         .setContentTitle(getResources().getString(R.string.app_name))
                         .setOngoing(true)
-                        .setContentText("Timer is running!")
+                        .setContentText(getString(R.string.notification_blue))
                         .setContentIntent(pNextIntent);
 
         return mBuilder.build();
@@ -138,7 +138,7 @@ public class TimerService extends Service {
                         .setSmallIcon(R.drawable.ic_directions_walk_white_36dp)
                         .setColor(ContextCompat.getColor(this, R.color.red))
                         .setContentTitle(getResources().getString(R.string.app_name))
-                        .setContentText("Stand Up !")
+                        .setContentText(getString(R.string.notification_red))
                         .setContentIntent(pNextIntent);
 
         //Vibration

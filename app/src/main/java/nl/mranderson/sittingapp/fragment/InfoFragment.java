@@ -34,12 +34,10 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
         ImageButton bBack = (ImageButton) getActivity().findViewById(R.id.bBack);
         bBack.setOnClickListener(this);
 
-
         ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
 
-
         ViewPagerArrowIndicator viewPagerArrowIndicator = (ViewPagerArrowIndicator) getActivity().findViewById(R.id.viewPagerArrowIndicator);
-        viewPager.setAdapter(new InfoPagerAdapter(getContext()));
+        viewPager.setAdapter(new InfoPagerAdapter(getActivity()));
 
         viewPagerArrowIndicator.bind(viewPager);
 

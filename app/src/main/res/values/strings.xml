@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Sitting Up</string>
-    <string name="action_settings">Settings</string>
 
     <!-- messages -->
     <string name="messages_starting">Sitting and working!</string>
@@ -13,7 +12,7 @@
 
     <!-- motivation -->
     <string name="motivation_message_1">Great that you are here!</string>
-    <string name="motivation_message_2">Difficult stuff</string>
+    <string name="motivation_message_2">Meeting?</string>
     <string name="motivation_message_3">Getting serious</string>
 
     <!-- hints -->
@@ -21,15 +20,18 @@
     <string name="messages_hint_2">Hint: You can deselect movement sensors in the settings menu</string>
     <string name="messages_hint_3">Hint: History charts and more for only 0.99</string>
 
-    <string name="new_message_notification_title_template">New message: %1$s</string>
 
-    <!-- TODO: remove this placeholder text -->
-    <string name="new_message_notification_placeholder_text_template">You said %1$s and lorem ipsum
-        dolor sit amet, consectetur adipiscing elit. Etiam non enim magna. Morbi dictum, velit vel
-        semper venenatis, magna odio volutpat velit, at ullamcorper nulla lacus sed turpis.
-        Pellentesque vitae metus elit, nec tincidunt tellus. Integer sed nisl sem, ullamcorper
-        ornare lacus. Duis ac mauris sed massa congue volutpat. Donec sed erat sit amet turpis
-        viverra rhoncus sit amet nec magna. Donec lacinia ligula at libero volutpat volutpat nec nec
-        tortor.
-    </string>
+    <!-- info pages -->
+    <string name="info_1_title">Sitting is Killing</string>
+    <string name="info_1_sub">Sitting to long isn\'t healthy for your body. This app will help you with remembering that you are sitting way too long. \n \n Use the timer and find out.</string>
+    <string name="info_2_title">Movement Sensors</string>
+    <string name="info_2_sub">We know that you are walking. This app registers movement and resets the timer by itself when you are sitting again. \n \n You should really try this!</string>
+    <string name="info_3_title">Analytics</string>
+    <string name="info_3_sub">Want to know when and for how long you are sitting in a nice looking graph? \n \n Buy the upgrade and try it out.</string>
+    <string name="info_4_title">Get Started</string>
+    <string name="info_4_sub">That was it.</string>
+
+    <!-- notifications -->
+    <string name="notification_red">Stand Up !</string>
+    <string name="notification_blue">Timer is running!</string>
 </resources>

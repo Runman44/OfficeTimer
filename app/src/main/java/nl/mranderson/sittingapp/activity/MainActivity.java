@@ -16,6 +16,24 @@ import nl.mranderson.sittingapp.fragment.TutorialFragment;
 
 public class MainActivity extends AppCompatActivity {
 
+    //TODO add backstack
+    //TODO add images
+    //TODO add text
+    //TODO Make arrows white
+    //TODO version 1.5                                  MARCH?
+    //TODO Start making the graph
+    //TODO start making the service
+    //TODO start making a settings for the service
+    //TODO make payment screen
+    //TODO make the payment with google
+    //TODO version 1.6                                  MAY?
+    //TODO do refactoring and testing
+    //TODO version 2.0                                  MAY?
+    //TODO change store text
+    //TODO change screenshots
+    //TODO create video?
+    //TODO release version 3.0 to public                JUNE?
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
                 getFragmentManager().beginTransaction().add(R.id.fragment, fragment, "main").commit();
             }
         }
-
     }
 
     public void onStartMain(View view) {

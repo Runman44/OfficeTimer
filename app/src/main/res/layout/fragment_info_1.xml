@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Sitting is Killing"/>
+        android:text="@string/info_1_title"/>
 
 
     <nl.mranderson.sittingapp.custom.CircularSeekBar
@@ -37,6 +37,6 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Sitting to long isn't healthy for your body. This app will help you with remembering that you are sitting way to long. \n \n Use the timer and find out. " />
+        android:text="@string/info_1_sub" />
 
 </LinearLayout>

@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Movement Sensors"/>
+        android:text="@string/info_2_title"/>
 
 
     <nl.mranderson.sittingapp.custom.CircularSeekBar
@@ -37,6 +37,6 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="We know that you are walking. This app registers movement and resets the timer by itself when you are sitting again. \n \n You should really try this!" />
+        android:text="@string/info_2_sub" />
 
 </LinearLayout>

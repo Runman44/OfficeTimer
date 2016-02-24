@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Get Started" />
+        android:text="@string/info_4_title" />
 
 
     <nl.mranderson.sittingapp.custom.CircularSeekBar
@@ -37,7 +37,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="That was it." />
+        android:text="@string/info_4_sub" />
 
     <Button
         android:id="@+id/bFinish"

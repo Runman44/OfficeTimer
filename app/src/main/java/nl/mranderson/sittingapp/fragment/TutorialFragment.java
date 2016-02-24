@@ -29,13 +29,12 @@ public class TutorialFragment extends Fragment {
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.viewpager);
+        ViewPager viewPager = (ViewPager) getActivity().findViewById(R.id.viewpager2);
 
         ViewPagerArrowIndicator viewPagerArrowIndicator = (ViewPagerArrowIndicator) getActivity().findViewById(R.id.viewPagerArrowIndicator);
-        viewPager.setAdapter(new TutorialPagerAdapter(getContext()));
+        viewPager.setAdapter(new TutorialPagerAdapter(getActivity()));
 
         viewPagerArrowIndicator.bind(viewPager);
-
     }
 
 

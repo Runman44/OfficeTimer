@@ -19,7 +19,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Analytics"/>
+        android:text="@string/info_3_title"/>
 
 
     <nl.mranderson.sittingapp.custom.CircularSeekBar
@@ -37,6 +37,6 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Want to know when and for how long you are sitting in a nice looking graph? \n \n Buy the upgrade and try it out." />
+        android:text="@string/info_3_sub" />
 
 </LinearLayout>
