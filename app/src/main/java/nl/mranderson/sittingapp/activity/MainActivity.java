@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity {
     //TODO create video?
     //TODO release version 3.0 to public                JUNE?
 
+    //TODO Bug Mariska? FIXED - TEST
+    //TODO Play Service not Available
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

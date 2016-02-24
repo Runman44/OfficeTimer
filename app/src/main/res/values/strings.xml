@@ -34,4 +34,13 @@
     <!-- notifications -->
     <string name="notification_red">Stand Up !</string>
     <string name="notification_blue">Timer is running!</string>
+
+    <!-- steps -->
+    <string name="step_1">step1</string>
+    <string name="step_2">step2</string>
+    <string name="step_3">step3</string>
+    <string name="step_4">step4</string>
+
+    <!-- temp -->
+    <string name="upgrade_not_there_temp">Not in here yet!</string>
 </resources>

@@ -14,9 +14,6 @@ import android.widget.ImageButton;
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.UserPreference;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class SettingsFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     public SettingsFragment() {
@@ -80,6 +77,5 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
                 UserPreference.setSensorSettings(getActivity(), isChecked);
                 break;
         }
-
     }
 }

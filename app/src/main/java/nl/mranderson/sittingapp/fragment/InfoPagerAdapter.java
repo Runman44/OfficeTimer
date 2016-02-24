@@ -6,9 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * Created by MrAnderson1 on 20/02/16.
- */
 public class InfoPagerAdapter extends PagerAdapter {
 
     private Context mContext;
@@ -46,5 +43,4 @@ public class InfoPagerAdapter extends PagerAdapter {
         InfoPagerEnum infoPagerEnum = InfoPagerEnum.values()[position];
         return mContext.getString(infoPagerEnum.getTitleResId());
     }
-
 }

@@ -13,9 +13,6 @@ import com.sembozdemir.viewpagerarrowindicator.library.ViewPagerArrowIndicator;
 
 import nl.mranderson.sittingapp.R;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class InfoFragment extends Fragment implements View.OnClickListener {
 
     public InfoFragment() {
@@ -45,7 +42,6 @@ public class InfoFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        // Replace fragment
         Fragment newFragment = new MainFragment();
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.fragment, newFragment);

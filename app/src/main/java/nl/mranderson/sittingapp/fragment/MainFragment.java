@@ -18,9 +18,6 @@ import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.custom.CircularSeekBar;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class MainFragment extends Fragment implements View.OnClickListener {
 
     private CircularSeekBar circularSeekbar;
@@ -60,7 +57,7 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         bUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Not in here yet!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), R.string.upgrade_not_there_temp, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -126,7 +123,6 @@ public class MainFragment extends Fragment implements View.OnClickListener {
             motivationText.setText(R.string.motivation_message_3);
         }
     }
-
 
     private void setRangeColor(int progress) {
         if (progress > circularSeekbar.getMaxProgress() / 2) {

@@ -92,7 +92,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
         bUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), "Not in here yet!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.upgrade_not_there_temp), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -186,7 +186,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
             //Connect to Google API
             mGApiClient.connect();
         } else {
-            //TODO do something else?
+            //TODO do something else? Show pop-up that the Movement sensors dont work without play service !
             Toast.makeText(getActivity(), "Google Play Service not Available", Toast.LENGTH_LONG).show();
         }
 

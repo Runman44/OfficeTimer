@@ -11,9 +11,6 @@ import com.sembozdemir.viewpagerarrowindicator.library.ViewPagerArrowIndicator;
 
 import nl.mranderson.sittingapp.R;
 
-/**
- * A placeholder fragment containing a simple view.
- */
 public class TutorialFragment extends Fragment {
 
     public TutorialFragment() {
@@ -36,6 +33,4 @@ public class TutorialFragment extends Fragment {
 
         viewPagerArrowIndicator.bind(viewPager);
     }
-
-
 }
