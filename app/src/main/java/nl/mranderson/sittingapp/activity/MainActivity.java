@@ -15,7 +15,7 @@ import nl.mranderson.sittingapp.fragment.TimerFragment;
 import nl.mranderson.sittingapp.fragment.TutorialFragment;
 
 public class MainActivity extends AppCompatActivity {
-    
+
     //TODO add images
     //TODO add text
     //TODO version 1.5                                  MARCH?

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.concurrent.TimeUnit;
 
@@ -54,7 +53,10 @@ public class MainFragment extends Fragment implements View.OnClickListener {
         bUpgrade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getActivity(), R.string.upgrade_not_there_temp, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), R.string.upgrade_not_there_temp, Toast.LENGTH_SHORT).show();
+
+                Fragment newFragment = new UpgradeFragment();
+                getFragmentManager().beginTransaction().replace(R.id.fragment, newFragment).addToBackStack("").commit();
             }
         });
 
