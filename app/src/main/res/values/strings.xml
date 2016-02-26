@@ -43,4 +43,8 @@
 
     <!-- temp -->
     <string name="upgrade_not_there_temp">Not in here yet!</string>
+
+    <!-- play service pop-up -->
+    <string name="playServiceMessage">Please update the Google Play Service. Movement Sensors are turned off.</string>
+    <string name="playServiceTitle">Google Play Service</string>
 </resources>

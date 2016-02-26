@@ -12,8 +12,11 @@ import android.widget.ImageButton;
 
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.UserPreference;
+import nl.mranderson.sittingapp.Utils;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
+
+    private CheckBox cSensors;
 
     public SettingsFragment() {
     }
@@ -29,7 +32,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
         super.onActivityCreated(savedInstanceState);
 
         ImageButton bSave = (ImageButton) getActivity().findViewById(R.id.bSave);
-        CheckBox cSensors = (CheckBox) getActivity().findViewById(R.id.sensors);
+        cSensors = (CheckBox) getActivity().findViewById(R.id.sensors);
         CheckBox cVibration = (CheckBox) getActivity().findViewById(R.id.notify_vibration);
         CheckBox cLight = (CheckBox) getActivity().findViewById(R.id.notify_light);
         CheckBox cSound = (CheckBox) getActivity().findViewById(R.id.notify_sound);
@@ -43,7 +46,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
         Boolean light = prefs.getBoolean("light", true);
         Boolean vibration = prefs.getBoolean("vibration", true);
         Boolean sound = prefs.getBoolean("sound", true);
-        Boolean sensors = prefs.getBoolean("sensor", true);
+        Boolean sensors = prefs.getBoolean("sensor", false);
 
         cLight.setChecked(light);
         cSound.setChecked(sound);
@@ -69,7 +72,17 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
                 UserPreference.setVibrationSettings(getActivity(), isChecked);
                 break;
             case R.id.sensors:
-                UserPreference.setSensorSettings(getActivity(), isChecked);
+                if (Utils.isPlayServiceAvailable(getActivity())) {
+                    UserPreference.setSensorSettings(getActivity(), isChecked);
+                } else {
+                    PlayServiceAlertDialog dialog = new PlayServiceAlertDialog(getActivity());
+                    dialog.setTitle(getResources().getString(R.string.playServiceTitle));
+                    dialog.setMessage(getResources().getString(R.string.playServiceMessage));
+                    dialog.show();
+                    cSensors.setChecked(false);
+                    UserPreference.setSensorSettings(getActivity(), false);
+                }
+
                 break;
         }
     }

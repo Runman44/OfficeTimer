@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO release version 3.0 to public                JUNE?
 
     //TODO Bug Mariska? FIXED - TEST
-    //TODO Play Service not Available
+    //TODO Play Service not Available - pop-up with link to playstore
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

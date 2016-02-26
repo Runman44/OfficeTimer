@@ -43,4 +43,10 @@ public class UserPreference {
         editor.putBoolean("introShown", isChecked);
         editor.commit();
     }
+
+    public static void setPlayServiceSettings(Activity activity, boolean isChecked) {
+        editor = activity.getSharedPreferences(MY_PREFS_NAME, activity.MODE_PRIVATE).edit();
+        editor.putBoolean("playServiceShown", isChecked);
+        editor.commit();
+    }
 }

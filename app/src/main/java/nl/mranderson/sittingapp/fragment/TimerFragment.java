@@ -19,7 +19,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
 
@@ -28,6 +27,7 @@ import java.util.concurrent.TimeUnit;
 import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.UserPreference;
+import nl.mranderson.sittingapp.Utils;
 import nl.mranderson.sittingapp.custom.CircularSeekBar;
 import nl.mranderson.sittingapp.service.ActivityRecognitionIntentService;
 import nl.mranderson.sittingapp.service.TimerService;
@@ -169,7 +169,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
 
     private void startSensors() {
         //Check Google Play Service Available
-        if (isPlayServiceAvailable()) {
+        if (Utils.isPlayServiceAvailable(getActivity())) {
             mGApiClient = new GoogleApiClient.Builder(getActivity())
                     .addApi(ActivityRecognition.API)
                     .addConnectionCallbacks(this)
@@ -178,8 +178,18 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
             //Connect to Google API
             mGApiClient.connect();
         } else {
-            //TODO do something else? Show pop-up that the Movement sensors dont work without play service !
-            Toast.makeText(getActivity(), "Google Play Service not Available", Toast.LENGTH_LONG).show();
+            SharedPreferences prefs = getActivity().getSharedPreferences(UserPreference.MY_PREFS_NAME, getActivity().MODE_PRIVATE);
+            Boolean playServiceShown = prefs.getBoolean("playServiceShown", false);
+            if (!playServiceShown) {
+                //TODO cleanup !
+                PlayServiceAlertDialog dialog = new PlayServiceAlertDialog(getActivity());
+                dialog.setTitle("Google Play Service");
+                dialog.setMessage("You don't have the right Play Service installed.");
+                dialog.show();
+
+                Toast.makeText(getActivity(), "Google Play Service not Available", Toast.LENGTH_LONG).show();
+                UserPreference.setPlayServiceSettings(getActivity(), true);
+            }
         }
 
         sensorReceiver = new BroadcastReceiver() {
@@ -190,11 +200,6 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
         };
 
         getActivity().registerReceiver(sensorReceiver, new IntentFilter(Constants.SENSOR_BROADCAST));
-    }
-
-    //Check for Google play services available on device
-    private boolean isPlayServiceAvailable() {
-        return GooglePlayServicesUtil.isGooglePlayServicesAvailable(getActivity()) == ConnectionResult.SUCCESS;
     }
 
     // Connection callback from play service.
@@ -224,7 +229,9 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
         super.onDestroy();
 
         getActivity().unregisterReceiver(timerCountdownReceiver);
-        getActivity().unregisterReceiver(sensorReceiver);
+
+        if (Utils.isPlayServiceAvailable(getActivity()))
+            getActivity().unregisterReceiver(sensorReceiver);
 
         if (mGApiClient != null)
             mGApiClient.disconnect();
