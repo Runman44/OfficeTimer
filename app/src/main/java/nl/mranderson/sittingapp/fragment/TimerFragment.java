@@ -35,7 +35,7 @@ import nl.mranderson.sittingapp.service.TimerService;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class TimerFragment extends Fragment implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class TimerFragment extends Fragment implements View.OnClickListener,GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private TextView countDownText;
     private TextView messageText;
@@ -236,4 +236,5 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
         if (mGApiClient != null)
             mGApiClient.disconnect();
     }
+
 }

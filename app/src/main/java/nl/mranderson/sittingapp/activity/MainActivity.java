@@ -2,6 +2,8 @@ package nl.mranderson.sittingapp.activity;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.app.NotificationManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -67,7 +69,17 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        //TODO doesnt shut down the timer service dammit !
         if(getFragmentManager().getBackStackEntryCount() != 0) {
+            if(Constants.IS_TIMER_SERVICE_RUNNING){
+                // Cancel the current notification.
+                NotificationManager mNotifyMgr =
+                        (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
+                mNotifyMgr.cancel(Constants.NOTIFICATION_GET_WALKING);
+
+                // Stop the service
+                this.sendBroadcast(new Intent(Constants.COUNTDOWN_STOP_BROADCAST));
+            }
             getFragmentManager().popBackStack();
         } else {
             super.onBackPressed();
