@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO release version 3.0 to public                JUNE?
 
     //TODO Bug Mariska? FIXED - TEST
-    //TODO Play Service not Available - pop-up with link to playstore
+    //TODO Play Service not Available - pop-up with link to playstore - TEST
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        //TODO doesnt shut down the timer service dammit !
         if(getFragmentManager().getBackStackEntryCount() != 0) {
             if(Constants.IS_TIMER_SERVICE_RUNNING){
                 // Cancel the current notification.
