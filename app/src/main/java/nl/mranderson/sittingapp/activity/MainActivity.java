@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO add images
     //TODO add text
-    //TODO version 1.5                                  MARCH?
+    //TODO Tablet !         //TODO just make a different layout folder for tablets with 350dp for the circle or even more !
     //TODO Start making the graph
     //TODO start making the service
     //TODO start making a settings for the service

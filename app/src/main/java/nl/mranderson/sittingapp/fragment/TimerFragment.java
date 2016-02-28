@@ -44,6 +44,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener,Goog
     private long millisUntilFinished;
     private BroadcastReceiver timerCountdownReceiver;
     private BroadcastReceiver sensorReceiver;
+    private boolean sensor;
 
 
     public TimerFragment() {
@@ -102,7 +103,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener,Goog
         }
 
         SharedPreferences prefs = getActivity().getSharedPreferences(UserPreference.MY_PREFS_NAME, getActivity().MODE_PRIVATE);
-        Boolean sensor = prefs.getBoolean("sensor", true);
+        sensor = prefs.getBoolean("sensor", true);
         if (sensor)
             startSensors();
 
@@ -191,15 +192,6 @@ public class TimerFragment extends Fragment implements View.OnClickListener,Goog
                 UserPreference.setPlayServiceSettings(getActivity(), true);
             }
         }
-
-        sensorReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                messageText.setText(intent.getStringExtra("message"));
-            }
-        };
-
-        getActivity().registerReceiver(sensorReceiver, new IntentFilter(Constants.SENSOR_BROADCAST));
     }
 
     // Connection callback from play service.
@@ -210,6 +202,15 @@ public class TimerFragment extends Fragment implements View.OnClickListener,Goog
                 .getService(getActivity(), 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
         ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mGApiClient, 0, mActivityRecongPendingIntent);
+
+        sensorReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                messageText.setText(intent.getStringExtra("message"));
+            }
+        };
+
+        getActivity().registerReceiver(sensorReceiver, new IntentFilter(Constants.SENSOR_BROADCAST));
     }
 
     // Connection callback from play service.
@@ -230,7 +231,8 @@ public class TimerFragment extends Fragment implements View.OnClickListener,Goog
 
         getActivity().unregisterReceiver(timerCountdownReceiver);
 
-        if (Utils.isPlayServiceAvailable(getActivity()))
+        //TODO dikke crash here
+        if (Utils.isPlayServiceAvailable(getActivity()) && sensor)
             getActivity().unregisterReceiver(sensorReceiver);
 
         if (mGApiClient != null)
