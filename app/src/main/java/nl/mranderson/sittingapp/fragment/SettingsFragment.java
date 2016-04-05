@@ -17,6 +17,7 @@ import nl.mranderson.sittingapp.Utils;
 public class SettingsFragment extends Fragment implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     private CheckBox cSensors;
+    private CheckBox cBackground;
 
     public SettingsFragment() {
     }
@@ -36,6 +37,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
         CheckBox cVibration = (CheckBox) getActivity().findViewById(R.id.notify_vibration);
         CheckBox cLight = (CheckBox) getActivity().findViewById(R.id.notify_light);
         CheckBox cSound = (CheckBox) getActivity().findViewById(R.id.notify_sound);
+        cBackground = (CheckBox) getActivity().findViewById(R.id.background);
+        cBackground.setOnCheckedChangeListener(this);
         cSensors.setOnCheckedChangeListener(this);
         cLight.setOnCheckedChangeListener(this);
         cSound.setOnCheckedChangeListener(this);
@@ -43,6 +46,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
         bSave.setOnClickListener(this);
 
         SharedPreferences prefs = getActivity().getSharedPreferences(UserPreference.MY_PREFS_NAME, getActivity().MODE_PRIVATE);
+        Boolean background = prefs.getBoolean("background", true);
         Boolean light = prefs.getBoolean("light", true);
         Boolean vibration = prefs.getBoolean("vibration", true);
         Boolean sound = prefs.getBoolean("sound", true);
@@ -51,6 +55,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
         cLight.setChecked(light);
         cSound.setChecked(sound);
         cVibration.setChecked(vibration);
+        cBackground.setChecked(background);
         cSensors.setChecked(sensors);
     }
 
@@ -71,9 +76,20 @@ public class SettingsFragment extends Fragment implements View.OnClickListener, 
             case R.id.notify_vibration:
                 UserPreference.setVibrationSettings(getActivity(), isChecked);
                 break;
+            case R.id.background:
+                UserPreference.setBackgroundSettings(getActivity(), isChecked);
+                break;
             case R.id.sensors:
                 if (Utils.isPlayServiceAvailable(getActivity())) {
                     UserPreference.setSensorSettings(getActivity(), isChecked);
+
+                    if (!isChecked) {
+                        cBackground.setChecked(false);
+                        cBackground.setEnabled(false);
+                    } else {
+                        cBackground.setEnabled(true);
+                    }
+                    
                 } else {
                     PlayServiceAlertDialog dialog = new PlayServiceAlertDialog(getActivity());
                     dialog.setTitle(getResources().getString(R.string.playServiceTitle));

@@ -53,6 +53,26 @@
                 style="@style/list_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Background Sensors" />
+
+            <CheckBox
+                android:id="@+id/background"
+                style="@style/list_item_check"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <TextView
+                style="@style/list_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="Movement Sensors" />
 
             <CheckBox
