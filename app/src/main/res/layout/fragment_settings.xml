@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
+    android:background="@color/lightGrey"
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -16,26 +16,10 @@
         android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp">
-
-            <ImageButton
-                android:id="@+id/bSave"
-                style="@style/small_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:gravity="center"
-                android:padding="5dp"
-                android:src="@drawable/ic_arrow_back_white_36dp" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
 
             <TextView
                 style="@style/list_header"
@@ -47,27 +31,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
-
-            <TextView
-                style="@style/list_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Background Sensors" />
-
-            <CheckBox
-                android:id="@+id/background"
-                style="@style/list_item_check"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true" />
-
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            android:padding="5dp">
 
             <TextView
                 style="@style/list_item"
@@ -80,14 +45,16 @@
                 style="@style/list_item_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
 
         </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
 
             <TextView
                 style="@style/list_header"
@@ -99,7 +66,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            android:padding="5dp">
 
             <TextView
                 style="@style/list_item"
@@ -112,14 +80,21 @@
                 style="@style/list_item_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
 
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            android:padding="5dp">
 
             <TextView
                 style="@style/list_item"
@@ -132,14 +107,21 @@
                 style="@style/list_item_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
 
         </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@android:color/white">
+            android:background="@android:color/white"
+            android:padding="5dp">
 
             <TextView
                 style="@style/list_item"
@@ -152,19 +134,9 @@
                 style="@style/list_item_check"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
 
         </RelativeLayout>
-
-        <!--<Button-->
-        <!--android:id="@+id/bSave"-->
-        <!--style="@style/button"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:layout_marginTop="20dp"-->
-        <!--android:gravity="center"-->
-        <!--android:text="Save" />-->
-
     </LinearLayout>
 </ScrollView>

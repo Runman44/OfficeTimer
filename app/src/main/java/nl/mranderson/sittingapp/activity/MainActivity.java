@@ -1,87 +1,104 @@
 package nl.mranderson.sittingapp.activity;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
-import android.app.NotificationManager;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
 
-import nl.mranderson.sittingapp.Constants;
+import java.util.ArrayList;
+import java.util.List;
+
 import nl.mranderson.sittingapp.R;
-import nl.mranderson.sittingapp.UserPreference;
+import nl.mranderson.sittingapp.fragment.InfoFragment;
 import nl.mranderson.sittingapp.fragment.MainFragment;
-import nl.mranderson.sittingapp.fragment.TimerFragment;
-import nl.mranderson.sittingapp.fragment.TutorialFragment;
+import nl.mranderson.sittingapp.fragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
     //TODO add images
     //TODO add text
-    //TODO Tablet !         //TODO just make a different layout folder for tablets with 350dp for the circle or even more !
-    //TODO Start making the graph
-    //TODO start making the service
-    //TODO start making a settings for the service
-    //TODO make payment screen
-    //TODO make the payment with google
+    //TODO tutorial
+    //TODO timer screen
+    //TODO Playstore fix
     //TODO version 1.6                                  MAY?
     //TODO do refactoring and testing
-    //TODO version 2.0                                  MAY?
-    //TODO change store text
     //TODO change screenshots
     //TODO create video?
     //TODO release version 3.0 to public                JUNE?
 
-    //TODO Bug Mariska? FIXED - TEST
-    //TODO Play Service not Available - pop-up with link to playstore - TEST
+    private Toolbar toolbar;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private int[] tabIcons = {
+            R.drawable.ic_directions_walk_white_48dp,
+            R.drawable.ic_settings_white_36dp,
+            R.drawable.ic_help_white_48dp
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        SharedPreferences prefs = this.getSharedPreferences(UserPreference.MY_PREFS_NAME, MODE_PRIVATE);
-        Boolean introShown = prefs.getBoolean("introShown", false);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
-        if (Constants.IS_TIMER_SERVICE_RUNNING) {
-            TimerFragment fragment = new TimerFragment();
-            getFragmentManager().beginTransaction().add(R.id.fragment, fragment, "timer").commit();
-        } else {
-            if (!introShown) {
-                TutorialFragment fragment = new TutorialFragment();
-                getFragmentManager().beginTransaction().add(R.id.fragment, fragment, "tutorial").commit();
-                UserPreference.setIntroShown(this, true);
-            } else if (getFragmentManager().findFragmentByTag("main") == null) {
-                MainFragment fragment = new MainFragment();
-                getFragmentManager().beginTransaction().add(R.id.fragment, fragment, "main").commit();
-            }
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+//        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+//        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+        setupTabIcons();
+    }
+
+    private void setupTabIcons() {
+        tabLayout.getTabAt(0).setIcon(tabIcons[0]);
+        tabLayout.getTabAt(1).setIcon(tabIcons[1]);
+        tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new MainFragment(), "ONE");
+        adapter.addFragment(new SettingsFragment(), "TWO");
+        adapter.addFragment(new InfoFragment(), "THREE");
+        viewPager.setAdapter(adapter);
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+        public ViewPagerAdapter(FragmentManager manager) {
+            super(manager);
         }
-    }
 
-    public void onStartMain(View view) {
-        Fragment newFragment = new MainFragment();
-        FragmentTransaction transaction = getFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment, newFragment);
-        transaction.commit();
-    }
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
 
-    @Override
-    public void onBackPressed() {
-        if(getFragmentManager().getBackStackEntryCount() != 0) {
-            if(Constants.IS_TIMER_SERVICE_RUNNING){
-                // Cancel the current notification.
-                NotificationManager mNotifyMgr =
-                        (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
-                mNotifyMgr.cancel(Constants.NOTIFICATION_GET_WALKING);
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
 
-                // Stop the service
-                this.sendBroadcast(new Intent(Constants.COUNTDOWN_STOP_BROADCAST));
-            }
-            getFragmentManager().popBackStack();
-        } else {
-            super.onBackPressed();
+        public void addFragment(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return null;
         }
     }
 }

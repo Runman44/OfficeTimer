@@ -47,4 +47,6 @@
     <!-- play service pop-up -->
     <string name="playServiceMessage">Please update the Google Play Service. Movement Sensors are turned off.</string>
     <string name="playServiceTitle">Google Play Service</string>
+
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 </resources>

@@ -106,6 +106,7 @@ public class TimerService extends Service {
 
         Constants.IS_TIMER_SERVICE_RUNNING = false;
         countDownTimer.cancel();
+        //TODO crash here receiver not registered
         TimerService.this.stopForeground(true);
         TimerService.this.stopSelf();
     }

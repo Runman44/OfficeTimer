@@ -46,7 +46,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:onClick="onStartMain"
         android:text="Start" />
 
 </LinearLayout>

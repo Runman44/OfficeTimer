@@ -49,10 +49,4 @@ public class UserPreference {
         editor.putBoolean("playServiceShown", isChecked);
         editor.commit();
     }
-
-    public static void setBackgroundSettings(Activity activity, boolean isChecked) {
-        editor = activity.getSharedPreferences(MY_PREFS_NAME, activity.MODE_PRIVATE).edit();
-        editor.putBoolean("background", isChecked);
-        editor.commit();
-    }
 }

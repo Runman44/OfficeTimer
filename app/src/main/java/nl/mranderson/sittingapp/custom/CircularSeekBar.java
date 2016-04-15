@@ -9,8 +9,11 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
@@ -210,18 +213,16 @@ public class CircularSeekBar extends View {
 
         circleColor = new Paint();
         innerColor = new Paint();
-//		Drawable d = getResources().getDrawable(R.drawable.foobar);
-//		d.setBounds(left, top, right, bottom);
-//		d.draw(canvas);
+
         circleRing = new Paint();
 
         circleColor.setColor(Color.parseColor("#ff33b5e5")); // Set default
         // progress
         // color to holo
         // blue.
-        innerColor.setColor(Color.WHITE); // Set default background color to
+        innerColor.setColor(Color.parseColor("#125688")); // Set default background color to
         // black
-        circleRing.setColor(Color.GRAY);// Set default background color to Gray
+        circleRing.setColor( Color.parseColor("#B3E5FC"));// Set default background color to Gray
 
         circleColor.setAntiAlias(true);
         innerColor.setAntiAlias(true);
@@ -343,7 +344,7 @@ public class CircularSeekBar extends View {
             dx = getXFromAngle();
             dy = getYFromAngle();
             if (SHOW_MARKER) {
-                // drawMarkerAtProgress(canvas);
+                drawMarkerAtProgress(canvas);
             }
             if (innerRadius > 0 && backgroundImage != null)
                 drawBackgroundImage(canvas);
@@ -352,15 +353,21 @@ public class CircularSeekBar extends View {
     }
 
     public void drawBackgroundImage(Canvas canvas) {
+
+        Paint paint = new Paint();
+        ColorFilter filter = new PorterDuffColorFilter(getResources().getColor(R.color.white), PorterDuff.Mode.SRC_IN);
+        paint.setColorFilter(filter);
+
         if (!calculated) {
             int reqWidth;
             int reqHeight;
+
             reqWidth = Math.round(innerRadius / 2);
             reqHeight = Math.round(innerRadius / 2 * this.backgroundImage.getHeight()) / this.backgroundImage.getWidth();
             this.backgroundImage = getResizedBitmap(this.backgroundImage, reqWidth, reqHeight);
             calculated = true;
         }
-        canvas.drawBitmap(this.backgroundImage, cx - (this.backgroundImage.getWidth() / 2), cy - (this.backgroundImage.getHeight() / 2), null);
+        canvas.drawBitmap(this.backgroundImage, cx - (this.backgroundImage.getWidth() / 2), cy - (this.backgroundImage.getHeight() / 2), paint);
     }
 
     public Bitmap getResizedBitmap(Bitmap bm, int newWidth, int newHeight) {
@@ -482,6 +489,10 @@ public class CircularSeekBar extends View {
 
     public void hideProgressMarker() {
         SHOW_MARKER = false;
+    }
+
+    public void showProgressMarker() {
+        SHOW_MARKER = true;
     }
 
     public void stopTouching() {
@@ -608,7 +619,7 @@ public class CircularSeekBar extends View {
      */
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(DEAL_TOUCHES) {
+        if (DEAL_TOUCHES) {
             float x = event.getX();
             float y = event.getY();
             boolean up = false;

@@ -1,6 +1,5 @@
 package nl.mranderson.sittingapp.fragment;
 
-import android.app.Fragment;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -10,21 +9,25 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.view.LayoutInflater;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
 
 import java.util.concurrent.TimeUnit;
 
+import co.mobiwise.materialintro.animation.MaterialIntroListener;
+import co.mobiwise.materialintro.shape.Focus;
+import co.mobiwise.materialintro.view.MaterialIntroView;
 import nl.mranderson.sittingapp.Constants;
+import nl.mranderson.sittingapp.MaterialIntroUtils;
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.UserPreference;
 import nl.mranderson.sittingapp.Utils;
@@ -35,7 +38,7 @@ import nl.mranderson.sittingapp.service.TimerService;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class TimerFragment extends Fragment implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
+public class TimerFragment extends AppCompatActivity implements View.OnClickListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private TextView countDownText;
     private TextView messageText;
@@ -45,54 +48,35 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
     private BroadcastReceiver timerCountdownReceiver;
     private BroadcastReceiver sensorReceiver;
     private boolean sensor;
+    private boolean introShown;
+    private CircularSeekBar circularSeekbar;
+    private Button stopButton;
 
 
     public TimerFragment() {
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_timer, container, false);
-    }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_timer);
 
-        countDownText = (TextView) getActivity().findViewById(R.id.countdown);
-        messageText = (TextView) getActivity().findViewById(R.id.messageText);
-        Button stopButton = (Button) getActivity().findViewById(R.id.bStop);
+        //Ads
+        AdView mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+
+
+        countDownText = (TextView) this.findViewById(R.id.countdown);
+        messageText = (TextView) this.findViewById(R.id.messageText);
+        stopButton = (Button) this.findViewById(R.id.bStop);
         stopButton.setOnClickListener(this);
 
         int time = Constants.TIMER_SELECTED_TIME;
         final int millisStarted = (time * 1000) * 60;
 
-        ImageButton bBack = (ImageButton) getActivity().findViewById(R.id.bBack);
-        bBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Cancel the current notification.
-                NotificationManager mNotifyMgr =
-                        (NotificationManager) getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
-                mNotifyMgr.cancel(Constants.NOTIFICATION_GET_WALKING);
-
-                // Stop the service
-                stopTimerService();
-
-                getActivity().onBackPressed();
-            }
-        });
-
-        ImageButton bUpgrade = (ImageButton) getActivity().findViewById(R.id.bUpgrade);
-        bUpgrade.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getActivity(), getResources().getString(R.string.upgrade_not_there_temp), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        CircularSeekBar circularSeekbar = (CircularSeekBar) getActivity().findViewById(R.id.seekBar2);
+        circularSeekbar = (CircularSeekBar) this.findViewById(R.id.seekBar2);
         circularSeekbar.initDrawable(R.drawable.stickman_walk);
         circularSeekbar.hideProgressMarker();
         circularSeekbar.stopTouching();
@@ -102,10 +86,12 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
             startTimerService(time);
         }
 
-        SharedPreferences prefs = getActivity().getSharedPreferences(UserPreference.MY_PREFS_NAME, getActivity().MODE_PRIVATE);
+        SharedPreferences prefs = this.getSharedPreferences(UserPreference.MY_PREFS_NAME, this.MODE_PRIVATE);
         sensor = prefs.getBoolean("sensor", true);
         if (sensor)
             startSensors();
+
+        introShown = prefs.getBoolean("introShown", false);
 
         timerCountdownReceiver = new BroadcastReceiver() {
             @Override
@@ -124,7 +110,46 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
                 }
             }
         };
-        getActivity().registerReceiver(timerCountdownReceiver, new IntentFilter(Constants.COUNTDOWN_TIME_BROADCAST));
+        this.registerReceiver(timerCountdownReceiver, new IntentFilter(Constants.COUNTDOWN_TIME_BROADCAST));
+    }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        //TODO introShown can be removed?
+        if (introShown) {
+            showStartTutorial();
+        }
+    }
+
+    private void showStartTutorial() {
+        MaterialIntroView.Builder test = MaterialIntroUtils.getTimerTimeText(this);
+        test.setInfoText("Hi There! Click this card and see what happens.")
+                .setTarget(countDownText)
+                .setFocusType(Focus.MINIMUM)
+                .setListener(new MaterialIntroListener() {
+                    @Override
+                    public void onUserClicked(String s) {
+                        MaterialIntroView.Builder test2 = MaterialIntroUtils.getTimerCircleButton(TimerFragment.this);
+                        test2.setInfoText("Hi There! Click this card and see what happens.")
+                                .setTarget(circularSeekbar)
+                                .setListener(new MaterialIntroListener() {
+                                    @Override
+                                    public void onUserClicked(String s) {
+                                        MaterialIntroView.Builder test2 = MaterialIntroUtils.getTimerStopButton(TimerFragment.this);
+                                        test2.setInfoText("Click on start when you are ready to sit!")
+                                                .setTarget(stopButton)
+                                                .setFocusType(Focus.ALL)
+                                                .enableDotAnimation(true)
+                                                .show();
+                                    }
+                                });
+                        test2.show();
+                    }
+                });
+        test.show();
     }
 
     private void setMessages(long millisStarted, long millisUntilFinished) {
@@ -145,33 +170,33 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
     }
 
     private void stopTimerService() {
-        getActivity().sendBroadcast(new Intent(Constants.COUNTDOWN_STOP_BROADCAST));
+        this.sendBroadcast(new Intent(Constants.COUNTDOWN_STOP_BROADCAST));
     }
 
     private void startTimerService(int time) {
-        Intent timerServiceIntent = new Intent(getActivity(), TimerService.class);
+        Intent timerServiceIntent = new Intent(this, TimerService.class);
         timerServiceIntent.putExtra("time", time);
-        getActivity().startService(timerServiceIntent);
+        this.startService(timerServiceIntent);
     }
 
     @Override
     public void onClick(View v) {
         // Cancel the current notification.
         NotificationManager mNotifyMgr =
-                (NotificationManager) getActivity().getSystemService(getActivity().NOTIFICATION_SERVICE);
+                (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
         mNotifyMgr.cancel(Constants.NOTIFICATION_GET_WALKING);
 
         // Stop the service
         stopTimerService();
 
         // Replace fragment
-        getActivity().onBackPressed();
+        this.onBackPressed();
     }
 
     private void startSensors() {
         //Check Google Play Service Available
-        if (Utils.isPlayServiceAvailable(getActivity())) {
-            mGApiClient = new GoogleApiClient.Builder(getActivity())
+        if (Utils.isPlayServiceAvailable(this)) {
+            mGApiClient = new GoogleApiClient.Builder(this)
                     .addApi(ActivityRecognition.API)
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
@@ -179,17 +204,17 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
             //Connect to Google API
             mGApiClient.connect();
         } else {
-            SharedPreferences prefs = getActivity().getSharedPreferences(UserPreference.MY_PREFS_NAME, getActivity().MODE_PRIVATE);
+            SharedPreferences prefs = this.getSharedPreferences(UserPreference.MY_PREFS_NAME, this.MODE_PRIVATE);
             Boolean playServiceShown = prefs.getBoolean("playServiceShown", false);
             if (!playServiceShown) {
                 //TODO cleanup !
-                PlayServiceAlertDialog dialog = new PlayServiceAlertDialog(getActivity());
+                PlayServiceAlertDialog dialog = new PlayServiceAlertDialog(this);
                 dialog.setTitle("Google Play Service");
                 dialog.setMessage("You don't have the right Play Service installed.");
                 dialog.show();
 
-                Toast.makeText(getActivity(), "Google Play Service not Available", Toast.LENGTH_LONG).show();
-                UserPreference.setPlayServiceSettings(getActivity(), true);
+                Toast.makeText(this, "Google Play Service not Available", Toast.LENGTH_LONG).show();
+                UserPreference.setPlayServiceSettings(this, true);
             }
         }
     }
@@ -197,9 +222,9 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
     // Connection callback from play service.
     @Override
     public void onConnected(Bundle bundle) {
-        Intent i = new Intent(getActivity(), ActivityRecognitionIntentService.class);
+        Intent i = new Intent(this, ActivityRecognitionIntentService.class);
         PendingIntent mActivityRecongPendingIntent = PendingIntent
-                .getService(getActivity(), 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+                .getService(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
         ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mGApiClient, 0, mActivityRecongPendingIntent);
 
@@ -210,7 +235,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
             }
         };
 
-        getActivity().registerReceiver(sensorReceiver, new IntentFilter(Constants.SENSOR_BROADCAST));
+        this.registerReceiver(sensorReceiver, new IntentFilter(Constants.SENSOR_BROADCAST));
     }
 
     // Connection callback from play service.
@@ -229,13 +254,27 @@ public class TimerFragment extends Fragment implements View.OnClickListener, Goo
     public void onDestroy() {
         super.onDestroy();
 
-        getActivity().unregisterReceiver(timerCountdownReceiver);
+        unregisterReceiver(timerCountdownReceiver);
 
-        if (Utils.isPlayServiceAvailable(getActivity()) && sensor)
-            getActivity().unregisterReceiver(sensorReceiver);
+        if (Utils.isPlayServiceAvailable(this) && sensor)
+            unregisterReceiver(sensorReceiver);
 
         if (mGApiClient != null)
             mGApiClient.disconnect();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (Constants.IS_TIMER_SERVICE_RUNNING) {
+            // Cancel the current notification.
+            NotificationManager mNotifyMgr =
+                    (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
+            mNotifyMgr.cancel(Constants.NOTIFICATION_GET_WALKING);
+
+            // Stop the service
+            this.sendBroadcast(new Intent(Constants.COUNTDOWN_STOP_BROADCAST));
+        }
+        super.onBackPressed();
     }
 
 }
