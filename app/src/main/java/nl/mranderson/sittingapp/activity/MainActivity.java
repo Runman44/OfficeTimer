@@ -21,10 +21,8 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO add images
     //TODO add text
-    //TODO tutorial
-    //TODO timer screen
-    //TODO Playstore fix
-    //TODO version 1.6                                  MAY?
+    //TODO add that we know he is moving and the setting is on ! (change icon in TimerFragment and let them know in the tutorial)
+    //TODO version 1.6                                  MAY To Alpha
     //TODO do refactoring and testing
     //TODO change screenshots
     //TODO create video?

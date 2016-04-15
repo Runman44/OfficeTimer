@@ -59,7 +59,7 @@ public abstract class MaterialIntroUtils {
                 .enableIcon(false)
                 .setFocusGravity(FocusGravity.CENTER)
                 .setFocusType(Focus.NORMAL)
-                .setDelayMillis(100)
+                .setDelayMillis(350)
                 .enableFadeAnimation(true)
                 .performClick(true);
     }

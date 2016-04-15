@@ -14,16 +14,14 @@
     <string name="notification_red">Stand Up !</string>
     <string name="notification_blue">Timer is running!</string>
 
-    <!-- play service pop-up -->
-    <string name="playServiceMessage">Please update the Google Play Service. Movement Sensors are turned off.</string>
-    <string name="playServiceTitle">Google Play Service</string>
-
     <!-- tutorial -->
+    <string name="tutorial_main_time_text">Welcome ! This will be the time that the timer uses for the countdown.</string>
+    <string name="tutorial_main_circle">You can adjust the time by dragging the outer circle.</string>
+    <string name="tutorial_start_button">Click here, when you are ready to sit!</string>
+    <string name="tutorial_timer_time_text">You will receive a notification when this timer hits 0.</string>
+    <string name="tutorial_timer_circle">Notice here that we know when you are walking! We will freeze the timer if you are walking and we will reset it again once you are seated again.</string>
+    <string name="tutorial_stop_button">Click here, when you are ready to stop. This was also the end of the tutorial ! Have Fun !</string>
+
+    <!-- misc -->
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="tutorial_stop_button">Click on start when you are ready to sit!</string>
-    <string name="tutorial_timer_circle">Hi There! Click this card and see what happens.</string>
-    <string name="tutorial_timer_time_text">Hi There! Click this card and see what happens.</string>
-    <string name="tutorial_start_button">Click on start when you are ready to sit!</string>
-    <string name="tutorial_main_circle">Hi There! Click this card and see what happens.</string>
-    <string name="tutorial_main_time_text">Hi There! Click this card and see what happens.</string>
 </resources>
