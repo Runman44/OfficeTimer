@@ -1,5 +1,6 @@
 package nl.mranderson.sittingapp.fragment;
 
+import android.app.Dialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -67,7 +68,9 @@ public class SettingsFragment extends android.support.v4.app.Fragment implements
                 if (Utils.isPlayServiceAvailable(getActivity())) {
                     UserPreference.setSensorSettings(getActivity(), isChecked);
                 } else {
-                    //TODO show play service dialog.
+                    Dialog errorDialogPlayService = Utils.getErrorDialogPlayService(getActivity());
+                    if (errorDialogPlayService != null)
+                        errorDialogPlayService.show();
                     cSensors.setChecked(false);
                     UserPreference.setSensorSettings(getActivity(), false);
                 }
