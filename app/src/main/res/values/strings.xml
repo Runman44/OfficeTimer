@@ -7,18 +7,12 @@
     <string name="messages_end">Almost there!</string>
 
     <!-- movement -->
-    <string name="messages_moving">Hey! are we moving?</string>
+    <string name="messages_moving">We are moving!</string>
     <string name="messages_sitting">Sitting again!</string>
 
     <!-- notifications -->
     <string name="notification_red">Stand Up !</string>
     <string name="notification_blue">Timer is running!</string>
-
-    <!-- steps -->
-    <string name="step_1">step1</string>
-    <string name="step_2">step2</string>
-    <string name="step_3">step3</string>
-    <string name="step_4">step4</string>
 
     <!-- play service pop-up -->
     <string name="playServiceMessage">Please update the Google Play Service. Movement Sensors are turned off.</string>
