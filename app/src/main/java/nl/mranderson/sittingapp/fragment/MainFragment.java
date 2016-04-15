@@ -104,6 +104,7 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
             if (!introShown) {
                 MaterialIntroUtils.generateViewIdList();
                 showStartTutorial();
+                introShown = true;
                 UserPreference.setIntroShown(getActivity(), true);
             }
         }
