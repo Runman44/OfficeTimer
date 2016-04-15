@@ -1,6 +1,5 @@
 package nl.mranderson.sittingapp.fragment;
 
-import android.app.Dialog;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -203,10 +202,6 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
                     .build();
             //Connect to Google API
             mGApiClient.connect();
-        } else {
-            Dialog errorDialogPlayService = Utils.getErrorDialogPlayService(TimerFragment.this);
-            if (errorDialogPlayService != null)
-                errorDialogPlayService.show();
         }
     }
 
