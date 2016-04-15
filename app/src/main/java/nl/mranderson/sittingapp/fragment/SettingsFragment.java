@@ -67,10 +67,7 @@ public class SettingsFragment extends android.support.v4.app.Fragment implements
                 if (Utils.isPlayServiceAvailable(getActivity())) {
                     UserPreference.setSensorSettings(getActivity(), isChecked);
                 } else {
-                    PlayServiceAlertDialog dialog = new PlayServiceAlertDialog(getActivity());
-                    dialog.setTitle(getResources().getString(R.string.playServiceTitle));
-                    dialog.setMessage(getResources().getString(R.string.playServiceMessage));
-                    dialog.show();
+                    //TODO show play service dialog.
                     cSensors.setChecked(false);
                     UserPreference.setSensorSettings(getActivity(), false);
                 }

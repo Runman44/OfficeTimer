@@ -10,27 +10,6 @@
     <string name="messages_moving">Hey! are we moving?</string>
     <string name="messages_sitting">Sitting again!</string>
 
-    <!-- motivation -->
-    <string name="motivation_message_1">Great that you are here!</string>
-    <string name="motivation_message_2">Meeting?</string>
-    <string name="motivation_message_3">Getting serious</string>
-
-    <!-- hints -->
-    <string name="messages_hint_1">Hint: A (too) small walk won\'t reset the timer</string>
-    <string name="messages_hint_2">Hint: You can deselect movement sensors in the settings menu</string>
-    <string name="messages_hint_3">Hint: History charts and more for only 0.99</string>
-
-
-    <!-- info pages -->
-    <string name="info_1_title">Sitting is Killing</string>
-    <string name="info_1_sub">Sitting to long isn\'t healthy for your body. This app will help you with remembering that you are sitting way too long. \n \n Use the timer and find out.</string>
-    <string name="info_2_title">Movement Sensors</string>
-    <string name="info_2_sub">We know that you are walking. This app registers movement and resets the timer by itself when you are sitting again. \n \n You should really try this!</string>
-    <string name="info_3_title">Analytics</string>
-    <string name="info_3_sub">Want to know when and for how long you are sitting in a nice looking graph? \n \n Buy the upgrade and try it out.</string>
-    <string name="info_4_title">Get Started</string>
-    <string name="info_4_sub">That was it.</string>
-
     <!-- notifications -->
     <string name="notification_red">Stand Up !</string>
     <string name="notification_blue">Timer is running!</string>
@@ -41,12 +20,16 @@
     <string name="step_3">step3</string>
     <string name="step_4">step4</string>
 
-    <!-- temp -->
-    <string name="upgrade_not_there_temp">Not in here yet!</string>
-
     <!-- play service pop-up -->
     <string name="playServiceMessage">Please update the Google Play Service. Movement Sensors are turned off.</string>
     <string name="playServiceTitle">Google Play Service</string>
 
+    <!-- tutorial -->
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="tutorial_stop_button">Click on start when you are ready to sit!</string>
+    <string name="tutorial_timer_circle">Hi There! Click this card and see what happens.</string>
+    <string name="tutorial_timer_time_text">Hi There! Click this card and see what happens.</string>
+    <string name="tutorial_start_button">Click on start when you are ready to sit!</string>
+    <string name="tutorial_main_circle">Hi There! Click this card and see what happens.</string>
+    <string name="tutorial_main_time_text">Hi There! Click this card and see what happens.</string>
 </resources>

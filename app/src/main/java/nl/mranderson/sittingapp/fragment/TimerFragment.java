@@ -13,7 +13,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -126,20 +125,20 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
 
     private void showStartTutorial() {
         MaterialIntroView.Builder test = MaterialIntroUtils.getTimerTimeText(this);
-        test.setInfoText("Hi There! Click this card and see what happens.")
+        test.setInfoText(getString(R.string.tutorial_timer_time_text))
                 .setTarget(countDownText)
                 .setFocusType(Focus.MINIMUM)
                 .setListener(new MaterialIntroListener() {
                     @Override
                     public void onUserClicked(String s) {
                         MaterialIntroView.Builder test2 = MaterialIntroUtils.getTimerCircleButton(TimerFragment.this);
-                        test2.setInfoText("Hi There! Click this card and see what happens.")
+                        test2.setInfoText(getString(R.string.tutorial_timer_circle))
                                 .setTarget(circularSeekbar)
                                 .setListener(new MaterialIntroListener() {
                                     @Override
                                     public void onUserClicked(String s) {
                                         MaterialIntroView.Builder test2 = MaterialIntroUtils.getTimerStopButton(TimerFragment.this);
-                                        test2.setInfoText("Click on start when you are ready to sit!")
+                                        test2.setInfoText(getString(R.string.tutorial_stop_button))
                                                 .setTarget(stopButton)
                                                 .setFocusType(Focus.ALL)
                                                 .enableDotAnimation(true)
@@ -204,18 +203,9 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
             //Connect to Google API
             mGApiClient.connect();
         } else {
-            SharedPreferences prefs = this.getSharedPreferences(UserPreference.MY_PREFS_NAME, this.MODE_PRIVATE);
-            Boolean playServiceShown = prefs.getBoolean("playServiceShown", false);
-            if (!playServiceShown) {
-                //TODO cleanup !
-                PlayServiceAlertDialog dialog = new PlayServiceAlertDialog(this);
-                dialog.setTitle("Google Play Service");
-                dialog.setMessage("You don't have the right Play Service installed.");
-                dialog.show();
 
-                Toast.makeText(this, "Google Play Service not Available", Toast.LENGTH_LONG).show();
-                UserPreference.setPlayServiceSettings(this, true);
-            }
+                //TODO cleanup show play service
+            
         }
     }
 

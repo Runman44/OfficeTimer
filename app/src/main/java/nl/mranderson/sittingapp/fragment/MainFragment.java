@@ -113,20 +113,20 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
         if (tabLayout.getSelectedTabPosition() == 0) {
             MaterialIntroView.Builder test = MaterialIntroUtils.getMainTimeText(getActivity());
-            test.setInfoText("Hi There! Click this card and see what happens.")
+            test.setInfoText(getString(R.string.tutorial_main_time_text))
                     .setTarget(timeText)
                     .setFocusType(Focus.MINIMUM)
                     .setListener(new MaterialIntroListener() {
                 @Override
                 public void onUserClicked(String s) {
                     MaterialIntroView.Builder test2 = MaterialIntroUtils.getMainCircleButton(getActivity());
-                    test2.setInfoText("Hi There! Click this card and see what happens.")
+                    test2.setInfoText(getString(R.string.tutorial_main_circle))
                             .setTarget(circularSeekbar)
                             .setListener(new MaterialIntroListener() {
                                 @Override
                                 public void onUserClicked(String s) {
                                     MaterialIntroView.Builder test2 = MaterialIntroUtils.getMainStartButton(getActivity());
-                                    test2.setInfoText("Click on start when you are ready to sit!")
+                                    test2.setInfoText(getString(R.string.tutorial_start_button))
                                             .setTarget(button)
                                             .setFocusType(Focus.ALL)
                                             .enableDotAnimation(true)
