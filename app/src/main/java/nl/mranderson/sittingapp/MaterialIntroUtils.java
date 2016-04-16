@@ -15,7 +15,7 @@ import co.mobiwise.materialintro.view.MaterialIntroView;
 public abstract class MaterialIntroUtils {
 
 
-    private static String[] viewIdList = new String[6];
+    private static String[] viewIdList = new String[9];
 
     public static MaterialIntroView.Builder getMainTimeText(Activity context){
         MaterialIntroView.Builder builder = getDefaultBuilder(context);
@@ -31,7 +31,7 @@ public abstract class MaterialIntroUtils {
 
     public static MaterialIntroView.Builder getMainStartButton(Activity context){
         MaterialIntroView.Builder builder = getDefaultBuilder(context);
-        builder.setUsageId(viewIdList[5]);
+        builder.setUsageId(viewIdList[6]);
         return builder;
     }
 
@@ -47,9 +47,27 @@ public abstract class MaterialIntroUtils {
         return builder;
     }
 
-    public static MaterialIntroView.Builder getTimerStopButton(Activity context){
+    public static MaterialIntroView.Builder getTimerCircleButton2(Activity context){
         MaterialIntroView.Builder builder = getDefaultBuilder(context);
         builder.setUsageId(viewIdList[4]);
+        return builder;
+    }
+
+    public static MaterialIntroView.Builder getTimerStopButton(Activity context){
+        MaterialIntroView.Builder builder = getDefaultBuilder(context);
+        builder.setUsageId(viewIdList[5]);
+        return builder;
+    }
+
+    public static MaterialIntroView.Builder getStarting(Activity context){
+        MaterialIntroView.Builder builder = getDefaultBuilder(context);
+        builder.setUsageId(viewIdList[7]);
+        return builder;
+    }
+
+    public static MaterialIntroView.Builder getStopping(Activity context){
+        MaterialIntroView.Builder builder = getDefaultBuilder(context);
+        builder.setUsageId(viewIdList[8]);
         return builder;
     }
 

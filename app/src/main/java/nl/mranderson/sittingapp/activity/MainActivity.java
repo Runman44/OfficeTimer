@@ -51,9 +51,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-//        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
-//        getSupportActionBar().setDisplayUseLogoEnabled(true);
-
         setupTabIcons();
     }
 

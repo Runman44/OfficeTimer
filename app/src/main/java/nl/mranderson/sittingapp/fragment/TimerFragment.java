@@ -137,12 +137,21 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
                                 .setListener(new MaterialIntroListener() {
                                     @Override
                                     public void onUserClicked(String s) {
-                                        MaterialIntroView.Builder test2 = MaterialIntroUtils.getTimerStopButton(TimerFragment.this);
-                                        test2.setInfoText(getString(R.string.tutorial_stop_button))
-                                                .setTarget(stopButton)
-                                                .setFocusType(Focus.ALL)
-                                                .enableDotAnimation(true)
-                                                .show();
+                                        MaterialIntroView.Builder test4 = MaterialIntroUtils.getTimerCircleButton2(TimerFragment.this);
+                                        test4.setInfoText(getString(R.string.tutorial_timer_circle_2))
+                                                .setTarget(circularSeekbar)
+                                                .setListener(new MaterialIntroListener() {
+                                                    @Override
+                                                    public void onUserClicked(String s) {
+                                                        MaterialIntroView.Builder test3 = MaterialIntroUtils.getTimerStopButton(TimerFragment.this);
+                                                        test3.setInfoText(getString(R.string.tutorial_stop_button))
+                                                                .setTarget(stopButton)
+                                                                .setFocusType(Focus.ALL)
+                                                                .enableDotAnimation(true)
+                                                                .show();
+                                                    }
+                                                });
+                                        test4.show();
                                     }
                                 });
                         test2.show();
