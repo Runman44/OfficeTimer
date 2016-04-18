@@ -34,6 +34,10 @@ public class ActivityRecognitionIntentService extends IntentService {
                 if (Constants.USER_WALKED) {
                     Constants.USER_WALKED = false;
 
+                    final Intent i = new Intent(Constants.SENSOR_BROADCAST);
+                    i.putExtra("walking", false);
+                    this.sendBroadcast(i);
+
                     this.sendBroadcast(new Intent(Constants.COUNTDOWN_RESTART_BROADCAST));
                 }
             }

@@ -51,10 +51,8 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
     private CircularSeekBar circularSeekbar;
     private Button stopButton;
 
-
     public TimerFragment() {
     }
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -66,7 +64,6 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
 
-
         countDownText = (TextView) this.findViewById(R.id.countdown);
         messageText = (TextView) this.findViewById(R.id.messageText);
         stopButton = (Button) this.findViewById(R.id.bStop);
@@ -76,7 +73,7 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
         final int millisStarted = (time * 1000) * 60;
 
         circularSeekbar = (CircularSeekBar) this.findViewById(R.id.seekBar2);
-        circularSeekbar.initDrawable(R.drawable.stickman_walk);
+        circularSeekbar.initDrawable(R.drawable.stickman_sitting_1);
         circularSeekbar.hideProgressMarker();
         circularSeekbar.stopTouching();
         circularSeekbar.invalidate();
@@ -105,7 +102,6 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
                     ));
 
                     setMessages(millisStarted, millisUntilFinished);
-
                 }
             }
         };
@@ -143,12 +139,25 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
                                                 .setListener(new MaterialIntroListener() {
                                                     @Override
                                                     public void onUserClicked(String s) {
-                                                        MaterialIntroView.Builder test3 = MaterialIntroUtils.getTimerStopButton(TimerFragment.this);
-                                                        test3.setInfoText(getString(R.string.tutorial_stop_button))
-                                                                .setTarget(stopButton)
-                                                                .setFocusType(Focus.ALL)
-                                                                .enableDotAnimation(true)
-                                                                .show();
+                                                        circularSeekbar.initDrawable(R.drawable.stickman_walk_2);
+                                                        circularSeekbar.calculated = false;
+                                                        circularSeekbar.invalidate();
+
+                                                        MaterialIntroView.Builder test5 = MaterialIntroUtils.getTimerCircleButton3(TimerFragment.this);
+                                                        test5.setInfoText(getString(R.string.tutorial_timer_circle_3))
+                                                                .setTarget(circularSeekbar)
+                                                                .setListener(new MaterialIntroListener() {
+                                                                    @Override
+                                                                    public void onUserClicked(String s) {
+                                                                        MaterialIntroView.Builder test3 = MaterialIntroUtils.getTimerStopButton(TimerFragment.this);
+                                                                        test3.setInfoText(getString(R.string.tutorial_stop_button))
+                                                                                .setTarget(stopButton)
+                                                                                .setFocusType(Focus.ALL)
+                                                                                .enableDotAnimation(true)
+                                                                                .show();
+                                                                    }
+                                                                });
+                                                        test5.show();
                                                     }
                                                 });
                                         test4.show();
@@ -226,7 +235,18 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
         sensorReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
-                messageText.setText(intent.getStringExtra("message"));
+                if (intent.getStringExtra("message") != null)
+                    messageText.setText(intent.getStringExtra("message"));
+
+                if (intent.getStringExtra("walking") != null && intent.getBooleanExtra("walking", false)) {
+                    circularSeekbar.initDrawable(R.drawable.stickman_walk_2);
+                    circularSeekbar.calculated = false;
+                    circularSeekbar.invalidate();
+                } else {
+                    circularSeekbar.initDrawable(R.drawable.stickman_sitting_1);
+                    circularSeekbar.calculated = false;
+                    circularSeekbar.invalidate();
+                }
             }
         };
 

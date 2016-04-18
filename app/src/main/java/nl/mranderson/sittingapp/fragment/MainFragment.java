@@ -51,7 +51,7 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
         circularSeekbar.setProgress(0);
         circularSeekbar.setBarWidth(10);
         circularSeekbar.setAdjustmentFactor(150);
-        circularSeekbar.initDrawable(R.drawable.stickman_walk);
+        circularSeekbar.initDrawable(R.drawable.stickman_sitting_1);
 
 
         circularSeekbar.setSeekBarChangeListener(new CircularSeekBar.OnSeekChangeListener() {

@@ -22,6 +22,7 @@
     <string name="tutorial_timer_time_text">You will receive a notification when this timer hits 0.</string>
     <string name="tutorial_timer_circle">Notice here that we know when you are walking! We will freeze the timer if you are walking and we will reset it again once you are seated again.</string>
     <string name="tutorial_timer_circle_2">Be sure to enable the movement sensors in the settings.</string>
+    <string name="tutorial_timer_circle_3">Be sure to enable the movement sensors in the settings.</string>
     <string name="tutorial_stop_button">Click here, when you are ready to stop.</string>
     <string name="tutorial_end">That was it ! Good luck !</string>
 

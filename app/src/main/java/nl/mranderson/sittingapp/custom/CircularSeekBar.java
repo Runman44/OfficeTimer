@@ -199,7 +199,7 @@ public class CircularSeekBar extends View {
      */
     private RectF rect = new RectF();
     private Bitmap backgroundImage;
-    private boolean calculated = false;
+    public boolean calculated = false;
     private boolean DEAL_TOUCHES = true;
 
     {
@@ -362,9 +362,10 @@ public class CircularSeekBar extends View {
             int reqWidth;
             int reqHeight;
 
-            reqWidth = Math.round(innerRadius / 2);
-            reqHeight = Math.round(innerRadius / 2 * this.backgroundImage.getHeight()) / this.backgroundImage.getWidth();
+            reqWidth = Math.round(innerRadius * 1.3f);
+            reqHeight = Math.round((innerRadius * 1.3f) * this.backgroundImage.getHeight()) / this.backgroundImage.getWidth();
             this.backgroundImage = getResizedBitmap(this.backgroundImage, reqWidth, reqHeight);
+            //TODO calculated moet weer op false worden gezet !
             calculated = true;
         }
         canvas.drawBitmap(this.backgroundImage, cx - (this.backgroundImage.getWidth() / 2), cy - (this.backgroundImage.getHeight() / 2), paint);
