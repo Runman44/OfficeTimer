@@ -25,7 +25,7 @@
                 style="@style/list_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Support" />
+                android:text="@string/support" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -49,7 +49,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/tutorial_icon"
                 android:layout_marginLeft="5dp"
-                android:text="Enable tutorial mode"
+                android:text="@string/enable_tutorial_mode"
                 android:textColor="@color/colorPrimary" />
 
         </RelativeLayout>
@@ -64,7 +64,7 @@
                 style="@style/list_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contact" />
+                android:text="@string/contact" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -89,7 +89,7 @@
                 android:layout_centerVertical="true"
                 android:layout_toRightOf="@id/contact_icon"
                 android:layout_marginLeft="5dp"
-                android:text="Contact the developers"
+                android:text="@string/contact_the_developers"
                 android:textColor="@color/colorPrimary" />
 
         </RelativeLayout>
@@ -121,7 +121,7 @@
                 android:layout_centerInParent="true"
                 android:layout_toRightOf="@id/rating_icon"
                 android:layout_marginLeft="5dp"
-                android:text="Rate the app"
+                android:text="@string/rate_the_app"
                 android:textColor="@color/colorPrimary" />
 
         </RelativeLayout>

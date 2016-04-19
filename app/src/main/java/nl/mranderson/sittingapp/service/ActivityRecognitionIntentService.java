@@ -29,6 +29,7 @@ public class ActivityRecognitionIntentService extends IntentService {
 
                 final Intent i = new Intent(Constants.SENSOR_BROADCAST);
                 i.putExtra("message", getString(R.string.messages_moving));
+                i.putExtra("walking", true);
                 this.sendBroadcast(i);
             } else if (mostProbableName.equals("Still") && confidence > 80) {
                 if (Constants.USER_WALKED) {

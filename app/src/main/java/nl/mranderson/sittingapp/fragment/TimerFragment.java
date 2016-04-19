@@ -127,6 +127,10 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
                 .setListener(new MaterialIntroListener() {
                     @Override
                     public void onUserClicked(String s) {
+                        circularSeekbar.initDrawable(R.drawable.stickman_sitting_2);
+                        circularSeekbar.calculated = false;
+                        circularSeekbar.invalidate();
+
                         MaterialIntroView.Builder test2 = MaterialIntroUtils.getTimerCircleButton(TimerFragment.this);
                         test2.setInfoText(getString(R.string.tutorial_timer_circle))
                                 .setTarget(circularSeekbar)
@@ -139,7 +143,7 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
                                                 .setListener(new MaterialIntroListener() {
                                                     @Override
                                                     public void onUserClicked(String s) {
-                                                        circularSeekbar.initDrawable(R.drawable.stickman_walk_2);
+                                                        circularSeekbar.initDrawable(R.drawable.stickman_sitting_1);
                                                         circularSeekbar.calculated = false;
                                                         circularSeekbar.invalidate();
 
@@ -230,6 +234,10 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
         PendingIntent mActivityRecongPendingIntent = PendingIntent
                 .getService(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
+        circularSeekbar.initDrawable(R.drawable.stickman_sitting_2);
+        circularSeekbar.calculated = false;
+        circularSeekbar.invalidate();
+
         ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mGApiClient, 0, mActivityRecongPendingIntent);
 
         sensorReceiver = new BroadcastReceiver() {
@@ -238,12 +246,12 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
                 if (intent.getStringExtra("message") != null)
                     messageText.setText(intent.getStringExtra("message"));
 
-                if (intent.getStringExtra("walking") != null && intent.getBooleanExtra("walking", false)) {
+                if (intent.getBooleanExtra("walking", false)) {
                     circularSeekbar.initDrawable(R.drawable.stickman_walk_2);
                     circularSeekbar.calculated = false;
                     circularSeekbar.invalidate();
                 } else {
-                    circularSeekbar.initDrawable(R.drawable.stickman_sitting_1);
+                    circularSeekbar.initDrawable(R.drawable.stickman_sitting_2);
                     circularSeekbar.calculated = false;
                     circularSeekbar.invalidate();
                 }

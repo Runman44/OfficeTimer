@@ -15,17 +15,34 @@
     <string name="notification_blue">Timer is running!</string>
 
     <!-- tutorial -->
-    <string name="tutorial_start">Welcome ! This is a small tutorial to guide you through the app.</string>
+    <string name="tutorial_start">Welcome ! This is a small tutorial to guide you through the app. Tap to continue.</string>
     <string name="tutorial_main_time_text">This will be the time that the timer uses for the countdown.</string>
     <string name="tutorial_main_circle">You can adjust the time by dragging the outer circle.</string>
     <string name="tutorial_start_button">Click here, when you are ready to sit!</string>
     <string name="tutorial_timer_time_text">You will receive a notification when this timer hits 0.</string>
-    <string name="tutorial_timer_circle">Notice here that we know when you are walking! We will freeze the timer if you are walking and we will reset it again once you are seated again.</string>
-    <string name="tutorial_timer_circle_2">Be sure to enable the movement sensors in the settings.</string>
+    <string name="tutorial_timer_circle">Notice here that we know when you are walking! You can also notice this on how the image looks like.</string>
+    <string name="tutorial_timer_circle_2">We will freeze the timer if you are walking and we will reset it again once you are seated again.</string>
     <string name="tutorial_timer_circle_3">Be sure to enable the movement sensors in the settings.</string>
     <string name="tutorial_stop_button">Click here, when you are ready to stop.</string>
-    <string name="tutorial_end">That was it ! Good luck !</string>
+    <string name="tutorial_end">The timer will also run when the app is closed ! That was it ! Good luck !</string>
+
+    <!-- settings -->
+    <string name="detection">Detection</string>
+    <string name="movement_sensors">Movement Sensors</string>
+    <string name="notification">Notification</string>
+    <string name="vibrate">Vibration</string>
+    <string name="led_light">LED Light</string>
+    <string name="sound">Sound</string>
+
+    <!-- help -->
+    <string name="support">Support</string>
+    <string name="enable_tutorial_mode">Enable tutorial mode</string>
+    <string name="contact">Contact</string>
+    <string name="contact_the_developers">Contact the developers</string>
+    <string name="rate_the_app">Rate the app</string>
 
     <!-- misc -->
-    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="banner_ad_unit_id">ca-app-pub-4050305580977890/4443389163</string>
+
+
 </resources>

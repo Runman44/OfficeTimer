@@ -50,7 +50,6 @@ public class InfoFragment extends android.support.v4.app.Fragment implements Vie
             case (R.id.contact_developer_wrapper):
                 mailIntent();
                 break;
-
         }
     }
 

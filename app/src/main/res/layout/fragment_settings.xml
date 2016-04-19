@@ -25,7 +25,7 @@
                 style="@style/list_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Detection" />
+                android:text="@string/detection" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -38,7 +38,7 @@
                 style="@style/list_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Movement Sensors" />
+                android:text="@string/movement_sensors" />
 
             <CheckBox
                 android:id="@+id/sensors"
@@ -60,7 +60,7 @@
                 style="@style/list_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Notification" />
+                android:text="@string/notification" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -73,7 +73,7 @@
                 style="@style/list_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Vibrate" />
+                android:text="@string/vibrate" />
 
             <CheckBox
                 android:id="@+id/notify_vibration"
@@ -100,7 +100,7 @@
                 style="@style/list_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="LED Light" />
+                android:text="@string/led_light" />
 
             <CheckBox
                 android:id="@+id/notify_light"
@@ -127,7 +127,7 @@
                 style="@style/list_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Sound" />
+                android:text="@string/sound" />
 
             <CheckBox
                 android:id="@+id/notify_sound"
