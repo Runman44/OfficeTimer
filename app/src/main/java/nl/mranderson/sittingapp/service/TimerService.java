@@ -93,13 +93,15 @@ public class TimerService extends Service {
     }
 
     private void restartTimerService(int time) {
-        stopTimerService();
-        Intent timerServiceIntent = new Intent(TimerService.this, TimerService.class);
-        timerServiceIntent.putExtra("time", time);
-        startService(timerServiceIntent);
+//        stopTimerService();
+//        Intent timerServiceIntent = new Intent(TimerService.this, TimerService.class);
+//        timerServiceIntent.putExtra("time", time);
+//        startService(timerServiceIntent);
+        startCountDown(time);
     }
 
     private void stopTimerService() {
+
         unregisterReceiver(restartServiceReceiver);
         unregisterReceiver(restartTimerServiceReceiver);
         unregisterReceiver(stopServiceReceiver);
