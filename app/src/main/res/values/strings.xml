@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Sitting Up</string>
+    <string name="app_name">Move-Up</string>
 
     <!-- messages -->
     <string name="messages_starting">Get to work now!</string>
