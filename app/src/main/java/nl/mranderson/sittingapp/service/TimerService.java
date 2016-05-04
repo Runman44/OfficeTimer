@@ -38,30 +38,7 @@ public class TimerService extends Service {
 
             Constants.IS_TIMER_SERVICE_RUNNING = true;
 
-            restartServiceReceiver = new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    restartTimerService(Constants.TIMER_SELECTED_TIME);
-                }
-            };
-            registerReceiver(restartServiceReceiver, new IntentFilter(Constants.COUNTDOWN_RESTART_BROADCAST));
 
-
-            restartTimerServiceReceiver = new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    countDownTimer.cancel();
-                }
-            };
-            registerReceiver(restartTimerServiceReceiver, new IntentFilter(Constants.COUNTDOWN_STOP_TIMER_BROADCAST));
-
-            stopServiceReceiver = new BroadcastReceiver() {
-                @Override
-                public void onReceive(Context context, Intent intent) {
-                    stopTimerService();
-                }
-            };
-            registerReceiver(stopServiceReceiver, new IntentFilter(Constants.COUNTDOWN_STOP_BROADCAST));
         }
         return super.onStartCommand(intent, flags, startId);
     }
@@ -84,9 +61,10 @@ public class TimerService extends Service {
 
             public void onFinish() {
                 sendNotification();
-                Intent timerServiceIntent = new Intent(TimerService.this, TimerService.class);
-                timerServiceIntent.putExtra("time", time);
-                startService(timerServiceIntent);
+//                Intent timerServiceIntent = new Intent(TimerService.this, TimerService.class);
+//                timerServiceIntent.putExtra("time", time);
+//                startService(timerServiceIntent);
+                startCountDown(time);
             }
         };
         countDownTimer.start();
@@ -102,15 +80,50 @@ public class TimerService extends Service {
 
     private void stopTimerService() {
 
-        unregisterReceiver(restartServiceReceiver);
-        unregisterReceiver(restartTimerServiceReceiver);
-        unregisterReceiver(stopServiceReceiver);
+
 
         Constants.IS_TIMER_SERVICE_RUNNING = false;
         countDownTimer.cancel();
         //TODO crash here receiver not registered
         TimerService.this.stopForeground(true);
         TimerService.this.stopSelf();
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        restartServiceReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                restartTimerService(Constants.TIMER_SELECTED_TIME);
+            }
+        };
+        registerReceiver(restartServiceReceiver, new IntentFilter(Constants.COUNTDOWN_RESTART_BROADCAST));
+
+
+        restartTimerServiceReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                countDownTimer.cancel();
+            }
+        };
+        registerReceiver(restartTimerServiceReceiver, new IntentFilter(Constants.COUNTDOWN_STOP_TIMER_BROADCAST));
+
+        stopServiceReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                stopTimerService();
+            }
+        };
+        registerReceiver(stopServiceReceiver, new IntentFilter(Constants.COUNTDOWN_STOP_BROADCAST));
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(restartServiceReceiver);
+        unregisterReceiver(restartTimerServiceReceiver);
+        unregisterReceiver(stopServiceReceiver);
     }
 
     private Notification createForegroundNotification() {

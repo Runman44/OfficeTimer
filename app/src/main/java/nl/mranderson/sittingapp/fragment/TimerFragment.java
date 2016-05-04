@@ -211,7 +211,7 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
         stopTimerService();
 
         // Replace fragment
-        this.onBackPressed();
+        super.onBackPressed();
     }
 
     private void startSensors() {
@@ -280,6 +280,7 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
         unregisterReceiver(timerCountdownReceiver);
 
         if (Utils.isPlayServiceAvailable(this) && sensor)
+            //TODO from add to app
             unregisterReceiver(sensorReceiver);
 
         if (mGApiClient != null)
