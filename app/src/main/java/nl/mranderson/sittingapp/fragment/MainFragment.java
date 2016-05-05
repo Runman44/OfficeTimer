@@ -111,6 +111,7 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
     }
 
     private void showStartTutorial() {
+        final boolean[] opened1 = {true, true};
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
         if (tabLayout.getSelectedTabPosition() == 0) {
             MaterialIntroView.Builder test2 = MaterialIntroUtils.getMainTimeText(getActivity());
@@ -120,21 +121,27 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
                     .setListener(new MaterialIntroListener() {
                         @Override
                         public void onUserClicked(String s) {
-                            MaterialIntroView.Builder test3 = MaterialIntroUtils.getMainCircleButton(getActivity());
-                            test3.setInfoText(getString(R.string.tutorial_main_circle))
-                                    .setTarget(circularSeekbar)
-                                    .setListener(new MaterialIntroListener() {
-                                        @Override
-                                        public void onUserClicked(String s) {
-                                            MaterialIntroView.Builder test2 = MaterialIntroUtils.getMainStartButton(getActivity());
-                                            test2.setInfoText(getString(R.string.tutorial_start_button))
-                                                    .setTarget(button)
-                                                    .setFocusType(Focus.ALL)
-                                                    .enableDotAnimation(true)
-                                                    .show();
-                                        }
-                                    });
-                            test3.show();
+                            if (opened1[0]) {
+                                opened1[0] = false;
+                                MaterialIntroView.Builder test3 = MaterialIntroUtils.getMainCircleButton(getActivity());
+                                test3.setInfoText(getString(R.string.tutorial_main_circle))
+                                        .setTarget(circularSeekbar)
+                                        .setListener(new MaterialIntroListener() {
+                                            @Override
+                                            public void onUserClicked(String s) {
+                                                if (opened1[1]) {
+                                                    opened1[1] = false;
+                                                    MaterialIntroView.Builder test2 = MaterialIntroUtils.getMainStartButton(getActivity());
+                                                    test2.setInfoText(getString(R.string.tutorial_start_button))
+                                                            .setTarget(button)
+                                                            .setFocusType(Focus.ALL)
+                                                            .enableDotAnimation(true)
+                                                            .show();
+                                                }
+                                            }
+                                        });
+                                test3.show();
+                            }
                         }
                     });
             test2.show();

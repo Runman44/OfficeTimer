@@ -120,6 +120,7 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
     }
 
     private void showStartTutorial() {
+        final boolean[] opened1 = {true, true, true, true};
         MaterialIntroView.Builder test = MaterialIntroUtils.getTimerTimeText(this);
         test.setInfoText(getString(R.string.tutorial_timer_time_text))
                 .setTarget(countDownText)
@@ -127,47 +128,59 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
                 .setListener(new MaterialIntroListener() {
                     @Override
                     public void onUserClicked(String s) {
-                        circularSeekbar.initDrawable(R.drawable.stickman_sitting_2);
-                        circularSeekbar.calculated = false;
-                        circularSeekbar.invalidate();
+                        if (opened1[0]) {
+                            opened1[0] = false;
+                            circularSeekbar.initDrawable(R.drawable.stickman_sitting_2);
+                            circularSeekbar.calculated = false;
+                            circularSeekbar.invalidate();
 
-                        MaterialIntroView.Builder test2 = MaterialIntroUtils.getTimerCircleButton(TimerFragment.this);
-                        test2.setInfoText(getString(R.string.tutorial_timer_circle))
-                                .setTarget(circularSeekbar)
-                                .setListener(new MaterialIntroListener() {
-                                    @Override
-                                    public void onUserClicked(String s) {
-                                        MaterialIntroView.Builder test4 = MaterialIntroUtils.getTimerCircleButton2(TimerFragment.this);
-                                        test4.setInfoText(getString(R.string.tutorial_timer_circle_2))
-                                                .setTarget(circularSeekbar)
-                                                .setListener(new MaterialIntroListener() {
-                                                    @Override
-                                                    public void onUserClicked(String s) {
-                                                        circularSeekbar.initDrawable(R.drawable.stickman_sitting_1);
-                                                        circularSeekbar.calculated = false;
-                                                        circularSeekbar.invalidate();
+                            MaterialIntroView.Builder test2 = MaterialIntroUtils.getTimerCircleButton(TimerFragment.this);
+                            test2.setInfoText(getString(R.string.tutorial_timer_circle))
+                                    .setTarget(circularSeekbar)
+                                    .setListener(new MaterialIntroListener() {
+                                        @Override
+                                        public void onUserClicked(String s) {
+                                            if (opened1[1]) {
+                                                opened1[1] = false;
+                                                MaterialIntroView.Builder test4 = MaterialIntroUtils.getTimerCircleButton2(TimerFragment.this);
+                                                test4.setInfoText(getString(R.string.tutorial_timer_circle_2))
+                                                        .setTarget(circularSeekbar)
+                                                        .setListener(new MaterialIntroListener() {
+                                                            @Override
+                                                            public void onUserClicked(String s) {
+                                                                if (opened1[2]) {
+                                                                    opened1[2] = false;
+                                                                    circularSeekbar.initDrawable(R.drawable.stickman_sitting_1);
+                                                                    circularSeekbar.calculated = false;
+                                                                    circularSeekbar.invalidate();
 
-                                                        MaterialIntroView.Builder test5 = MaterialIntroUtils.getTimerCircleButton3(TimerFragment.this);
-                                                        test5.setInfoText(getString(R.string.tutorial_timer_circle_3))
-                                                                .setTarget(circularSeekbar)
-                                                                .setListener(new MaterialIntroListener() {
-                                                                    @Override
-                                                                    public void onUserClicked(String s) {
-                                                                        MaterialIntroView.Builder test3 = MaterialIntroUtils.getTimerStopButton(TimerFragment.this);
-                                                                        test3.setInfoText(getString(R.string.tutorial_stop_button))
-                                                                                .setTarget(stopButton)
-                                                                                .setFocusType(Focus.ALL)
-                                                                                .enableDotAnimation(true)
-                                                                                .show();
-                                                                    }
-                                                                });
-                                                        test5.show();
-                                                    }
-                                                });
-                                        test4.show();
-                                    }
-                                });
-                        test2.show();
+                                                                    MaterialIntroView.Builder test5 = MaterialIntroUtils.getTimerCircleButton3(TimerFragment.this);
+                                                                    test5.setInfoText(getString(R.string.tutorial_timer_circle_3))
+                                                                            .setTarget(circularSeekbar)
+                                                                            .setListener(new MaterialIntroListener() {
+                                                                                @Override
+                                                                                public void onUserClicked(String s) {
+                                                                                    if (opened1[3]) {
+                                                                                        opened1[3] = false;
+                                                                                        MaterialIntroView.Builder test3 = MaterialIntroUtils.getTimerStopButton(TimerFragment.this);
+                                                                                        test3.setInfoText(getString(R.string.tutorial_stop_button))
+                                                                                                .setTarget(stopButton)
+                                                                                                .setFocusType(Focus.ALL)
+                                                                                                .enableDotAnimation(true)
+                                                                                                .show();
+                                                                                    }
+                                                                                }
+                                                                            });
+                                                                    test5.show();
+                                                                }
+                                                            }
+                                                        });
+                                                test4.show();
+                                            }
+                                        }
+                                    });
+                            test2.show();
+                        }
                     }
                 });
         test.show();
