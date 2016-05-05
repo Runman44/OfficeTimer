@@ -84,7 +84,6 @@ public abstract class MaterialIntroUtils {
                 .setFocusGravity(FocusGravity.CENTER)
                 .setFocusType(Focus.NORMAL)
                 .setDelayMillis(350)
-                .dismissOnTouch(true)
                 .enableFadeAnimation(true)
                 .performClick(true);
     }
