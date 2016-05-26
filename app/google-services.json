@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "190435377863",
+    "firebase_url": "https://admob-app-id-2966655960.firebaseio.com",
+    "project_id": "admob-app-id-2966655960",
+    "storage_bucket": "admob-app-id-2966655960.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:190435377863:android:ad3afc78b7256162",
+        "android_client_info": {
+          "package_name": "nl.mranderson.sittingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "190435377863-776rp9p411lile5t3lq15am5nrvig14r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBOhGhxJD2P-Kmybdw9nqsRWz4xt7BeGeY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
