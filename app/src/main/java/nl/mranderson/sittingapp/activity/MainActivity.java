@@ -51,7 +51,16 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+
         setupTabIcons();
+
+    }
+
+    @Override
+    protected void onResume() {
+        boolean stop = getIntent().getBooleanExtra("stop", false);
+        super.onResume();
+
     }
 
     private void setupTabIcons() {

@@ -13,6 +13,7 @@ import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.os.CountDownTimer;
 import android.os.IBinder;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.NotificationCompat;
 
@@ -20,6 +21,7 @@ import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.UserPreference;
 import nl.mranderson.sittingapp.activity.MainActivity;
+import nl.mranderson.sittingapp.activity.PushActionActivity;
 
 public class TimerService extends Service {
 
@@ -61,9 +63,6 @@ public class TimerService extends Service {
 
             public void onFinish() {
                 sendNotification();
-//                Intent timerServiceIntent = new Intent(TimerService.this, TimerService.class);
-//                timerServiceIntent.putExtra("time", time);
-//                startService(timerServiceIntent);
                 startCountDown(time);
             }
         };
@@ -71,27 +70,24 @@ public class TimerService extends Service {
     }
 
     private void restartTimerService(int time) {
-//        stopTimerService();
-//        Intent timerServiceIntent = new Intent(TimerService.this, TimerService.class);
-//        timerServiceIntent.putExtra("time", time);
-//        startService(timerServiceIntent);
         startCountDown(time);
     }
 
     private void stopTimerService() {
-
-
-
         Constants.IS_TIMER_SERVICE_RUNNING = false;
         countDownTimer.cancel();
-        //TODO crash here receiver not registered
         TimerService.this.stopForeground(true);
         TimerService.this.stopSelf();
+
+        NotificationManager mNotifyMgr =
+                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        mNotifyMgr.cancel(Constants.NOTIFICATION_GET_WALKING);
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        sendNotification();
         restartServiceReceiver = new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
@@ -127,6 +123,19 @@ public class TimerService extends Service {
     }
 
     private Notification createForegroundNotification() {
+        Intent pushHandlerActivityIntent = new Intent(this, PushActionActivity.class);
+        pushHandlerActivityIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        pushHandlerActivityIntent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        pushHandlerActivityIntent.putExtra("stop", true);
+        PendingIntent resultPendingIntent = PendingIntent.getActivity(this, 1, pushHandlerActivityIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Intent pushHandlerActivityIntent2 = new Intent(this, PushActionActivity.class);
+        pushHandlerActivityIntent2.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        pushHandlerActivityIntent2.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        pushHandlerActivityIntent2.putExtra("refresh", true);
+        PendingIntent resultPendingIntent2 = PendingIntent.getActivity(this, 1, pushHandlerActivityIntent2, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
         final Intent nextIntent = new Intent(this, MainActivity.class);
         nextIntent.putExtra("show_timer", true);
         PendingIntent pNextIntent = PendingIntent.getActivity(this, 0,
@@ -139,6 +148,8 @@ public class TimerService extends Service {
                         .setContentTitle(getResources().getString(R.string.app_name))
                         .setOngoing(true)
                         .setContentText(getString(R.string.notification_blue))
+                        .addAction(R.drawable.ic_check_white_48dp, "Stop", resultPendingIntent)
+                        .addAction(R.drawable.ic_check_white_48dp, "Restart", resultPendingIntent2)
                         .setContentIntent(pNextIntent);
 
         return mBuilder.build();
@@ -162,6 +173,7 @@ public class TimerService extends Service {
                         .setColor(ContextCompat.getColor(this, R.color.red))
                         .setContentTitle(getResources().getString(R.string.app_name))
                         .setContentText(getString(R.string.notification_red))
+                        .setStyle(new android.support.v4.app.NotificationCompat.BigTextStyle().bigText("Time to Stand Up!"))
                         .setContentIntent(pNextIntent);
 
         //Vibration
@@ -177,8 +189,8 @@ public class TimerService extends Service {
             mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
 
         // Gets an instance of the NotificationManager service
-        NotificationManager mNotifyMgr =
-                (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
+        NotificationManagerCompat mNotifyMgr =
+                NotificationManagerCompat.from(getApplicationContext());
         // Builds the notification and issues it.
         mNotifyMgr.notify(Constants.NOTIFICATION_GET_WALKING, mBuilder.build());
     }

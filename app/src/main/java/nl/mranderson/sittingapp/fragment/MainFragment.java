@@ -19,6 +19,7 @@ import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.MaterialIntroUtils;
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.UserPreference;
+import nl.mranderson.sittingapp.activity.MainActivity;
 import nl.mranderson.sittingapp.custom.CircularSeekBar;
 
 public class MainFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
@@ -98,8 +99,15 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
         });
 
         if (Constants.IS_TIMER_SERVICE_RUNNING) {
-            Intent intent = new Intent(getActivity(), TimerFragment.class);
-            startActivity(intent);
+            MainActivity activity = (MainActivity) getActivity();
+            boolean stop = activity.getIntent().getBooleanExtra("stop", false);
+            if (stop) {
+                // Stop the service
+                stopTimerService();
+            } else {
+                Intent intent = new Intent(getActivity(), TimerFragment.class);
+                startActivity(intent);
+            }
         } else {
             if (!introShown) {
                 MaterialIntroUtils.generateViewIdList();
@@ -108,6 +116,10 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
                 UserPreference.setIntroShown(getActivity(), true);
             }
         }
+    }
+
+    private void stopTimerService() {
+        getActivity().sendBroadcast(new Intent(Constants.COUNTDOWN_STOP_BROADCAST));
     }
 
     private void showStartTutorial() {

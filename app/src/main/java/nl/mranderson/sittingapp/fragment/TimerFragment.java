@@ -1,6 +1,5 @@
 package nl.mranderson.sittingapp.fragment;
 
-import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -215,11 +214,6 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        // Cancel the current notification.
-        NotificationManager mNotifyMgr =
-                (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
-        mNotifyMgr.cancel(Constants.NOTIFICATION_GET_WALKING);
-
         // Stop the service
         stopTimerService();
 
@@ -303,13 +297,8 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
     @Override
     public void onBackPressed() {
         if (Constants.IS_TIMER_SERVICE_RUNNING) {
-            // Cancel the current notification.
-            NotificationManager mNotifyMgr =
-                    (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
-            mNotifyMgr.cancel(Constants.NOTIFICATION_GET_WALKING);
-
             // Stop the service
-            this.sendBroadcast(new Intent(Constants.COUNTDOWN_STOP_BROADCAST));
+            stopTimerService();
         }
         super.onBackPressed();
     }
