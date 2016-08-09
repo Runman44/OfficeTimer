@@ -82,11 +82,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SettingsFragment.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SettingsFragment.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/SettingsFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="106" column="99" selection-start-line="106" selection-start-column="99" selection-end-line="106" selection-end-column="99" />
+            <state vertical-scroll-proportion="0.522293">
+              <caret line="102" column="38" selection-start-line="102" selection-start-column="38" selection-end-line="102" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -95,8 +95,8 @@
       <file leaf-file-name="fragment_settings.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_settings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.3207548">
-              <caret line="156" column="40" selection-start-line="156" selection-start-column="40" selection-end-line="156" selection-end-column="40" />
+            <state vertical-scroll-proportion="-4.1698112">
+              <caret line="159" column="44" selection-start-line="159" selection-start-column="44" selection-end-line="159" selection-end-column="44" />
               <folding>
                 <element signature="e#310#343#0" expanded="true" />
                 <element signature="e#368#403#0" expanded="true" />
@@ -108,6 +108,7 @@
                 <element signature="e#2822#2839#0" expanded="true" />
                 <element signature="e#3782#3801#0" expanded="true" />
                 <element signature="e#4740#4755#0" expanded="true" />
+                <element signature="e#5694#5708#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -121,16 +122,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-2.6470587">
               <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="build.gradle" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.1910828">
-              <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="7" selection-end-column="56" />
               <folding />
             </state>
           </provider>
@@ -1874,9 +1865,9 @@
         <option value="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/activity/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/UserPreference.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/service/TimerService.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/SettingsFragment.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_settings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_settings.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/SettingsFragment.java" />
       </list>
     </option>
   </component>
@@ -2757,18 +2748,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/SettingsFragment.java">
+    <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="106" column="99" selection-start-line="106" selection-start-column="99" selection-end-line="106" selection-end-column="99" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6369427">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.6470587">
+          <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_settings.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.3207548">
-          <caret line="156" column="40" selection-start-line="156" selection-start-column="40" selection-end-line="156" selection-end-column="40" />
+        <state vertical-scroll-proportion="-4.1698112">
+          <caret line="159" column="44" selection-start-line="159" selection-start-column="44" selection-end-line="159" selection-end-column="44" />
           <folding>
             <element signature="e#310#343#0" expanded="true" />
             <element signature="e#368#403#0" expanded="true" />
@@ -2780,6 +2787,7 @@
             <element signature="e#2822#2839#0" expanded="true" />
             <element signature="e#3782#3801#0" expanded="true" />
             <element signature="e#4740#4755#0" expanded="true" />
+            <element signature="e#5694#5708#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2787,26 +2795,10 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/nl/mranderson/sittingapp/fragment/SettingsFragment.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.6470587">
-          <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.1910828">
-          <caret line="6" column="18" selection-start-line="6" selection-start-column="18" selection-end-line="7" selection-end-column="56" />
+        <state vertical-scroll-proportion="0.522293">
+          <caret line="102" column="38" selection-start-line="102" selection-start-column="38" selection-end-line="102" selection-end-column="38" />
           <folding />
         </state>
       </provider>

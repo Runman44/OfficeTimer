@@ -44,7 +44,7 @@ public class UserPreference {
         editor.commit();
     }
 
-    public static void setMusicSettings(Activity activity, String musicString) {
+    public static void setToneSettings(Activity activity, String musicString) {
         editor = activity.getSharedPreferences(MY_PREFS_NAME, activity.MODE_PRIVATE).edit();
         editor.putString("music", musicString);
         editor.commit();
