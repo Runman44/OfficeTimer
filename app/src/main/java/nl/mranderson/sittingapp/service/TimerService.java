@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.v4.content.ContextCompat;
@@ -150,6 +151,7 @@ public class TimerService extends Service {
         Boolean light = prefs.getBoolean("light", true);
         Boolean vibration = prefs.getBoolean("vibration", true);
         Boolean sound = prefs.getBoolean("sound", true);
+        String music = prefs.getString("music", RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION).toString());
 
         final Intent nextIntent = new Intent(this, MainActivity.class);
         nextIntent.putExtra("show_timer", true);
@@ -172,9 +174,9 @@ public class TimerService extends Service {
         if (light)
             mBuilder.setLights(Color.BLUE, 3000, 3000);
 
-        //Ton
+        //Tone
         if (sound)
-            mBuilder.setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION));
+            mBuilder.setSound(Uri.parse(music));
 
         // Gets an instance of the NotificationManager service
         NotificationManager mNotifyMgr =
