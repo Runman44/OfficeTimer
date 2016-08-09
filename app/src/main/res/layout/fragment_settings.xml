@@ -139,10 +139,18 @@
 
         </RelativeLayout>
 
-        <View
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray" />
+            android:layout_height="wrap_content"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp">
+
+            <TextView
+                style="@style/list_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sounds" />
+        </RelativeLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -156,9 +164,9 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tone" />
 
-            <CheckBox
+            <TextView
                 android:id="@+id/notify_tone"
-                style="@style/list_item_check"
+                style="@style/list_item_sub"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"

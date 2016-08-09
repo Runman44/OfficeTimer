@@ -34,6 +34,7 @@
     <string name="led_light">LED Light</string>
     <string name="sound">Sound</string>
     <string name="tone">Tone</string>
+    <string name="sounds">Sounds</string>
 
     <!-- help -->
     <string name="support">Support</string>
@@ -44,7 +45,5 @@
 
     <!-- misc -->
     <string name="banner_ad_unit_id">ca-app-pub-4050305580977890/4443389163</string>
-
-
 
 </resources>
