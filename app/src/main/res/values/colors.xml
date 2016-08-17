@@ -9,14 +9,19 @@
     <color name="white">#FFFFFF</color>
     <color name="grey">#e0e0e0</color>
 
-    <color name="colorPrimary">#0277BD</color>
-    <color name="colorPrimaryDark">#125688</color>
-    <color name="textColorPrimary">#FFFFFF</color>
-    <color name="windowBackground">#FFFFFF</color>
-    <color name="navigationBarColor">#000000</color>
-    <color name="colorAccent">#c8e8ff</color>
+    <color name="colorPrimary">#2196F3</color>
+    <color name="colorPrimaryDark">#1976D2</color>
+    <color name="colorPrimaryLight">#BBDEFB</color>
 
-    <color name="lightGrey">#EEEEEE</color>
+
+
+    <color name="colorAccent">#FFC107</color>
+
+    <color name="textColorPrimary">#212121</color>
+    <color name="textColorSecondary">#727272</color>
+
+    <color name="divider">#B6B6B6</color>
+    <color name="textAndIcon">#FFFFFF</color>
 
 
 </resources>

@@ -9,9 +9,6 @@ import co.mobiwise.materialintro.shape.Focus;
 import co.mobiwise.materialintro.shape.FocusGravity;
 import co.mobiwise.materialintro.view.MaterialIntroView;
 
-/**
- * Created by MrAnderson1 on 13/04/16.
- */
 public abstract class MaterialIntroUtils {
 
 
