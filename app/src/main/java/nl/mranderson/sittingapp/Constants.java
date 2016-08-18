@@ -1,5 +1,7 @@
 package nl.mranderson.sittingapp;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 /**
  * Created by MrAnderson1 on 20/01/16.
  * <p/>
@@ -22,5 +24,9 @@ public class Constants {
     public static final String COUNTDOWN_TIME_BROADCAST = "time";
     public static final String COUNTDOWN_RESTART_BROADCAST = "restart";
     public static final String COUNTDOWN_STOP_BROADCAST = "stop";
+
+
+
+    public static FirebaseAnalytics FIREBASE_ANALYTICS;
 
 }

@@ -10,9 +10,13 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.MaterialIntroUtils;
 import nl.mranderson.sittingapp.R;
+
+import static com.google.firebase.analytics.FirebaseAnalytics.Event.SELECT_CONTENT;
 
 public class InfoFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
@@ -59,6 +63,12 @@ public class InfoFragment extends android.support.v4.app.Fragment implements Vie
         Constants.SHOW_TUTORIAL = true;
         MaterialIntroUtils.generateViewIdList();
         Toast.makeText(getActivity(), "Tutorial Enabled", Toast.LENGTH_SHORT).show();
+
+        // [START custom_event]
+        Bundle params = new Bundle();
+        params.putString(FirebaseAnalytics.Param.ITEM_NAME, "TUTORIAL");
+        Constants.FIREBASE_ANALYTICS.logEvent(SELECT_CONTENT, params);
+        // [END custom_event]
     }
 
     private void rateIntent() {
@@ -75,6 +85,12 @@ public class InfoFragment extends android.support.v4.app.Fragment implements Vie
             startActivity(new Intent(Intent.ACTION_VIEW,
                     Uri.parse("http://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
         }
+
+        // [START custom_event]
+        Bundle params = new Bundle();
+        params.putString(FirebaseAnalytics.Param.ITEM_NAME, "RATE");
+        Constants.FIREBASE_ANALYTICS.logEvent(SELECT_CONTENT, params);
+        // [END custom_event]
     }
 
     private void mailIntent() {
@@ -85,5 +101,11 @@ public class InfoFragment extends android.support.v4.app.Fragment implements Vie
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);
         }
+
+        // [START custom_event]
+        Bundle params = new Bundle();
+        params.putString(FirebaseAnalytics.Param.ITEM_NAME, "MAIL");
+        Constants.FIREBASE_ANALYTICS.logEvent(SELECT_CONTENT, params);
+        // [END custom_event]
     }
 }

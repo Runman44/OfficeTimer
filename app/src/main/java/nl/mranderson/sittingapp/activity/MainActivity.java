@@ -10,9 +10,12 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.fragment.InfoFragment;
 import nl.mranderson.sittingapp.fragment.MainFragment;
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Constants.FIREBASE_ANALYTICS = FirebaseAnalytics.getInstance(this);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

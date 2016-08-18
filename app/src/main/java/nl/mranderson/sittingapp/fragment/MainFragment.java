@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
 import java.util.concurrent.TimeUnit;
 
 import co.mobiwise.materialintro.animation.MaterialIntroListener;
@@ -20,6 +22,8 @@ import nl.mranderson.sittingapp.MaterialIntroUtils;
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.UserPreference;
 import nl.mranderson.sittingapp.custom.CircularSeekBar;
+
+import static com.google.firebase.analytics.FirebaseAnalytics.Event.SELECT_CONTENT;
 
 public class MainFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
 
@@ -40,6 +44,8 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+
         button = (Button) getActivity().findViewById(R.id.bStart);
         button.setOnClickListener(this);
 
@@ -161,5 +167,11 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
     public void onClick(View v) {
         Intent intent = new Intent(getActivity(), TimerFragment.class);
         startActivity(intent);
+
+        // [START custom_event]
+        Bundle params = new Bundle();
+        params.putString(FirebaseAnalytics.Param.ITEM_NAME, "START_TIMER");
+        Constants.FIREBASE_ANALYTICS.logEvent(SELECT_CONTENT, params);
+        // [END custom_event]
     }
 }

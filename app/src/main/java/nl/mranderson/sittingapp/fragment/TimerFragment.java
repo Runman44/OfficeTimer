@@ -19,6 +19,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import java.util.concurrent.TimeUnit;
 
@@ -33,6 +34,8 @@ import nl.mranderson.sittingapp.Utils;
 import nl.mranderson.sittingapp.custom.CircularSeekBar;
 import nl.mranderson.sittingapp.service.ActivityRecognitionIntentService;
 import nl.mranderson.sittingapp.service.TimerService;
+
+import static com.google.firebase.analytics.FirebaseAnalytics.Event.SELECT_CONTENT;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -225,6 +228,12 @@ public class TimerFragment extends AppCompatActivity implements View.OnClickList
 
         // Replace fragment
         super.onBackPressed();
+
+        // [START custom_event]
+        Bundle params = new Bundle();
+        params.putString(FirebaseAnalytics.Param.ITEM_NAME, "STOP_TIMER");
+        Constants.FIREBASE_ANALYTICS.logEvent(SELECT_CONTENT, params);
+        // [END custom_event]
     }
 
     private void startSensors() {
