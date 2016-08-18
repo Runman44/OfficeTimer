@@ -25,7 +25,7 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
 
     private CircularSeekBar circularSeekbar;
     private TextView timeText;
-    private boolean introShown;
+    private boolean isFirstStart;
     private Button button;
 
     public MainFragment() {
@@ -65,7 +65,7 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
         });
 
         SharedPreferences prefs = getActivity().getSharedPreferences(UserPreference.MY_PREFS_NAME, getActivity().MODE_PRIVATE);
-        introShown = prefs.getBoolean("introShown", false);
+        isFirstStart = prefs.getBoolean("isFirstStart", true);
     }
 
     @Override
@@ -85,8 +85,11 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
             return;
         }
 
-        if (introShown) {
+        if (isFirstStart || Constants.SHOW_TUTORIAL) {
             showStartTutorial();
+            isFirstStart = false;
+            Constants.SHOW_TUTORIAL = false;
+            UserPreference.setIntroShown(getActivity(), true);
         }
 
         circularSeekbar.showProgressMarker();
@@ -100,13 +103,6 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
         if (Constants.IS_TIMER_SERVICE_RUNNING) {
             Intent intent = new Intent(getActivity(), TimerFragment.class);
             startActivity(intent);
-        } else {
-            if (!introShown) {
-                MaterialIntroUtils.generateViewIdList();
-                showStartTutorial();
-                introShown = true;
-                UserPreference.setIntroShown(getActivity(), true);
-            }
         }
     }
 

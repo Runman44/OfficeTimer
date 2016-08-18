@@ -8,7 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
+import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.MaterialIntroUtils;
 import nl.mranderson.sittingapp.R;
 
@@ -54,7 +56,9 @@ public class InfoFragment extends android.support.v4.app.Fragment implements Vie
     }
 
     private void resetTutorial() {
+        Constants.SHOW_TUTORIAL = true;
         MaterialIntroUtils.generateViewIdList();
+        Toast.makeText(getActivity(), "Tutorial Enabled", Toast.LENGTH_SHORT).show();
     }
 
     private void rateIntent() {
@@ -76,7 +80,7 @@ public class InfoFragment extends android.support.v4.app.Fragment implements Vie
     private void mailIntent() {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
         intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[] { "info@mranderson.nl"});
+        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"info@mranderson.nl"});
         intent.putExtra(Intent.EXTRA_SUBJECT, "Sitting Up!");
         if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivity(intent);

@@ -14,6 +14,8 @@ public class Constants {
 
     public static boolean USER_WALKED = false;
 
+    public static boolean SHOW_TUTORIAL = false;
+
     public static boolean IS_TIMER_SERVICE_RUNNING = false;
     public static int TIMER_SELECTED_TIME = 5;
 

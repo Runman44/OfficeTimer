@@ -20,15 +20,6 @@ import nl.mranderson.sittingapp.fragment.SettingsFragment;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TODO add images
-    //TODO add text
-    //TODO add that we know he is moving and the setting is on ! (change icon in TimerFragment and let them know in the tutorial)
-    //TODO version 1.6                                  MAY To Alpha
-    //TODO do refactoring and testing
-    //TODO change screenshots
-    //TODO create video?
-    //TODO release version 3.0 to public                JUNE?
-
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
