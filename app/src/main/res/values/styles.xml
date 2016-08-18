@@ -43,7 +43,7 @@
     </style>
 
     <style name="list_item">
-        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:textColor">@color/textColorSecondary</item>
         <item name="android:textSize">18sp</item>
         <item name="android:padding">10dp</item>
     </style>
