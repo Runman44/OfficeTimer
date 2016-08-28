@@ -7,45 +7,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
-
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.MaterialIntroUtils;
 import nl.mranderson.sittingapp.R;
+import nl.mranderson.sittingapp.Utils;
 
-import static com.google.firebase.analytics.FirebaseAnalytics.Event.SELECT_CONTENT;
+public class InfoFragment extends android.support.v4.app.Fragment {
 
-public class InfoFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
-
-    public InfoFragment() {
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_info, container, false);
+        View view = inflater.inflate(R.layout.fragment_info, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-
-        RelativeLayout tutorial = (RelativeLayout) getActivity().findViewById(R.id.tutorial_wrapper);
-        tutorial.setOnClickListener(this);
-
-        RelativeLayout view = (RelativeLayout) getActivity().findViewById(R.id.contact_developer_wrapper);
-        view.setOnClickListener(this);
-
-        RelativeLayout rating = (RelativeLayout) getActivity().findViewById(R.id.rating_wrapper);
-        rating.setOnClickListener(this);
-    }
-
-    @Override
-    public void onClick(View v) {
-
+    @OnClick({R.id.tutorial_wrapper, R.id.contact_developer_wrapper, R.id.rating_wrapper})
+    public void onWrapperClicked(View v) {
         switch (v.getId()) {
             case (R.id.tutorial_wrapper):
                 resetTutorial();
@@ -64,11 +47,7 @@ public class InfoFragment extends android.support.v4.app.Fragment implements Vie
         MaterialIntroUtils.generateViewIdList();
         Toast.makeText(getActivity(), "Tutorial Enabled", Toast.LENGTH_SHORT).show();
 
-        // [START custom_event]
-        Bundle params = new Bundle();
-        params.putString(FirebaseAnalytics.Param.ITEM_NAME, "TUTORIAL");
-        Constants.FIREBASE_ANALYTICS.logEvent(SELECT_CONTENT, params);
-        // [END custom_event]
+        Utils.logFirebaseEvent("TUTORIAL");
     }
 
     private void rateIntent() {
@@ -86,11 +65,7 @@ public class InfoFragment extends android.support.v4.app.Fragment implements Vie
                     Uri.parse("http://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
         }
 
-        // [START custom_event]
-        Bundle params = new Bundle();
-        params.putString(FirebaseAnalytics.Param.ITEM_NAME, "RATE");
-        Constants.FIREBASE_ANALYTICS.logEvent(SELECT_CONTENT, params);
-        // [END custom_event]
+        Utils.logFirebaseEvent("RATE");
     }
 
     private void mailIntent() {
@@ -102,10 +77,6 @@ public class InfoFragment extends android.support.v4.app.Fragment implements Vie
             startActivity(intent);
         }
 
-        // [START custom_event]
-        Bundle params = new Bundle();
-        params.putString(FirebaseAnalytics.Param.ITEM_NAME, "MAIL");
-        Constants.FIREBASE_ANALYTICS.logEvent(SELECT_CONTENT, params);
-        // [END custom_event]
+        Utils.logFirebaseEvent("MAIL");
     }
 }

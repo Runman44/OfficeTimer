@@ -6,10 +6,14 @@ import android.content.Intent;
 import com.google.android.gms.location.ActivityRecognitionResult;
 import com.google.android.gms.location.DetectedActivity;
 
-import nl.mranderson.sittingapp.Constants;
-import nl.mranderson.sittingapp.R;
+import org.greenrobot.eventbus.EventBus;
+
+import nl.mranderson.sittingapp.UserPreference;
+import nl.mranderson.sittingapp.events.WalkingEvent;
 
 public class ActivityRecognitionIntentService extends IntentService {
+
+    public static final int CONFIDENCE_METER_PERCENTAGE = 80;
 
     public ActivityRecognitionIntentService() {
         super("ActivityRecognitionIntentService");
@@ -23,24 +27,15 @@ public class ActivityRecognitionIntentService extends IntentService {
 
             int confidence = detectedActivity.getConfidence();
             String mostProbableName = getActivityName(detectedActivity.getType());
-            if (mostProbableName.equals("On Foot") || mostProbableName.equals("On Bicycle") && confidence > 80) {
-                Constants.USER_WALKED = true;
-                this.sendBroadcast(new Intent(Constants.COUNTDOWN_STOP_TIMER_BROADCAST));
+            if (mostProbableName.equals("On Foot") || mostProbableName.equals("On Bicycle") && confidence > CONFIDENCE_METER_PERCENTAGE) {
 
-                final Intent i = new Intent(Constants.SENSOR_BROADCAST);
-                i.putExtra("message", getString(R.string.messages_moving));
-                i.putExtra("walking", true);
-                this.sendBroadcast(i);
-            } else if (mostProbableName.equals("Still") && confidence > 80) {
-                if (Constants.USER_WALKED) {
-                    Constants.USER_WALKED = false;
+                UserPreference.setUserWalked(this, true);
+                EventBus.getDefault().post(new WalkingEvent(true));
 
-                    final Intent i = new Intent(Constants.SENSOR_BROADCAST);
-                    i.putExtra("walking", false);
-                    this.sendBroadcast(i);
+            } else if (mostProbableName.equals("Still") && confidence > CONFIDENCE_METER_PERCENTAGE && UserPreference.getUserWalked(this)) {
 
-                    this.sendBroadcast(new Intent(Constants.COUNTDOWN_RESTART_BROADCAST));
-                }
+                UserPreference.setUserWalked(this, false);
+                EventBus.getDefault().post(new WalkingEvent(false));
             }
         }
     }

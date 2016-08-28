@@ -3,7 +3,6 @@ package nl.mranderson.sittingapp.fragment;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -15,46 +14,53 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.UserPreference;
 import nl.mranderson.sittingapp.Utils;
 
-public class SettingsFragment extends android.support.v4.app.Fragment implements CompoundButton.OnCheckedChangeListener, View.OnClickListener {
+public class SettingsFragment extends android.support.v4.app.Fragment implements CompoundButton.OnCheckedChangeListener {
 
-    private CheckBox cSensors;
+
+    public static final int REQUEST_TONE = 5;
     private String tone;
-    private TextView cTone;
 
-    public SettingsFragment() {
-    }
+
+    @BindView(R.id.notify_tone)
+    TextView cTone;
+    @BindView(R.id.sensors)
+    CheckBox cSensors;
+    @BindView(R.id.notify_light)
+    CheckBox cLight;
+    @BindView(R.id.notify_sound)
+    CheckBox cSound;
+    @BindView(R.id.notify_vibration)
+    CheckBox cVibration;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_settings, container, false);
+        View view = inflater.inflate(R.layout.fragment_settings, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        cSensors = (CheckBox) getActivity().findViewById(R.id.sensors);
-        CheckBox cVibration = (CheckBox) getActivity().findViewById(R.id.notify_vibration);
-        CheckBox cLight = (CheckBox) getActivity().findViewById(R.id.notify_light);
-        CheckBox cSound = (CheckBox) getActivity().findViewById(R.id.notify_sound);
-        cTone = (TextView) getActivity().findViewById(R.id.notify_tone);
         cSensors.setOnCheckedChangeListener(this);
         cLight.setOnCheckedChangeListener(this);
         cSound.setOnCheckedChangeListener(this);
         cVibration.setOnCheckedChangeListener(this);
-        cTone.setOnClickListener(this);
 
-        SharedPreferences prefs = getActivity().getSharedPreferences(UserPreference.MY_PREFS_NAME, getActivity().MODE_PRIVATE);
-        Boolean light = prefs.getBoolean("light", true);
-        Boolean vibration = prefs.getBoolean("vibration", true);
-        Boolean sound = prefs.getBoolean("sound", true);
-        Boolean sensors = prefs.getBoolean("sensor", false);
-        tone = prefs.getString("music", RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION).toString());
+        Boolean sensors = UserPreference.getSensorSettings(getActivity());
+        Boolean light = UserPreference.getLightSettings(getActivity());
+        Boolean vibration = UserPreference.getVibrationSettings(getActivity());
+        Boolean sound = UserPreference.getSoundSettings(getActivity());
+        tone = UserPreference.getToneSettings(getActivity());
 
         setRingToneText(tone);
 
@@ -69,7 +75,6 @@ public class SettingsFragment extends android.support.v4.app.Fragment implements
         String title = ringtone.getTitle(getActivity());
         cTone.setText(title);
     }
-
 
     @Override
     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -99,7 +104,7 @@ public class SettingsFragment extends android.support.v4.app.Fragment implements
 
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
-        if (resultCode == Activity.RESULT_OK && requestCode == 5) {
+        if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_TONE) {
             Uri uri = intent.getParcelableExtra(RingtoneManager.EXTRA_RINGTONE_PICKED_URI);
 
             if (uri != null) {
@@ -116,15 +121,15 @@ public class SettingsFragment extends android.support.v4.app.Fragment implements
         }
     }
 
-    @Override
-    public void onClick(View v) {
+    @OnClick(R.id.notify_tone)
+    public void onToneClicked(View v) {
         switch (v.getId()) {
             case R.id.notify_tone:
                 Intent intent = new Intent(RingtoneManager.ACTION_RINGTONE_PICKER);
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TYPE, RingtoneManager.TYPE_NOTIFICATION);
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_TITLE, "Select Tone");
                 intent.putExtra(RingtoneManager.EXTRA_RINGTONE_EXISTING_URI, Uri.parse(tone));
-                this.startActivityForResult(intent, 5);
+                this.startActivityForResult(intent, REQUEST_TONE);
                 break;
         }
     }

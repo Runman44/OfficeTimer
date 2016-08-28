@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
@@ -31,6 +32,9 @@ dependencies {
     compile 'com.github.tittojose:timerangepicker-library:0.2'
     compile 'com.google.android.gms:play-services-location:9.0.0'
     compile 'com.google.firebase:firebase-core:9.0.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.jakewharton:butterknife:8.0.1'
+    apt 'com.jakewharton:butterknife-compiler:8.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

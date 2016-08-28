@@ -1,34 +1,43 @@
 package nl.mranderson.sittingapp;
 
 import android.app.Activity;
+import android.view.View;
 
+import java.util.ArrayList;
 import java.util.UUID;
 
 import co.mobiwise.materialintro.MaterialIntroConfiguration;
+import co.mobiwise.materialintro.animation.MaterialIntroListener;
 import co.mobiwise.materialintro.shape.Focus;
 import co.mobiwise.materialintro.shape.FocusGravity;
 import co.mobiwise.materialintro.view.MaterialIntroView;
 
-public abstract class MaterialIntroUtils {
+public abstract class MaterialIntroUtils implements MaterialIntroListener {
 
 
     private static String[] viewIdList = new String[10];
 
-    public static MaterialIntroView.Builder getMainTimeText(Activity context) {
+    public static MaterialIntroView.Builder getMainTimeText(Activity context, View view, String message) {
         MaterialIntroView.Builder builder = getDefaultBuilder(context);
         builder.setUsageId(viewIdList[0]);
+        builder.setTarget(view);
+        builder.setInfoText(message);
         return builder;
     }
 
-    public static MaterialIntroView.Builder getMainCircleButton(Activity context) {
+    public static MaterialIntroView.Builder getMainCircleButton(Activity context, View view, String message) {
         MaterialIntroView.Builder builder = getDefaultBuilder(context);
         builder.setUsageId(viewIdList[1]);
+        builder.setTarget(view);
+        builder.setInfoText(message);
         return builder;
     }
 
-    public static MaterialIntroView.Builder getMainStartButton(Activity context) {
+    public static MaterialIntroView.Builder getMainStartButton(Activity context, View view, String message) {
         MaterialIntroView.Builder builder = getDefaultBuilder(context);
         builder.setUsageId(viewIdList[6]);
+        builder.setTarget(view);
+        builder.setInfoText(message);
         return builder;
     }
 
@@ -94,5 +103,49 @@ public abstract class MaterialIntroUtils {
         for (int i = 0; i < viewIdList.length; i++) {
             viewIdList[i] = String.valueOf(UUID.randomUUID());
         }
+    }
+
+    public void generate(final ArrayList<MaterialIntroView.Builder> tutorialList) {
+
+        for (int position = 0; position < tutorialList.size(); position++) {
+
+            if (tutorialList.get(position + 1) != null) {
+                MaterialIntroView.Builder builder = tutorialList.get(position);
+                builder.setListener(new MaterialIntroListener() {
+                    @Override
+                    public void onUserClicked(String s) {
+                        MaterialIntroView.Builder builder2 = tutorialList.get(position + 1);
+                        builder2.setListener(new MaterialIntroListener() {
+                            @Override
+                            public void onUserClicked(String s) {
+                                MaterialIntroView.Builder builder3 = tutorialList.get(position + 2);
+                                builder3.show();
+                            }
+                        });
+                        builder2.show();
+                    }
+                });
+                builder.show();
+            }
+        }
+    }
+
+
+////        for (int position = 0; position == tutorialList.size(); position++) {
+//            if (position1 < tutorialList.size()) {
+//                MaterialIntroView.Builder builder = tutorialList.get(position1);
+//
+//
+//                builder.setListener(generate(tutorialList, position1 + 1));
+//                builder.show();
+//            }
+//
+////        }
+////            tutorialList.get(i).setListener()
+}
+
+    @Override
+    public void onUserClicked(String s) {
+
     }
 }

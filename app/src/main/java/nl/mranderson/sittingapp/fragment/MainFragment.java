@@ -1,7 +1,6 @@
 package nl.mranderson.sittingapp.fragment;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.view.LayoutInflater;
@@ -10,68 +9,62 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.google.firebase.analytics.FirebaseAnalytics;
+import java.util.ArrayList;
 
-import java.util.concurrent.TimeUnit;
-
-import co.mobiwise.materialintro.animation.MaterialIntroListener;
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import co.mobiwise.materialintro.shape.Focus;
 import co.mobiwise.materialintro.view.MaterialIntroView;
 import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.MaterialIntroUtils;
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.UserPreference;
+import nl.mranderson.sittingapp.Utils;
+import nl.mranderson.sittingapp.activity.TimerActivity;
 import nl.mranderson.sittingapp.custom.CircularSeekBar;
+import nl.mranderson.sittingapp.events.TimerState;
 
-import static com.google.firebase.analytics.FirebaseAnalytics.Event.SELECT_CONTENT;
+public class MainFragment extends android.support.v4.app.Fragment {
 
-public class MainFragment extends android.support.v4.app.Fragment implements View.OnClickListener {
-
-    private CircularSeekBar circularSeekbar;
-    private TextView timeText;
+    private static final int DEFAULT_TIME = 5;
     private boolean isFirstStart;
-    private Button button;
 
-    public MainFragment() {
-    }
+    @BindView(R.id.seekBar) CircularSeekBar circularSeekbar;
+    @BindView(R.id.timeText) TextView timeText;
+    @BindView(R.id.bStart) Button button;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        View view = inflater.inflate(R.layout.fragment_main, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        isFirstStart = UserPreference.getIntroShown(getActivity());
 
-        button = (Button) getActivity().findViewById(R.id.bStart);
-        button.setOnClickListener(this);
+        timeText.setText(getTimeText(DEFAULT_TIME));
 
-        timeText = (TextView) getActivity().findViewById(R.id.timeText);
-        timeText.setText(getTimeText(Constants.TIMER_SELECTED_TIME));
-
-        circularSeekbar = (CircularSeekBar) getActivity().findViewById(R.id.seekBar);
         circularSeekbar.setMaxProgress(115);
         circularSeekbar.setProgress(0);
         circularSeekbar.setBarWidth(10);
         circularSeekbar.setAdjustmentFactor(150);
         circularSeekbar.initDrawable(R.drawable.stickman_sitting_1);
 
-
         circularSeekbar.setSeekBarChangeListener(new CircularSeekBar.OnSeekChangeListener() {
 
             @Override
             public void onProgressChange(CircularSeekBar view, int newProgress) {
-                int time = round(view.getProgress(), 5) + 5;
+                int time = Utils.round(view.getProgress(), 5) + 5;
                 timeText.setText(getTimeText(time));
-                Constants.TIMER_SELECTED_TIME = time;
+                UserPreference.setCounterTime(getActivity(), time);
             }
         });
-
-        SharedPreferences prefs = getActivity().getSharedPreferences(UserPreference.MY_PREFS_NAME, getActivity().MODE_PRIVATE);
-        isFirstStart = prefs.getBoolean("isFirstStart", true);
     }
 
     @Override
@@ -91,11 +84,14 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
             return;
         }
 
-        if (isFirstStart || Constants.SHOW_TUTORIAL) {
-            showStartTutorial();
+        if (isFirstStart) {
+            MaterialIntroUtils.generateViewIdList();
+            showStartTutorial2();
             isFirstStart = false;
-            Constants.SHOW_TUTORIAL = false;
-            UserPreference.setIntroShown(getActivity(), true);
+        }
+
+        if (Constants.SHOW_TUTORIAL) {
+            showStartTutorial2();
         }
 
         circularSeekbar.showProgressMarker();
@@ -106,12 +102,18 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
             }
         });
 
-        if (Constants.IS_TIMER_SERVICE_RUNNING) {
-            Intent intent = new Intent(getActivity(), TimerFragment.class);
+        // this needs to be in onResume because when you open the app again when timer is running it will start in the onResume.
+        if (TimerState.toApplicationState(UserPreference.getTimerStatus(getActivity())) == TimerState.RUNNING || TimerState.toApplicationState(UserPreference.getTimerStatus(getActivity())) == TimerState.MOVING) {
+            Intent intent = new Intent(getActivity(), TimerActivity.class);
             startActivity(intent);
+        } else {
+            UserPreference.setCounterTime(getActivity(), DEFAULT_TIME);
+            timeText.setText(getTimeText(DEFAULT_TIME));
+            circularSeekbar.setProgress(0);
         }
     }
 
+    //TODO this is very ugly...
     private void showStartTutorial() {
         final boolean[] opened1 = {true, true};
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
@@ -150,28 +152,35 @@ public class MainFragment extends android.support.v4.app.Fragment implements Vie
         }
     }
 
-    private int round(double i, int v) {
-        return (int) (Math.round(i / v) * v);
+    private void showStartTutorial2() {
+        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
+        if (tabLayout.getSelectedTabPosition() == 0) {
+
+            ArrayList<MaterialIntroView.Builder> tutorialList = new ArrayList<>();
+
+            tutorialList.add(MaterialIntroUtils.getMainTimeText(getActivity(), timeText, getString(R.string.tutorial_main_time_text))
+                    .setFocusType(Focus.MINIMUM));
+
+            tutorialList.add(MaterialIntroUtils.getMainCircleButton(getActivity(), circularSeekbar, getString(R.string.tutorial_main_circle)));
+
+            tutorialList.add(MaterialIntroUtils.getMainStartButton(getActivity(), button, getString(R.string.tutorial_start_button))
+                    .setFocusType(Focus.ALL)
+                    .enableDotAnimation(true));
+
+            MaterialIntroUtils.generate(tutorialList);
+        }
+
     }
 
     private String getTimeText(int progress) {
-        int timeDown = (progress * 1000) * 60;
-        return String.format("%02d:%02d",
-                TimeUnit.MILLISECONDS.toMinutes(timeDown),
-                TimeUnit.MILLISECONDS.toSeconds(timeDown) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeDown))
-        );
+        return Utils.formatDate((progress * 1000) * 60);
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent intent = new Intent(getActivity(), TimerFragment.class);
-        startActivity(intent);
+    @OnClick(R.id.bStart)
+    public void onStartClicked() {
+        UserPreference.setTimerStatus(getActivity(), TimerState.START.toString());
+        startActivity(new Intent(getActivity(), TimerActivity.class));
 
-        // [START custom_event]
-        Bundle params = new Bundle();
-        params.putString(FirebaseAnalytics.Param.ITEM_NAME, "START_TIMER");
-        Constants.FIREBASE_ANALYTICS.logEvent(SELECT_CONTENT, params);
-        // [END custom_event]
+        Utils.logFirebaseEvent("START_TIMER");
     }
 }

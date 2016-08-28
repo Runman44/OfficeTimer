@@ -4,42 +4,40 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.IBinder;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.NotificationCompat;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.UserPreference;
 import nl.mranderson.sittingapp.activity.MainActivity;
+import nl.mranderson.sittingapp.events.CounterEvent;
+import nl.mranderson.sittingapp.events.TimeEvent;
 
 public class TimerService extends Service {
 
     private CountDownTimer countDownTimer;
-    private BroadcastReceiver restartServiceReceiver;
-    private BroadcastReceiver restartTimerServiceReceiver;
-    private BroadcastReceiver stopServiceReceiver;
+    private int counterTime;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         if (intent != null) {
-            final int time = (int) intent.getExtras().get("time");
+            int time = (int) intent.getExtras().get("time");
 
             startCountDown(time);
             startForeground(666, createForegroundNotification());
 
-            Constants.IS_TIMER_SERVICE_RUNNING = true;
+            counterTime = UserPreference.getCounterTime(this);
 
-
+            EventBus.getDefault().register(this);
         }
         return super.onStartCommand(intent, flags, startId);
     }
@@ -50,86 +48,57 @@ public class TimerService extends Service {
     }
 
     private void startCountDown(final int time) {
-        final Intent bi = new Intent(Constants.COUNTDOWN_TIME_BROADCAST);
 
         countDownTimer = new CountDownTimer(((time * 1000) * 60), 1000) {
 
             public void onTick(long millisUntilFinished) {
-                Constants.TIMER_SERVICE_MILLI_LEFT = millisUntilFinished;
-                bi.putExtra("countdown", millisUntilFinished);
-                sendBroadcast(bi);
+                EventBus.getDefault().post(new TimeEvent(millisUntilFinished));
             }
 
             public void onFinish() {
                 sendNotification();
-//                Intent timerServiceIntent = new Intent(TimerService.this, TimerService.class);
-//                timerServiceIntent.putExtra("time", time);
-//                startService(timerServiceIntent);
                 startCountDown(time);
             }
         };
         countDownTimer.start();
     }
 
-    private void restartTimerService(int time) {
-//        stopTimerService();
-//        Intent timerServiceIntent = new Intent(TimerService.this, TimerService.class);
-//        timerServiceIntent.putExtra("time", time);
-//        startService(timerServiceIntent);
-        startCountDown(time);
-    }
-
     private void stopTimerService() {
+        disableCountDown();
 
-
-
-        Constants.IS_TIMER_SERVICE_RUNNING = false;
-        countDownTimer.cancel();
-        //TODO crash here receiver not registered
+        EventBus.getDefault().unregister(this);
         TimerService.this.stopForeground(true);
         TimerService.this.stopSelf();
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        restartServiceReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                restartTimerService(Constants.TIMER_SELECTED_TIME);
-            }
-        };
-        registerReceiver(restartServiceReceiver, new IntentFilter(Constants.COUNTDOWN_RESTART_BROADCAST));
-
-
-        restartTimerServiceReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
-                countDownTimer.cancel();
-            }
-        };
-        registerReceiver(restartTimerServiceReceiver, new IntentFilter(Constants.COUNTDOWN_STOP_TIMER_BROADCAST));
-
-        stopServiceReceiver = new BroadcastReceiver() {
-            @Override
-            public void onReceive(Context context, Intent intent) {
+    @Subscribe
+    public void onCounterEvent(CounterEvent event) {
+        switch (event.status) {
+            case RESTARTED:
+                if (countDownTimer == null)
+                    startCountDown(counterTime);
+                break;
+            case STOPPED:
                 stopTimerService();
-            }
-        };
-        registerReceiver(stopServiceReceiver, new IntentFilter(Constants.COUNTDOWN_STOP_BROADCAST));
+                break;
+            case PAUSED:
+                disableCountDown();
+                break;
+            default:
+                break;
+        }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(restartServiceReceiver);
-        unregisterReceiver(restartTimerServiceReceiver);
-        unregisterReceiver(stopServiceReceiver);
+
+    private void disableCountDown() {
+        if (countDownTimer != null) {
+            countDownTimer.cancel();
+            countDownTimer = null;
+        }
     }
 
     private Notification createForegroundNotification() {
         final Intent nextIntent = new Intent(this, MainActivity.class);
-        nextIntent.putExtra("show_timer", true);
         PendingIntent pNextIntent = PendingIntent.getActivity(this, 0,
                 nextIntent, 0);
 
@@ -140,21 +109,19 @@ public class TimerService extends Service {
                         .setContentTitle(getResources().getString(R.string.app_name))
                         .setOngoing(true)
                         .setContentText(getString(R.string.notification_blue))
+//                        .addAction(new android.support.v4.app.NotificationCompat.Action(R.drawable.ic_notification_icon, "Stop", new PendingIntent(new Intent(this, MainActivity.class))))
                         .setContentIntent(pNextIntent);
 
         return mBuilder.build();
     }
 
     private void sendNotification() {
-
-        SharedPreferences prefs = this.getSharedPreferences(UserPreference.MY_PREFS_NAME, this.MODE_PRIVATE);
-        Boolean light = prefs.getBoolean("light", true);
-        Boolean vibration = prefs.getBoolean("vibration", true);
-        Boolean sound = prefs.getBoolean("sound", true);
-        String music = prefs.getString("music", RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION).toString());
+        Boolean light = UserPreference.getLightSettings(this);
+        Boolean vibration = UserPreference.getVibrationSettings(this);
+        Boolean sound = UserPreference.getSoundSettings(this);
+        String music = UserPreference.getToneSettings(this);
 
         final Intent nextIntent = new Intent(this, MainActivity.class);
-        nextIntent.putExtra("show_timer", true);
         PendingIntent pNextIntent = PendingIntent.getActivity(this, 0,
                 nextIntent, 0);
 
