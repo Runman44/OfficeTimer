@@ -9,13 +9,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import co.mobiwise.materialintro.animation.MaterialIntroListener;
 import co.mobiwise.materialintro.shape.Focus;
-import co.mobiwise.materialintro.view.MaterialIntroView;
 import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.MaterialIntroUtils;
 import nl.mranderson.sittingapp.R;
@@ -30,9 +28,12 @@ public class MainFragment extends android.support.v4.app.Fragment {
     private static final int DEFAULT_TIME = 5;
     private boolean isFirstStart;
 
-    @BindView(R.id.seekBar) CircularSeekBar circularSeekbar;
-    @BindView(R.id.timeText) TextView timeText;
-    @BindView(R.id.bStart) Button button;
+    @BindView(R.id.seekBar)
+    CircularSeekBar circularSeekbar;
+    @BindView(R.id.timeText)
+    TextView timeText;
+    @BindView(R.id.bStart)
+    Button button;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -86,12 +87,12 @@ public class MainFragment extends android.support.v4.app.Fragment {
 
         if (isFirstStart) {
             MaterialIntroUtils.generateViewIdList();
-            showStartTutorial2();
+            showStartTutorial();
             isFirstStart = false;
         }
 
         if (Constants.SHOW_TUTORIAL) {
-            showStartTutorial2();
+            showStartTutorial();
         }
 
         circularSeekbar.showProgressMarker();
@@ -118,58 +119,33 @@ public class MainFragment extends android.support.v4.app.Fragment {
         final boolean[] opened1 = {true, true};
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
         if (tabLayout.getSelectedTabPosition() == 0) {
-            MaterialIntroView.Builder test2 = MaterialIntroUtils.getMainTimeText(getActivity());
-            test2.setInfoText(getString(R.string.tutorial_main_time_text))
-                    .setTarget(timeText)
+
+            MaterialIntroUtils.getMainTimeText(getActivity(), timeText, getString(R.string.tutorial_main_time_text))
                     .setFocusType(Focus.MINIMUM)
                     .setListener(new MaterialIntroListener() {
                         @Override
                         public void onUserClicked(String s) {
                             if (opened1[0]) {
                                 opened1[0] = false;
-                                MaterialIntroView.Builder test3 = MaterialIntroUtils.getMainCircleButton(getActivity());
-                                test3.setInfoText(getString(R.string.tutorial_main_circle))
-                                        .setTarget(circularSeekbar)
+                                MaterialIntroUtils.getMainCircleButton(getActivity(), circularSeekbar, getString(R.string.tutorial_main_circle))
                                         .setListener(new MaterialIntroListener() {
                                             @Override
                                             public void onUserClicked(String s) {
                                                 if (opened1[1]) {
                                                     opened1[1] = false;
-                                                    MaterialIntroView.Builder test2 = MaterialIntroUtils.getMainStartButton(getActivity());
-                                                    test2.setInfoText(getString(R.string.tutorial_start_button))
-                                                            .setTarget(button)
+                                                    MaterialIntroUtils.getMainStartButton(getActivity(), button, getString(R.string.tutorial_start_button))
                                                             .setFocusType(Focus.ALL)
                                                             .enableDotAnimation(true)
                                                             .show();
                                                 }
                                             }
-                                        });
-                                test3.show();
+                                        }).show();
                             }
                         }
-                    });
-            test2.show();
+                    }).show();
+
+
         }
-    }
-
-    private void showStartTutorial2() {
-        TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);
-        if (tabLayout.getSelectedTabPosition() == 0) {
-
-            ArrayList<MaterialIntroView.Builder> tutorialList = new ArrayList<>();
-
-            tutorialList.add(MaterialIntroUtils.getMainTimeText(getActivity(), timeText, getString(R.string.tutorial_main_time_text))
-                    .setFocusType(Focus.MINIMUM));
-
-            tutorialList.add(MaterialIntroUtils.getMainCircleButton(getActivity(), circularSeekbar, getString(R.string.tutorial_main_circle)));
-
-            tutorialList.add(MaterialIntroUtils.getMainStartButton(getActivity(), button, getString(R.string.tutorial_start_button))
-                    .setFocusType(Focus.ALL)
-                    .enableDotAnimation(true));
-
-            MaterialIntroUtils.generate(tutorialList);
-        }
-
     }
 
     private String getTimeText(int progress) {
