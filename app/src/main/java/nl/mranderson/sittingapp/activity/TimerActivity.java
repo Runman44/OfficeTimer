@@ -249,6 +249,11 @@ public class TimerActivity extends AppCompatActivity implements GoogleApiClient.
             EventBus.getDefault().post(new CounterEvent(CounterEvent.CounterAction.STOPPED));
 
             UserPreference.setTimerStatus(this, TimerState.STOPPED.toString());
+            Intent i = new Intent(this, ActivityRecognitionIntentService.class);
+            PendingIntent mActivityRecongPendingIntent = PendingIntent
+                    .getService(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            ActivityRecognition.ActivityRecognitionApi.removeActivityUpdates(mGApiClient, mActivityRecongPendingIntent);
         }
 
         EventBus.getDefault().unregister(this);

@@ -15,13 +15,11 @@ import static com.google.android.gms.location.DetectedActivity.ON_BICYCLE;
 import static com.google.android.gms.location.DetectedActivity.ON_FOOT;
 import static com.google.android.gms.location.DetectedActivity.RUNNING;
 import static com.google.android.gms.location.DetectedActivity.STILL;
-import static com.google.android.gms.location.DetectedActivity.TILTING;
 import static com.google.android.gms.location.DetectedActivity.WALKING;
 
 public class ActivityRecognitionIntentService extends IntentService {
 
     private static final int CONFIDENCE_METER_PERCENTAGE = 70;
-    private static final int CONFIDENCE_METER_CERTAIN_PERCENTAGE = 90;
 
     public ActivityRecognitionIntentService() {
         super("ActivityRecognitionIntentService");
@@ -34,10 +32,10 @@ public class ActivityRecognitionIntentService extends IntentService {
 
             int confidence = detectedActivity.getConfidence();
             int type = detectedActivity.getType();
-            if (type == ON_FOOT || type == ON_BICYCLE || type == RUNNING || type == WALKING && confidence > CONFIDENCE_METER_PERCENTAGE) {
+            if ((type == ON_FOOT || type == ON_BICYCLE || type == RUNNING || type == WALKING) && confidence > CONFIDENCE_METER_PERCENTAGE) {
                 UserPreference.setUserWalked(this, true);
                 EventBus.getDefault().post(new WalkingEvent(true));
-            } else if ((type == STILL && confidence > CONFIDENCE_METER_PERCENTAGE) || (type == TILTING && confidence > CONFIDENCE_METER_CERTAIN_PERCENTAGE) && UserPreference.getUserWalked(this)) {
+            } else if (((type == STILL && confidence > CONFIDENCE_METER_PERCENTAGE)) && UserPreference.getUserWalked(this)) {
                 UserPreference.setUserWalked(this, false);
                 EventBus.getDefault().post(new WalkingEvent(false));
             }
