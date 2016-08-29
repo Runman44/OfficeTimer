@@ -131,6 +131,7 @@ public class TimerService extends Service {
                         .setColor(ContextCompat.getColor(this, R.color.red))
                         .setContentTitle(getResources().getString(R.string.app_name))
                         .setContentText(getString(R.string.notification_red))
+                        .setAutoCancel(true)
                         .setContentIntent(pNextIntent);
 
         //Vibration
