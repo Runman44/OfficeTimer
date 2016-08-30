@@ -114,7 +114,7 @@ public class MainFragment extends android.support.v4.app.Fragment {
         }
     }
 
-    //TODO this is very ugly...
+    //TODO tthis is very ugly...
     private void showStartTutorial() {
         final boolean[] opened1 = {true, true};
         TabLayout tabLayout = (TabLayout) getActivity().findViewById(R.id.tabs);

@@ -22,6 +22,8 @@ import nl.mranderson.sittingapp.activity.MainActivity;
 import nl.mranderson.sittingapp.events.CounterEvent;
 import nl.mranderson.sittingapp.events.TimeEvent;
 
+import static android.app.PendingIntent.FLAG_UPDATE_CURRENT;
+
 public class TimerService extends Service {
 
     private CountDownTimer countDownTimer;
@@ -50,6 +52,7 @@ public class TimerService extends Service {
     private void startCountDown(final int time) {
 
         countDownTimer = new CountDownTimer(((time * 1000) * 60), 1000) {
+//            countDownTimer = new CountDownTimer(5000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 EventBus.getDefault().post(new TimeEvent(millisUntilFinished));
@@ -98,6 +101,10 @@ public class TimerService extends Service {
     }
 
     private Notification createForegroundNotification() {
+        final Intent pushIntent = new Intent(this, PushActionActivity.class);
+        PendingIntent pPushIntent = PendingIntent.getActivity(this, 0,
+                pushIntent, FLAG_UPDATE_CURRENT);
+
         final Intent nextIntent = new Intent(this, MainActivity.class);
         PendingIntent pNextIntent = PendingIntent.getActivity(this, 0,
                 nextIntent, 0);
@@ -109,7 +116,7 @@ public class TimerService extends Service {
                         .setContentTitle(getResources().getString(R.string.app_name))
                         .setOngoing(true)
                         .setContentText(getString(R.string.notification_blue))
-//                        .addAction(new android.support.v4.app.NotificationCompat.Action(R.drawable.ic_notification_icon, "Stop", new PendingIntent(new Intent(this, MainActivity.class))))
+                        .addAction(new android.support.v4.app.NotificationCompat.Action(R.drawable.ic_stop_black_24dp, "Stop", pPushIntent))
                         .setContentIntent(pNextIntent);
 
         return mBuilder.build();

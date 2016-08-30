@@ -88,13 +88,12 @@ public class TimerActivity extends AppCompatActivity implements GoogleApiClient.
         if (timerState == TimerState.START) {
             startTimerService(time);
             UserPreference.setTimerStatus(this, TimerState.RUNNING.toString());
+
+            if (UserPreference.getSensorSettings(this))
+                startSensors();
         } else if (timerState == TimerState.MOVING) {
             onWalkingEvent(new WalkingEvent(true));
         }
-
-        //TODO do this 2 times? after reboot too?
-        if (UserPreference.getSensorSettings(this))
-            startSensors();
 
         isFirstStart = UserPreference.getIntroShown(this);
     }
