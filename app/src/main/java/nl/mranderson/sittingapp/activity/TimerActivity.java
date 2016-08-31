@@ -167,6 +167,7 @@ public class TimerActivity extends AppCompatActivity implements GoogleApiClient.
                 onWalkingEvent(new WalkingEvent(true));
                 break;
             case R.id.bStop:
+                Utils.logFirebaseEvent("STOP_TIMER");
                 onBackPressed();
         }
     }
@@ -241,8 +242,6 @@ public class TimerActivity extends AppCompatActivity implements GoogleApiClient.
 
         EventBus.getDefault().unregister(this);
         super.onBackPressed();
-
-        Utils.logFirebaseEvent("STOP_TIMER");
     }
 
     private void killTimer() {
