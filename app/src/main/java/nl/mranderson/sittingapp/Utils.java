@@ -1,6 +1,7 @@
 package nl.mranderson.sittingapp;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -37,7 +38,7 @@ public abstract class Utils {
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeDown)));
     }
 
-    public static void logFirebaseEvent(String event){
+    public static void logFirebaseEvent(String event) {
         // [START custom_event]
         Bundle params = new Bundle();
         params.putString(FirebaseAnalytics.Param.ITEM_NAME, event);
@@ -49,4 +50,13 @@ public abstract class Utils {
         return (int) (Math.round(i / v) * v);
     }
 
+    public static boolean isMyServiceRunning(Class<?> serviceClass, Activity activity) {
+        ActivityManager manager = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
+        for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
+            if (serviceClass.getName().equals(service.service.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

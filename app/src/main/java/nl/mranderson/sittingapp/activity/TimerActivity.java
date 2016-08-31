@@ -123,6 +123,13 @@ public class TimerActivity extends AppCompatActivity implements GoogleApiClient.
             Constants.SHOW_TUTORIAL = false;
             showStartTutorial();
         }
+
+        Intent intent = getIntent();
+        if (intent.getExtras() != null) {
+            if ("STOP".equals(intent.getExtras().getString("ACTION"))) {
+                this.onBackPressed();
+            }
+        }
     }
 
 
@@ -229,15 +236,16 @@ public class TimerActivity extends AppCompatActivity implements GoogleApiClient.
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
+    public void onBackPressed() {
+        killTimer();
 
-        if (mGApiClient != null)
-            mGApiClient.disconnect();
+        EventBus.getDefault().unregister(this);
+        super.onBackPressed();
+
+        Utils.logFirebaseEvent("STOP_TIMER");
     }
 
-    @Override
-    public void onBackPressed() {
+    private void killTimer() {
         if (TimerState.toApplicationState(UserPreference.getTimerStatus(this)) == TimerState.RUNNING || TimerState.toApplicationState(UserPreference.getTimerStatus(this)) == TimerState.MOVING) {
             // Cancel the current notification.
             NotificationManager mNotifyMgr =
@@ -248,19 +256,17 @@ public class TimerActivity extends AppCompatActivity implements GoogleApiClient.
             EventBus.getDefault().post(new CounterEvent(CounterEvent.CounterAction.STOPPED));
 
             UserPreference.setTimerStatus(this, TimerState.STOPPED.toString());
+
             Intent i = new Intent(this, ActivityRecognitionIntentService.class);
             PendingIntent mActivityRecongPendingIntent = PendingIntent
                     .getService(this, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            ActivityRecognition.ActivityRecognitionApi.removeActivityUpdates(mGApiClient, mActivityRecongPendingIntent);
+            if (mGApiClient != null) {
+                ActivityRecognition.ActivityRecognitionApi.removeActivityUpdates(mGApiClient, mActivityRecongPendingIntent);
+                mGApiClient.disconnect();
+            }
         }
-
-        EventBus.getDefault().unregister(this);
-        super.onBackPressed();
-
-        Utils.logFirebaseEvent("STOP_TIMER");
     }
-
 
     private void showStartTutorial() {
         final boolean[] opened1 = {true, true, true, true};

@@ -5,13 +5,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import org.greenrobot.eventbus.EventBus;
-
-import nl.mranderson.sittingapp.UserPreference;
 import nl.mranderson.sittingapp.Utils;
 import nl.mranderson.sittingapp.activity.MainActivity;
-import nl.mranderson.sittingapp.events.CounterEvent;
-import nl.mranderson.sittingapp.events.TimerState;
+import nl.mranderson.sittingapp.activity.TimerActivity;
 
 public class PushActionActivity extends Activity {
 
@@ -19,10 +15,12 @@ public class PushActionActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        EventBus.getDefault().post(new CounterEvent(CounterEvent.CounterAction.STOPPED));
-        UserPreference.setTimerStatus(this, TimerState.STOPPED.toString());
+        //TODO or do Parent in the manifest !
+        Intent[] intents = new Intent[2];
+        intents[0] = new Intent(this, MainActivity.class);
+        intents[1] = new Intent(this, TimerActivity.class).putExtra("ACTION", "STOP");
 
-        startActivity(new Intent(this, MainActivity.class));
+        startActivities(intents);
 
         Utils.logFirebaseEvent("NOTIFICATION_STOP_TIMER");
         finish();

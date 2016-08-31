@@ -9,6 +9,7 @@ import com.google.android.gms.location.DetectedActivity;
 import org.greenrobot.eventbus.EventBus;
 
 import nl.mranderson.sittingapp.UserPreference;
+import nl.mranderson.sittingapp.events.TimerState;
 import nl.mranderson.sittingapp.events.WalkingEvent;
 
 import static com.google.android.gms.location.DetectedActivity.ON_BICYCLE;
@@ -25,6 +26,7 @@ public class ActivityRecognitionIntentService extends IntentService {
         super("ActivityRecognitionIntentService");
     }
 
+    //TODO seems like this is still running in the BE even when the app is closed!
     @Override
     protected void onHandleIntent(Intent intent) {
         if (ActivityRecognitionResult.hasResult(intent)) {
@@ -32,12 +34,16 @@ public class ActivityRecognitionIntentService extends IntentService {
 
             int confidence = detectedActivity.getConfidence();
             int type = detectedActivity.getType();
-            if ((type == ON_FOOT || type == ON_BICYCLE || type == RUNNING || type == WALKING) && confidence > CONFIDENCE_METER_PERCENTAGE) {
-                UserPreference.setUserWalked(this, true);
-                EventBus.getDefault().post(new WalkingEvent(true));
-            } else if (((type == STILL && confidence > CONFIDENCE_METER_PERCENTAGE)) && UserPreference.getUserWalked(this)) {
-                UserPreference.setUserWalked(this, false);
-                EventBus.getDefault().post(new WalkingEvent(false));
+            if (!TimerState.STOPPED.toString().equals(UserPreference.getTimerStatus(this))) {
+                if ((type == ON_FOOT || type == ON_BICYCLE || type == RUNNING || type == WALKING) && confidence > CONFIDENCE_METER_PERCENTAGE) {
+                    UserPreference.setUserWalked(this, true);
+                    EventBus.getDefault().post(new WalkingEvent(true));
+                } else if (((type == STILL && confidence > CONFIDENCE_METER_PERCENTAGE)) && UserPreference.getUserWalked(this)) {
+                    UserPreference.setUserWalked(this, false);
+                    EventBus.getDefault().post(new WalkingEvent(false));
+                }
+            } else {
+                stopSelf();
             }
         }
     }
