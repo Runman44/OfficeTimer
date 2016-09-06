@@ -22,7 +22,7 @@ public class PushActionActivity extends Activity {
 
         startActivities(intents);
 
-        Utils.logFirebaseEvent("NOTIFICATION_STOP_TIMER");
+        Utils.logFirebaseEvent("NOTIFICATION_STOP_TIMER", "notification_action");
         finish();
     }
 }

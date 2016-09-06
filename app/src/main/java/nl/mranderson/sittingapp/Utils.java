@@ -38,10 +38,11 @@ public abstract class Utils {
                         TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(timeDown)));
     }
 
-    public static void logFirebaseEvent(String event) {
+    public static void logFirebaseEvent(String event, String contentType) {
         // [START custom_event]
         Bundle params = new Bundle();
-        params.putString(FirebaseAnalytics.Param.ITEM_NAME, event);
+        params.putString(FirebaseAnalytics.Param.ITEM_ID, event);
+        params.putString(FirebaseAnalytics.Param.CONTENT_TYPE, contentType);
         Constants.FIREBASE_ANALYTICS.logEvent(SELECT_CONTENT, params);
         // [END custom_event]
     }

@@ -167,7 +167,7 @@ public class TimerActivity extends AppCompatActivity implements GoogleApiClient.
                 onWalkingEvent(new WalkingEvent(true));
                 break;
             case R.id.bStop:
-                Utils.logFirebaseEvent("STOP_TIMER");
+                Utils.logFirebaseEvent("STOP_TIMER", "button");
                 onBackPressed();
         }
     }
