@@ -3,7 +3,7 @@ apply plugin: 'com.neenbedankt.android-apt'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    buildToolsVersion "24.0.0"
 
     defaultConfig {
         applicationId "nl.mranderson.sittingapp"
@@ -23,14 +23,15 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.1.1'
-    compile 'com.android.support:support-v4:23.1.1'
-    compile 'com.android.support:design:23.1.1'
+    compile 'com.android.support:appcompat-v7:24.0.0'
+    compile 'com.android.support:support-v4:24.0.0'
+    compile 'com.android.support:design:24.0.0'
     compile 'com.github.iammert:MaterialIntroView:1.5.2'
     compile 'com.google.android.gms:play-services-ads:9.0.0'
     compile 'com.google.android.gms:play-services-location:9.0.0'
     compile 'com.google.firebase:firebase-core:9.0.0'
     compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'io.github.kobakei:ratethisapp:1.0.5'
     compile 'com.jakewharton:butterknife:8.0.1'
     apt 'com.jakewharton:butterknife-compiler:8.0.1'
 }

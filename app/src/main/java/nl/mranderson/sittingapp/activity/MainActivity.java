@@ -11,12 +11,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+import com.kobakei.ratethisapp.RateThisApp;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.R;
+import nl.mranderson.sittingapp.Utils;
 import nl.mranderson.sittingapp.fragment.InfoFragment;
 import nl.mranderson.sittingapp.fragment.MainFragment;
 import nl.mranderson.sittingapp.fragment.SettingsFragment;
@@ -49,6 +51,54 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.setupWithViewPager(viewPager);
 
         setupTabIcons();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+
+        setRating();
+    }
+
+    private void setRating() {
+        // Monitor launch times and interval from installation
+        RateThisApp.onStart(this);
+
+        configRating(3, 5);
+
+        RateThisApp.setCallback(new RateThisApp.Callback() {
+            @Override
+            public void onYesClicked() {
+                Utils.logFirebaseEvent("YES", "RATING");
+                RateThisApp.stopRateDialog(MainActivity.this);
+            }
+
+            @Override
+            public void onNoClicked() {
+                Utils.logFirebaseEvent("NO", "RATING");
+                RateThisApp.stopRateDialog(MainActivity.this);
+            }
+
+            @Override
+            public void onCancelClicked() {
+                Utils.logFirebaseEvent("CANCEL", "RATING");
+            }
+        });
+        // If the criteria is satisfied, "Rate this app" dialog will be shown
+        RateThisApp.showRateDialogIfNeeded(this);
+    }
+
+    private void configRating(int days, int launches) {
+        // Custom criteria: 3 days and 5 launches
+        RateThisApp.Config config = new RateThisApp.Config(days, launches);
+        // Custom title ,message and buttons names
+        config.setTitle(R.string.rating_title);
+        config.setMessage(R.string.rating_message);
+        config.setYesButtonText(R.string.rating_yes);
+        config.setNoButtonText(R.string.rating_no);
+        config.setCancelButtonText(R.string.rating_cancel);
+        RateThisApp.init(config);
     }
 
     private void setupTabIcons() {

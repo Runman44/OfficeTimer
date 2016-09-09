@@ -47,7 +47,7 @@ public class InfoFragment extends android.support.v4.app.Fragment {
         MaterialIntroUtils.generateViewIdList();
         Toast.makeText(getActivity(), "Tutorial Enabled", Toast.LENGTH_SHORT).show();
 
-        Utils.logFirebaseEvent("TUTORIAL", "button");
+        Utils.logFirebaseEvent("TUTORIAL", "BUTTON");
     }
 
     private void rateIntent() {
@@ -65,7 +65,7 @@ public class InfoFragment extends android.support.v4.app.Fragment {
                     Uri.parse("http://play.google.com/store/apps/details?id=" + getActivity().getPackageName())));
         }
 
-        Utils.logFirebaseEvent("RATE", "button");
+        Utils.logFirebaseEvent("RATE", "BUTTON");
     }
 
     private void mailIntent() {
@@ -77,6 +77,6 @@ public class InfoFragment extends android.support.v4.app.Fragment {
             startActivity(intent);
         }
 
-        Utils.logFirebaseEvent("MAIL", "button");
+        Utils.logFirebaseEvent("MAIL", "BUTTON");
     }
 }

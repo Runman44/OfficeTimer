@@ -46,4 +46,11 @@
     <!-- misc -->
     <string name="banner_ad_unit_id">ca-app-pub-4050305580977890/4443389163</string>
 
+    <!-- rating -->
+    <string name="rating_title">Rate this app!</string>
+    <string name="rating_message">If you are enjoying this app, would you mind taking a moment to rate it? Thank you for the support!</string>
+    <string name="rating_yes">SURE</string>
+    <string name="rating_no">NO, THANKS</string>
+    <string name="rating_cancel">NOT NOW</string>
+
 </resources>
