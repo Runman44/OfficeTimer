@@ -33,6 +33,7 @@
     <string name="vibrate">Vibration</string>
     <string name="led_light">LED Light</string>
     <string name="sound">Sound</string>
+    <string name="waking">Wake Phone</string>
     <string name="tone">Tone</string>
     <string name="sounds">Sounds</string>
 

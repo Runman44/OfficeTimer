@@ -38,6 +38,8 @@ public class SettingsFragment extends android.support.v4.app.Fragment implements
     CheckBox cSound;
     @BindView(R.id.notify_vibration)
     CheckBox cVibration;
+    @BindView(R.id.notify_waking)
+    CheckBox cWake;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -55,11 +57,13 @@ public class SettingsFragment extends android.support.v4.app.Fragment implements
         cLight.setOnCheckedChangeListener(this);
         cSound.setOnCheckedChangeListener(this);
         cVibration.setOnCheckedChangeListener(this);
+        cWake.setOnCheckedChangeListener(this);
 
         Boolean sensors = UserPreference.getSensorSettings(getActivity());
         Boolean light = UserPreference.getLightSettings(getActivity());
         Boolean vibration = UserPreference.getVibrationSettings(getActivity());
         Boolean sound = UserPreference.getSoundSettings(getActivity());
+        Boolean wake = UserPreference.getWakeSettings(getActivity());
         tone = UserPreference.getToneSettings(getActivity());
 
         setRingToneText(tone);
@@ -68,12 +72,17 @@ public class SettingsFragment extends android.support.v4.app.Fragment implements
         cSound.setChecked(sound);
         cVibration.setChecked(vibration);
         cSensors.setChecked(sensors);
+        cWake.setChecked(wake);
     }
 
     private void setRingToneText(String tone) {
         Ringtone ringtone = RingtoneManager.getRingtone(getActivity(), Uri.parse(tone));
-        String title = ringtone.getTitle(getActivity());
-        cTone.setText(title);
+        if (ringtone != null) {
+            String title = ringtone.getTitle(getActivity());
+            cTone.setText(title);
+        } else {
+            cTone.setText("Can't find default tone.");
+        }
     }
 
     @Override
@@ -87,6 +96,9 @@ public class SettingsFragment extends android.support.v4.app.Fragment implements
                 break;
             case R.id.notify_vibration:
                 UserPreference.setVibrationSettings(getActivity(), isChecked);
+                break;
+            case R.id.notify_waking:
+                UserPreference.setWakingSettings(getActivity(), isChecked);
                 break;
             case R.id.sensors:
                 if (Utils.isPlayServiceAvailable(getActivity())) {

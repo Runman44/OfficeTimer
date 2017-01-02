@@ -134,6 +134,7 @@
     <orderEntry type="library" exported="" name="firebase-common-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="firebase-core-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="recyclerview-v7-24.0.0" level="project" />
+    <orderEntry type="library" exported="" name="MPAndroidChart-v3.0.0-beta1" level="project" />
     <orderEntry type="library" exported="" name="play-services-basement-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-maps-9.0.0" level="project" />
     <orderEntry type="library" exported="" name="play-services-tasks-9.0.0" level="project" />

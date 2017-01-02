@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.CountDownTimer;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.NotificationCompat;
 
@@ -126,6 +127,7 @@ public class TimerService extends Service {
         Boolean light = UserPreference.getLightSettings(this);
         Boolean vibration = UserPreference.getVibrationSettings(this);
         Boolean sound = UserPreference.getSoundSettings(this);
+        Boolean wake = UserPreference.getWakeSettings(this);
         String music = UserPreference.getToneSettings(this);
 
         final Intent nextIntent = new Intent(this, MainActivity.class);
@@ -158,5 +160,13 @@ public class TimerService extends Service {
                 (NotificationManager) this.getSystemService(this.NOTIFICATION_SERVICE);
         // Builds the notification and issues it.
         mNotifyMgr.notify(Constants.NOTIFICATION_GET_WALKING, mBuilder.build());
+
+        // Wake Phone
+        if (wake) {
+            PowerManager.WakeLock screenOn = ((PowerManager) getSystemService(POWER_SERVICE)).newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK | PowerManager.ACQUIRE_CAUSES_WAKEUP, "example");
+            screenOn.acquire();
+
+//            screenOn.release();
+        }
     }
 }

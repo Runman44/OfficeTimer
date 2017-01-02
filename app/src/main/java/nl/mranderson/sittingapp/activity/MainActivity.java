@@ -11,14 +11,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
-import com.kobakei.ratethisapp.RateThisApp;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import nl.mranderson.sittingapp.Constants;
 import nl.mranderson.sittingapp.R;
-import nl.mranderson.sittingapp.Utils;
 import nl.mranderson.sittingapp.fragment.InfoFragment;
 import nl.mranderson.sittingapp.fragment.MainFragment;
 import nl.mranderson.sittingapp.fragment.SettingsFragment;
@@ -31,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private int[] tabIcons = {
             R.drawable.ic_directions_walk_white_48dp,
             R.drawable.ic_settings_white_36dp,
+//            R.drawable.ic_help_white_48dp,
             R.drawable.ic_help_white_48dp
     };
 
@@ -40,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Constants.FIREBASE_ANALYTICS = FirebaseAnalytics.getInstance(this);
+
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,64 +53,18 @@ public class MainActivity extends AppCompatActivity {
         setupTabIcons();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-
-        setRating();
-    }
-
-    private void setRating() {
-        // Monitor launch times and interval from installation
-        RateThisApp.onStart(this);
-
-        configRating(3, 5);
-
-        RateThisApp.setCallback(new RateThisApp.Callback() {
-            @Override
-            public void onYesClicked() {
-                Utils.logFirebaseEvent("YES", "RATING");
-                RateThisApp.stopRateDialog(MainActivity.this);
-            }
-
-            @Override
-            public void onNoClicked() {
-                Utils.logFirebaseEvent("NO", "RATING");
-                RateThisApp.stopRateDialog(MainActivity.this);
-            }
-
-            @Override
-            public void onCancelClicked() {
-                Utils.logFirebaseEvent("CANCEL", "RATING");
-            }
-        });
-        // If the criteria is satisfied, "Rate this app" dialog will be shown
-        RateThisApp.showRateDialogIfNeeded(this);
-    }
-
-    private void configRating(int days, int launches) {
-        // Custom criteria: 3 days and 5 launches
-        RateThisApp.Config config = new RateThisApp.Config(days, launches);
-        // Custom title ,message and buttons names
-        config.setTitle(R.string.rating_title);
-        config.setMessage(R.string.rating_message);
-        config.setYesButtonText(R.string.rating_yes);
-        config.setNoButtonText(R.string.rating_no);
-        config.setCancelButtonText(R.string.rating_cancel);
-        RateThisApp.init(config);
-    }
-
     private void setupTabIcons() {
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
+//        tabLayout.getTabAt(3).setIcon(tabIcons[3]);
     }
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new MainFragment(), "ONE");
         adapter.addFragment(new SettingsFragment(), "TWO");
+//        adapter.addFragment(new AnalyticsFragment(), "THREE");
         adapter.addFragment(new InfoFragment(), "THREE");
         viewPager.setAdapter(adapter);
     }

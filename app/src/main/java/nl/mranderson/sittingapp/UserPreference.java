@@ -72,6 +72,12 @@ public class UserPreference {
         editor.commit();
     }
 
+    public static void setWakingSettings(Context context, boolean isWaking) {
+        editor = PreferenceManager.getDefaultSharedPreferences(context).edit();
+        editor.putBoolean("waking", isWaking);
+        editor.commit();
+    }
+
     public static boolean getLightSettings(Context context) {
         SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return defaultSharedPreferences.getBoolean("light", false);
@@ -116,4 +122,10 @@ public class UserPreference {
         SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         return defaultSharedPreferences.getInt("counterTime", 5);
     }
+
+    public static Boolean getWakeSettings(Context context) {
+        SharedPreferences defaultSharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return defaultSharedPreferences.getBoolean("waking", false);
+    }
+
 }
