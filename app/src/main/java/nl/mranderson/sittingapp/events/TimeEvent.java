@@ -8,6 +8,4 @@ public class TimeEvent {
     public TimeEvent(long time) {
         this.time = time;
     }
-
-
 }

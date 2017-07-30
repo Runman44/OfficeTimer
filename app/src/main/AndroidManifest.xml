@@ -12,13 +12,9 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
+        android:logo="@drawable/ic_directions_walk_white_48dp"
         android:theme="@style/MyMaterialTheme">
-        <activity
-            android:name=".activity.MainActivity"
-            android:label="@string/app_name"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait">
+        <activity android:name=".splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,17 +22,25 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.TimerActivity"
-            android:label="@string/app_name"
+            android:name=".timer.stop.TimerActivity"
+            android:label="@string/rate_the_app"
             android:launchMode="singleTask"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
-            android:name=".service.PushActionActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"></activity>
+            android:name=".push.PushActionActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".NavigationActivity"
+            android:label="@string/title_activity_navigation"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
 
-        <service android:name=".service.TimerService" />
-        <service android:name=".service.ActivityRecognitionIntentService" />
+        <service
+            android:name=".timer.service.TimerService"
+            android:exported="false" />
+        <service
+            android:name=".timer.recognition.ActivityRecognitionIntentService"
+            android:exported="false" />
     </application>
 
 </manifest>
