@@ -67,4 +67,11 @@ public class SettingsPresenter implements SettingsContract.Presenter {
             view.setRingToneText(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION).toString());
         }
     }
+
+    @Override
+    public void onSensitivityChanged(int progress) {
+        double v = progress * 0.75;
+        double v1 = 25 + v;
+        userPreference.setSensitivity((int) Math.round(v1));
+    }
 }

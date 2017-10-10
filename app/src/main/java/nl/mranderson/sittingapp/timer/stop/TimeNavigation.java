@@ -6,4 +6,5 @@ public interface TimeNavigation {
 
     void stopTimerService();
 
+    void closeScreen();
 }

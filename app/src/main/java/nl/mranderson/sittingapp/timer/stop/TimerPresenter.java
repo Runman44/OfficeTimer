@@ -74,5 +74,6 @@ public class TimerPresenter implements TimerContract.Presenter, RecognitionInter
             recognitionInteractor.stopSensors();
 //        }
         navigation.stopTimerService();
+        navigation.closeScreen();
     }
 }

@@ -1,6 +1,5 @@
 package nl.mranderson.sittingapp.info;
 
-import nl.mranderson.sittingapp.common.Constants;
 import nl.mranderson.sittingapp.common.Utils;
 
 class InfoPresenter implements InfoContract.Presenter {
@@ -24,7 +23,7 @@ class InfoPresenter implements InfoContract.Presenter {
 
     @Override
     public void onTutorialTapped() {
-        Constants.INSTANCE.setSHOW_TUTORIAL(true);
+//        Constants.INSTANCE.setSHOW_TUTORIAL(true);
 //        MaterialIntroUtils.generateViewIdList();
 //        Toast.makeText(getActivity(), "Tutorial Enabled", Toast.LENGTH_SHORT).show();
 

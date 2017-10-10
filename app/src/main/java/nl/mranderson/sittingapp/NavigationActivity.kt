@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentPagerAdapter
+import android.support.v4.app.FragmentStatePagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
+import nl.mranderson.sittingapp.custom.NonSwipingViewPager
 import nl.mranderson.sittingapp.info.InfoFragment
 import nl.mranderson.sittingapp.settings.SettingsFragment
 import nl.mranderson.sittingapp.timer.start.MainFragment
@@ -14,20 +15,23 @@ import java.util.*
 
 class NavigationActivity : AppCompatActivity() {
 
-    private var viewPager: ViewPager? = null
+    lateinit var viewPager: NonSwipingViewPager
 
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_home -> {
-                viewPager!!.currentItem = 0
+                setTitle(R.string.title_timer)
+                viewPager.currentItem = 0
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_dashboard -> {
-                viewPager!!.currentItem = 1
+                setTitle(R.string.title_settings)
+                viewPager.currentItem = 1
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_notifications -> {
-                viewPager!!.currentItem = 2
+                setTitle(R.string.title_info)
+                viewPager.currentItem = 2
                 return@OnNavigationItemSelectedListener true
             }
         }
@@ -38,8 +42,9 @@ class NavigationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_navigation)
 
-        viewPager = findViewById(R.id.viewpager) as ViewPager
-        setupViewPager(viewPager!!)
+        viewPager = findViewById(R.id.viewpager) as NonSwipingViewPager
+        viewPager.setPagingEnabled(false)
+        setupViewPager(viewPager)
 
         val navigation = findViewById(R.id.navigation) as BottomNavigationView
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
@@ -55,7 +60,7 @@ class NavigationActivity : AppCompatActivity() {
         viewPager.adapter = adapter
     }
 
-    internal inner class ViewPagerAdapter(manager: FragmentManager) : FragmentPagerAdapter(manager) {
+    internal inner class ViewPagerAdapter(manager: FragmentManager) : FragmentStatePagerAdapter(manager) {
         private val mFragmentList = ArrayList<Fragment>()
         private val mFragmentTitleList = ArrayList<String>()
 

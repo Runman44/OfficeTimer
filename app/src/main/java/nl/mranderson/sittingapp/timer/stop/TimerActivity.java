@@ -122,7 +122,7 @@ public class TimerActivity extends AppCompatActivity implements TimerContract.Vi
     private TimerContract.Presenter createPresenter() {
         UserPreference userPreference = new UserPreference(this);
         TimeNavigation timeNavigation = new TimerActivityNavigation(this);
-        RecognitionInteractor recognitionInteractor = new RecognitionInteractor(this);
+        RecognitionInteractor recognitionInteractor = new RecognitionInteractor(this, userPreference);
         return new TimerPresenter(recognitionInteractor, userPreference, timeNavigation);
     }
 

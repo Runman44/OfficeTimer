@@ -34,9 +34,6 @@
     <string name="banner_ad_unit_id">ca-app-pub-4050305580977890/4443389163</string>
 
     <!-- rating -->
-
-
-    <string name="title_activity_navigation">NavigationActivity</string>
     <string name="title_timer">Timer</string>
     <string name="title_settings">Settings</string>
     <string name="title_info">Info</string>

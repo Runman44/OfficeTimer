@@ -3,6 +3,7 @@ package nl.mranderson.sittingapp.timer.stop;
 import android.app.Activity;
 import android.content.Intent;
 
+import nl.mranderson.sittingapp.R;
 import nl.mranderson.sittingapp.common.Navigation;
 import nl.mranderson.sittingapp.timer.service.TimerService;
 
@@ -25,6 +26,11 @@ class TimerActivityNavigation implements TimeNavigation, Navigation {
     public void stopTimerService() {
         Intent timerServiceIntent = new Intent(context, TimerService.class);
         context.stopService(timerServiceIntent);
+    }
+
+    @Override
+    public void closeScreen() {
         context.finish();
+        context.overridePendingTransition(R.anim.push_down_from_up, R.anim.push_out_to_bottom);
     }
 }

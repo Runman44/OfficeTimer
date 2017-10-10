@@ -26,11 +26,11 @@ public class MainFragment extends android.support.v4.app.Fragment implements Mai
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main, container, false);
-        minusButton = (CircleButton) view.findViewById(R.id.minus);
-        plusButton = (CircleButton) view.findViewById(R.id.plus);
-        timeText = (TextView) view.findViewById(R.id.timeText);
-        button = (Button) view.findViewById(R.id.bStart);
-        assistant = (AssistantView) view.findViewById(R.id.assistant);
+        minusButton = view.findViewById(R.id.minus);
+        plusButton = view.findViewById(R.id.plus);
+        timeText = view.findViewById(R.id.timeText);
+        button = view.findViewById(R.id.bStart);
+        assistant = view.findViewById(R.id.assistant);
         return view;
     }
 
@@ -39,12 +39,11 @@ public class MainFragment extends android.support.v4.app.Fragment implements Mai
         super.onViewCreated(view, savedInstanceState);
         setPresenter();
         setListeners();
-        getActivity().setTitle(R.string.title_timer);
         setAssistant();
     }
 
     private void setAssistant() {
-        assistant.animateText("Hi ! I'm Mariska");
+        assistant.animateText("Hi ! I'm Mariska, please select a time");
     }
 
     @Override

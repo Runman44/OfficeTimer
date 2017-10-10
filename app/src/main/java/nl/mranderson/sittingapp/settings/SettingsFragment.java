@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import nl.mranderson.sittingapp.R;
@@ -31,17 +32,19 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
     private CheckBox cWake;
     private SettingsContract.Presenter presenter;
     private UserPreference userPreference;
+    private SeekBar cSensitivity;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_settings, container, false);
-        cTone = (TextView) view.findViewById(R.id.notify_tone);
-        cSensors = (CheckBox) view.findViewById(R.id.sensors);
-        cLight = (CheckBox) view.findViewById(R.id.notify_light);
-        cSound = (CheckBox) view.findViewById(R.id.notify_sound);
-        cVibration = (CheckBox) view.findViewById(R.id.notify_vibration);
-        cWake = (CheckBox) view.findViewById(R.id.notify_waking);
+        cTone = view.findViewById(R.id.notify_tone);
+        cSensors = view.findViewById(R.id.sensors);
+        cLight = view.findViewById(R.id.notify_light);
+        cSound = view.findViewById(R.id.notify_sound);
+        cVibration = view.findViewById(R.id.notify_vibration);
+        cWake = view.findViewById(R.id.notify_waking);
+        cSensitivity = view.findViewById(R.id.sensitivity);
         return view;
     }
 
@@ -50,7 +53,6 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
         super.onViewCreated(view, savedInstanceState);
         setPresenter();
         setListeners();
-        getActivity().setTitle(R.string.title_settings);
 
         setRingToneText(userPreference.getToneSettings());
         cLight.setChecked(userPreference.getLightSettings());
@@ -58,6 +60,7 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
         cVibration.setChecked(userPreference.getVibrationSettings());
         cSensors.setChecked(userPreference.hasSensorSettingsEnabled());
         cWake.setChecked(userPreference.getWakeSettings());
+        cSensitivity.setProgress(userPreference.getSensitivity());
     }
 
     private void setListeners() {
@@ -72,6 +75,23 @@ public class SettingsFragment extends Fragment implements SettingsContract.View 
                         errorDialogPlayService.show();
                     cSensors.setChecked(false);
                 }
+            }
+        });
+
+        cSensitivity.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                //NO-OP
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                //NO-OP
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                presenter.onSensitivityChanged(seekBar.getProgress());
             }
         });
         cLight.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {

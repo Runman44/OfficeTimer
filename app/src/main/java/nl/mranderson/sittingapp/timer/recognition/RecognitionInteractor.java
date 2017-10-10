@@ -11,15 +11,18 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.ActivityRecognition;
 
+import nl.mranderson.sittingapp.common.UserPreference;
 import nl.mranderson.sittingapp.common.Utils;
 
 public class RecognitionInteractor {
 
     private GoogleApiClient mGApiClient;
     private Context context;
+    private UserPreference userPreference;
 
-    public RecognitionInteractor(Context context) {
+    public RecognitionInteractor(Context context, UserPreference userPreference) {
         this.context = context;
+        this.userPreference = userPreference;
     }
 
     public void startSensors(final Listener listener) {
@@ -60,8 +63,9 @@ public class RecognitionInteractor {
     }
 
     private void onRecognitionConnected(GoogleApiClient mGApiClient) {
-        Intent i = new Intent(context, ActivityRecognitionIntentService.class);
-        PendingIntent mActivityRecognitionPendingIntent = PendingIntent.getService(context, 0, i, PendingIntent.FLAG_UPDATE_CURRENT);
+        Intent intent = new Intent(context, ActivityRecognitionIntentService.class);
+        intent.putExtra("sensitivity", userPreference.getSensitivity());
+        PendingIntent mActivityRecognitionPendingIntent = PendingIntent.getService(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         ActivityRecognition.ActivityRecognitionApi.requestActivityUpdates(mGApiClient, 5000, mActivityRecognitionPendingIntent);
     }
 

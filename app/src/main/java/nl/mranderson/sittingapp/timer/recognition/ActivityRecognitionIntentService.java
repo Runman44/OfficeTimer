@@ -20,7 +20,7 @@ import static com.google.android.gms.location.DetectedActivity.WALKING;
 
 public class ActivityRecognitionIntentService extends IntentService {
 
-    private final int CONFIDENCE_METER_PERCENTAGE = 80;
+    private int CONFIDENCE_METER_PERCENTAGE = 80;
     private Bus bus;
 
     public ActivityRecognitionIntentService() {
@@ -29,7 +29,9 @@ public class ActivityRecognitionIntentService extends IntentService {
 
     @Override
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
-        //TODO get the confidenceMeter here. in the intent?
+        if (intent != null && intent.hasExtra("sensitivity")) {
+            CONFIDENCE_METER_PERCENTAGE = intent.getIntExtra("sensitivity", 80);
+        }
         bus = BusProvider.getInstance();
         return super.onStartCommand(intent, flags, startId);
     }

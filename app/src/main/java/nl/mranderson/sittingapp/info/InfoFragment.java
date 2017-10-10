@@ -33,11 +33,6 @@ public class InfoFragment extends android.support.v4.app.Fragment implements Inf
         presenter = createPresenter();
         presenter.attach(this);
         setListeners();
-        setTitle();
-    }
-
-    private void setTitle() {
-        getActivity().setTitle(R.string.title_info);
     }
 
     private void setListeners() {

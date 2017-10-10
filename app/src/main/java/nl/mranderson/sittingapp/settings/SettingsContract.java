@@ -28,6 +28,8 @@ public interface SettingsContract {
         void onToneTapped();
 
         void onToneSelected(Uri uri);
+
+        void onSensitivityChanged(int progress);
     }
 
 }
